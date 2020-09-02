@@ -11,9 +11,7 @@ public class Reservation {
 	private Guest guest;
 	private Status status;
 	
-	public Reservation() {
-		// TODO Auto-generated constructor stub
-	}
+	public Reservation() {}
 
 	public Reservation(Apartment apartment, LocalDate beginDate, int nights, float totalPrice, String message,
 			Guest guest, Status status) {

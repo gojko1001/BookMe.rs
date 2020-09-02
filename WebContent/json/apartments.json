@@ -1,1 +1,101 @@
-[]
+[
+	{
+		"id":"OR11",
+		"type":"wholeApartment",
+		"numberOfRooms":3,
+		"numberOfGuests":4,
+		"location":{
+			"latitude":45.6,
+			"longitude":60.7,
+			"address":{
+				"country":"Serbia",
+				"place":"Novi Sad",
+				"postalCode":21000,
+				"street":"Oblacica Rada",
+				"number":"11"
+			}
+		},
+		"datesForRent":["2020-09-10", "2020-09-11", "2020-09-12"],
+		"freeDates":["2020-09-10", "2020-09-11"],
+		"host":{
+			"username":"milica"
+		},
+		"comments":[
+			{
+				"guest": 
+				{
+					"username":"filip"
+				},
+				"apartment":
+				{
+					"id":"OR11"
+				},
+				"text":"bilo je super",
+				"rate":5
+			}
+		],
+		"photos":[],
+		"price":500,
+		"checkInTime":15,
+		"checkOutTime":8,
+		"active":true,
+		"amenities":
+		[
+			{
+				"id":"wf",
+				"name":"WI-FI"
+			}
+		],
+		"reservations":[]
+	},
+	
+	{
+		"id":"LG23",
+		"type":"oneRoom",
+		"numberOfRooms":2,
+		"numberOfGuests":2,
+		"location":{
+			"latitude":55,
+			"longitude":45.7,
+			"address":{
+				"country":"Serbia",
+				"place":"Novi Sad",
+				"postalCode":21000,
+				"street":"Lasla Gala",
+				"number":"23"
+			}
+		},
+		"datesForRent":["2020-07-12", "2020-07-13", "2020-07-14", "2020-07-15"],
+		"freeDates":["2020-07-12", "2020-07-13"],
+		"host":{
+			"username":"ana"
+		},
+		"comments":[
+			{
+				"guest": 
+				{
+					"username":"igor"
+				},
+				"apartment":
+				{
+					"id":"LG23"
+				},
+				"text":"sve preporuke",
+				"rate":4
+			}
+		],
+		"photos":[],
+		"price":350,
+		"checkInTime":14,
+		"checkOutTime":9,
+		"active":true,
+		"amenities":
+		[
+			{
+				"id":"wf",
+				"name":"WI-FI"
+			}
+		],
+		"reservations":[]
+	}
+]

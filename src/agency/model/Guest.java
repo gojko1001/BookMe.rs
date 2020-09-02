@@ -8,7 +8,8 @@ public class Guest extends User{
 	private List<Reservation> reservations = new ArrayList<Reservation>();
 	
 	public Guest() {}
-	public Guest(String username, String password, String name, String lastName, boolean isMale, Role role, List<Apartment> apartmentsRented, List<Reservation> reservations) {
+	public Guest(String username, String password, String name, String lastName, boolean isMale,
+			Role role, List<Apartment> apartmentsRented, List<Reservation> reservations) {
 		super(username, password, name, lastName, isMale, role);
 		this.apartmentsRented = apartmentsRented;
 		this.reservations = reservations;

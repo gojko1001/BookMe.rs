@@ -1,1 +1,32 @@
-[]
+[
+	{
+		"apartment":
+			{
+				"id":"OR11"
+			},
+		"beginDate":"2020-09-10",
+		"nights":4,
+		"totalPrice":46.0,
+		"message":"",
+		"guest":
+			{
+				"username":"mika"
+			},
+		"status":"denied"
+	},
+	{
+		"apartment":
+			{
+				"id":"LG23"
+			},
+		"beginDate":"2020-07-17",
+		"nights":4,
+		"totalPrice":46.0,
+		"message":"",
+		"guest":
+			{
+				"username":"filip"
+			},
+		"status":"accepted"
+	}
+]
