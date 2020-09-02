@@ -6,17 +6,17 @@ public class User {
 	private String password;
 	private String name;
 	private String lastName;
-	private boolean isMale = false;
+	private boolean male;
 	private Role role;
 	
 	public User(){}
 	
-	public User(String username, String password, String name, String lastName, boolean isMale, Role role) {
+	public User(String username, String password, String name, String lastName, boolean male, Role role) {
 		this.username = username;
 		this.password = password;
 		this.name = name;
 		this.lastName = lastName;
-		this.isMale = isMale;
+		this.male = male;
 		this.role = role;
 	}
 
@@ -53,11 +53,11 @@ public class User {
 	}
 
 	public boolean isMale() {
-		return isMale;
+		return male;
 	}
 
-	public void setMale(boolean isMale) {
-		this.isMale = isMale;
+	public void setMale(boolean male) {
+		this.male = male;
 	}
 
 	public Role getRole() {

@@ -4,7 +4,7 @@
 		"password":"12",
 		"name":"Marija",
 		"lastName":"Milanovic",
-		"isMale":false,
+		"male":false,
 		"role":"Administrator"
 	},
 	{
@@ -12,47 +12,39 @@
 		"password":"12",
 		"name":"Filip",
 		"lastName":"Filipovic",
-		"isMale":true,
-		"role":"Guest",
-		"apartmentsRented":[],
-		"reservations":[]
+		"male":true,
+		"role":"Guest"
 	},
 	{
 		"username":"igor",
 		"password":"12",
 		"name":"Igor",
 		"lastName":"Igorovic",
-		"isMale":true,
-		"role":"Guest",
-		"apartmentsRented":[],
-		"reservations":[]
+		"male":true,
+		"role":"Guest"
 	},
 	{
 		"username":"mika",
 		"password":"12",
 		"name":"Mika",
 		"lastName":"Mikic",
-		"isMale":true,
-		"role":"Guest",
-		"apartmentsRented":[],
-		"reservations":[]
+		"male":true,
+		"role":"Guest"
 	},
 	{
 		"username":"ana",
 		"password":"12",
 		"name":"Ana",
 		"lastName":"Anic",
-		"isMale":false,
-		"role":"Host",
-		"apartmentsForRent":[]
+		"male":false,
+		"role":"Host"
 	},
 	{
 		"username":"kaca",
 		"password":"12",
 		"name":"Kaca",
 		"lastName":"Katic",
-		"isMale":false,
-		"role":"Host",
-		"apartmentsForRent":[]
+		"male":false,
+		"role":"Host"
 	}
 ]

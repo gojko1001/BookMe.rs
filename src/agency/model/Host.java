@@ -7,10 +7,9 @@ public class Host extends User {
 	private List<Apartment> apartmentsForRent = new ArrayList<Apartment>();
 	
 	public Host() {}
-	public Host(String username, String password, String name, String lastName, boolean isMale,
-			Role role, List<Apartment> apartmentsForRent) {
-		super(username, password, name, lastName, isMale, role);
-		this.apartmentsForRent = apartmentsForRent;
+	public Host(String username, String password, String name, String lastName, boolean male,
+			Role role) {
+		super(username, password, name, lastName, male, role);
 	}
 	public List<Apartment> getApartmentsForRent() {
 		return apartmentsForRent;
