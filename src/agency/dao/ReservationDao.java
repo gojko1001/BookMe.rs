@@ -18,7 +18,7 @@ public class ReservationDao {
 	
 	public ReservationDao(String path) {
 		this.path = path + "json/reservations.json";
-		System.out.println(this.path);
+		//System.out.println(this.path);
 		loadReservationsFromJson();
 	}
 	

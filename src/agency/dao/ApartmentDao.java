@@ -19,7 +19,7 @@ public class ApartmentDao {
 	
 	public ApartmentDao(String path) {
 		this.path = path + "json/apartments.json";
-		System.out.println(this.path);
+		//System.out.println(this.path);
 		loadApartmentsFromJson();
 	}
 	

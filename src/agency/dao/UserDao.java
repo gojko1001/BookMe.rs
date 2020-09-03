@@ -23,7 +23,7 @@ public class UserDao {
 	
 	public UserDao(String path) {
 		this.path = path + "json/users.json";
-		System.out.println(this.path);
+		//System.out.println(this.path);
 		loadUsersFromJson();
 	}
 	
@@ -57,7 +57,6 @@ public class UserDao {
 					}
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			
