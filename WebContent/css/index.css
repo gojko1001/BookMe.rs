@@ -14,3 +14,8 @@ body {
         text-decoration: none;
         color: grey;
 }
+
+table.centerSearch{
+    margin-left:auto; 
+    margin-right:auto;
+}

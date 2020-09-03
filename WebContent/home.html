@@ -1,38 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Početna</title>
-	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
-	<link href="css/index.css" rel="stylesheet"></link>
+    <meta charset="UTF-8">
+    <title>Početna</title>
+    <link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
+    <link href="css/home.css" rel="stylesheet"></link>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="js/registration.js"></script>
 </head>
 <body>
-
 	<h4 style="background-color:lightgrey" height=70px>
 		&nbsp;
 		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
 		&nbsp;
 		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
 		<span style="float:right; padding-right:10%; margin-top:0.5%"">
-		<a href="#"> REGISTRACIJA </a>
-		&nbsp;
-		<a href="#"> PRIJAVA </a>
+		<a href="#"> IZLOGUJ SE </a>
 		&nbsp;&nbsp;
 		</span>
 	</h4>
-	<form action="pretraga" method="GET">
+    <form action="pretraga" method="GET">
         <table class="centerSearch">
             	<tr><td>Pretraga apartmana:&nbsp;&nbsp;</td><td><input type="text" name="search"></td><td>&nbsp;&nbsp;<button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button></td></tr>
         </table>
         <br>
 		
     </form>
-	
-	<button type="button" class="btn btn-primary" onclick="getUsers()"> Lista svih korisnika </button>
 </body>
-<script type="text/javascript" src="js/index.js"></script>
 </html>
