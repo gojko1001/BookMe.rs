@@ -1,3 +1,16 @@
+body {
+  background-image: url("travel.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 .blueButton{
 	background-color: blue;
+}
+
+.disabledLink{
+        cursor: default;
+        pointer-events: none;        
+        text-decoration: none;
+        color: grey;
 }
