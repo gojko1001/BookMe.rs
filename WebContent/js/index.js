@@ -9,3 +9,22 @@ function getUsers(){
 	
 	
 }
+
+$("#aLogin").click(function() {
+  $("div#logModal").show();
+});
+
+$("#aRegistration").click(function() {
+  $("div#regModal").show();
+});
+
+$(window).click(function(event) {
+  if (event.target == $("div#logModal")) {
+   $("div#logModal").hide();
+  }
+});
+
+$(".close").click(function() {
+  $("div#logModal").hide();
+  $("div#regModal").hide();
+})
