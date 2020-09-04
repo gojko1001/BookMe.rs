@@ -10,21 +10,35 @@ function getUsers(){
 	
 }
 
-$("#aLogin").click(function() {
-  $("div#logModal").show();
-});
+$(document).ready(function(){
+	// ModalBox Registration/Login
+	$("#aLogin").click(function() {
+	  $("div#logModal").slideDown("fast");
+	});
 
-$("#aRegistration").click(function() {
-  $("div#regModal").show();
-});
+	$("#aRegistration").click(function() {
+	  $("div#regModal").slideDown("fast");
+	});
 
-$(window).click(function(event) {
-  if (event.target == $("div#logModal")) {
-   $("div#logModal").hide();
-  }
-});
+	$("#regToLog").click(function(){
+		$("div#regModal").hide(50, function(){
+			$("div#logModal").fadeIn();
+		});
+	})
 
-$(".close").click(function() {
-  $("div#logModal").hide();
-  $("div#regModal").hide();
+	$("#logToReg").click(function(){
+		$("div#logModal").hide(50, function(){
+			$("div#regModal").fadeIn();
+		});
+	})
+
+	$(".close").click(function() {
+	  $(".modal").hide(200);
+	})
+
+/*	$(window).click(function(event) {
+	  if (event.target == $(".modal")) {
+	   $(".modal").hide();
+	  }
+	});*/
 })

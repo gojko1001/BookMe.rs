@@ -42,7 +42,7 @@
 					</td></tr>
 					<tr><td>Lozinka:</td> <td><input type="text" name="password" id="password" required></td></tr>
 					<tr><td>Kontrolno polje za lozinku:</td> <td><input type="text" name="controlPassword" id="controlPassword" title="Unesite ponovo lozinku radi provere!" required></td></tr>
-					<tr><td></td> <td><p><a href="#" class="text-primary" style="font-size:12px;">Imate nalog? Prijavite se.</a></p></td></tr>
+					<tr><td></td> <td><p><a href="#" class="text-primary" id="regToLog" style="font-size:12px">Imate nalog? Prijavite se.</a></p></td></tr>
 				</table>
 				<br>
 				<button type="submit" id="submitBtn" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
@@ -58,7 +58,7 @@
 				<table>
 					<tr><td>Korisničko ime:</td><td><input type="text" name="korisnickoIme" required></td></tr>
 					<tr><td>Lozinka:</td> <td><input type="text" name="lozinka" required></td></tr>
-					<tr><td></td> <td><p><a href="#" class="text-primary" style="font-size:12px;">Nemate nalog? Registrujte se.</a><br><a href="#" class="text-primary" style="font-size:12px;">Zaboravio/la sam šifru.</a></p></td></tr>
+					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a><br><a href="#" class="text-primary" style="font-size:12px;">Zaboravio/la sam šifru.</a></p></td></tr>
 				</table>
 				<button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
 			</form>
@@ -67,13 +67,17 @@
 	
 	<form action="pretraga" method="GET">
         <table class="centerSearch">
-            	<tr><td>Pretraga apartmana:&nbsp;&nbsp;</td><td><input type="text" name="search"></td><td>&nbsp;&nbsp;<button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button></td></tr>
+            	<tr><td>Pretraga apartmana:&nbsp;&nbsp;</td>
+				<td><input type="text" name="search" placeholder="Gde idete?"></td><td>&nbsp;&nbsp;
+				<td><input type="text" name="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')" value=""></td><td>&nbsp;<b>-</b>&nbsp;
+				<td><input type="text" name="dateTo" placeholder="Do datuma" onfocus="(this.type='date')"></td><td>&nbsp;&nbsp;
+				<button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Pretraga</button></td></tr>
         </table>
         <br>
 		
     </form>
 	
-	<button type="button" class="btn btn-primary" onclick="getUsers()"> Lista svih korisnika </button>
+	<button type="button" class="btn btn-primary" onclick="getUsers()" style="margin-left:10%"> Lista svih korisnika </button>
 </body>
 <script type="text/javascript" src="js/index.js"></script>
 </html>
