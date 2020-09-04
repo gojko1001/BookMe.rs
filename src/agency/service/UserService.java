@@ -50,6 +50,19 @@ public class UserService {
 		return userDao.getAllUsers();
 	}
 	
+	/*
+	@GET
+	@Path("/allByRole")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAllUsersByRole() {
+		UserDao userDao = (UserDao) context.getAttribute("userDao");
+		User user = (User) request.getSession().getAttribute("loginUser");
+		Role role = user.getRole();
+		
+		return userDao.getAllUsersByRole(role);
+	}
+	*/
+	
 	@POST
 	@Path("/registration")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -76,8 +89,30 @@ public class UserService {
 			System.out.println(((User)request.getSession().getAttribute("loginUser")).getUsername());
 			
 			return "Uspešno ulogovan korisnik.";
+		}	
+	}
+	
+	@POST
+	@Path("/logout")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String logoutUser() {
+		User user = (User)request.getSession().getAttribute("loginUser");
+		if(user == null) {
+			return "Trenutno nema ulogovanog korisnika.";
+		}else {
+			request.getSession().setAttribute("loginUser", null);
+			return "Uspešno izlogovan korisnik.";
 		}
+	}
+	
+	@PUT
+	@Path("/update")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public User updateUser(User user) {
+		UserDao userDao = (UserDao) context.getAttribute("userDao");
 		
+		return userDao.updateUser(user);
 	}
 	
 	

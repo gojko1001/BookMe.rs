@@ -114,6 +114,53 @@ public class UserDao {
 		
 		return null;
 	}
+	
+	public User updateUser(User user) {
+		List<User> allUsers = getAllUsers();
+		for(User u : allUsers) {
+			if(u.getUsername().equals(user.getUsername())) {
+				u.setLastName(user.getLastName());
+				u.setMale(user.isMale());
+				u.setName(user.getName());
+				u.setPassword(user.getPassword());
+				
+				try {
+					addUsersToFile();
+				} catch (JsonGenerationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					System.out.println("Neuspešno mapiranje.");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("Greška u radu sa fajlovima.");
+					e.printStackTrace();
+				}
+				
+				return u;
+			}
+		}
+		return null;
+	}
+	
+	/*
+	public List<User> getAllUsersByRole(User user){
+		List<User> allUsers = getAllUsers();
+		List<User> listUsers = new ArrayList<User>();
+		
+		if(user.getRole() == Role.Administrator) {
+			return allUsers;
+		}else if(user.getRole() == Role.Host) {
+			
+			for(Guest g : guests) {
+				for(Apartment a : g.getApartmentsRented()) {
+					
+				}
+			}
+		}
+		
+	}
+	*/
 
 	
 }

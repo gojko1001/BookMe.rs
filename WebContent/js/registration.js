@@ -15,13 +15,49 @@
 	});
 });*/
 
+
+/*
+$(document).ready(function(){
+	//let inputElem = $("#username");
+	let forma = $("form");
+	forma.submit(function(event){
+		let username = $("#username").val();
+		let name = $("#name").val();
+		let lastName = $("#lastName").val();
+		let sex = $("#sex").val();
+		let password = $("#password").val();
+		alert("Korisničko ime je " + username);
+		
+		var jsonRegistration = JSON.stringify({
+			"username":username,
+			"name":name,
+			"lastName":lastName,
+			"sex":sex,
+			"password":password,
+		});
+		
+		$.ajax({
+			method:"POST",
+			url:"../TuristickaAgencija/rest/users/registration",
+			contentType:"application/json",
+			data:jsonRegistration,
+			datatype:"text"
+		}).success(function(data){
+			console.log(data);
+		});
+		
+		 
+		event.preventDefault();
+	});
+});
+*/
+
 function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
 	let username = $("#username").val();
 	let name = $("#name").val();
 	let lastName = $("#lastName").val();
 	let sex = $("#sex").val();
 	let password = $("#password").val();
-	let controlPassword = $("#controlPassword").val();
 	
 	var jsonRegistration = JSON.stringify({
 		"username":username,
@@ -29,7 +65,6 @@ function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pr
 		"lastName":lastName,
 		"sex":sex,
 		"password":password,
-		"controlPassword":controlPassword
 	});
 	
 	$.ajax({
