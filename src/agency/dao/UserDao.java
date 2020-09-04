@@ -5,12 +5,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
+import agency.dto.AuthenticationDTO;
 import agency.model.Administrator;
+import agency.model.Apartment;
 import agency.model.Guest;
 import agency.model.Host;
+import agency.model.Reservation;
 import agency.model.Role;
 import agency.model.User;
 
@@ -61,5 +68,52 @@ public class UserDao {
 			}
 			
 	}
+	
+	// TODO 2: ne pamti zauvek..
+	public void addUsersToFile() throws JsonGenerationException, JsonMappingException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter ow = mapper.writer(new DefaultPrettyPrinter());			// da se lepo napise u JSON-u
+		ow.writeValue(new File(path), getAllUsers());
+		//ow.writeValue(new File("/json/users.json"), getAllUsers());
+	}
+	
+	public String addUser(User user) {
+		List<User> allUsers = getAllUsers();
+		for(User u : allUsers) {
+			if(u.getUsername().equals(user.getUsername())) {
+				return "Korisnik sa prosledjenim korisničkim imenom već postoji.";
+			}
+		}
+		
+		Guest guest = new Guest(user.getUsername(), user.getPassword(), user.getName(), user.getLastName(), user.isMale(), user.getRole());
+		
+		guests.add(guest);
+		try {
+			addUsersToFile();
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			System.out.println("Neuspešno mapiranje.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Greška u radu sa fajlovima.");
+			e.printStackTrace();
+		}
+		
+		return "Uspešna registracija";
+	}
+	
+	
+	public User loginUser(AuthenticationDTO authentication) {
+		List<User> allUsers = getAllUsers();
+		for(User u : allUsers) {
+			if(u.getUsername().equals(authentication.getUsername()) && u.getPassword().equals(authentication.getPassword())) {
+				return u;
+			}
+		}
+		
+		return null;
+	}
+
 	
 }
