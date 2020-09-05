@@ -1,0 +1,66 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Izmena profila</title>
+	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
+	<link href="css/main.css" rel="stylesheet"></link>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	
+	<style>
+		.data {
+			margin-left:10%;
+			margin-right:10%;
+			margin-top:50px;
+			background:white;
+			border: 1px solid grey;
+		}
+		
+		td {
+			text-align: right;
+			padding: 10px;
+		}
+		#sex {
+			width: 100%;
+		}
+	</style>
+</head>
+<body>
+	<h4 style="background-color:lightgrey; flex-wrap:wrap">
+		&nbsp;
+		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
+		&nbsp;
+		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
+		<span style="float:right; padding-right:10%; margin-top:0.5%"">
+		<a href="#"> IZLOGUJ SE </a>
+		&nbsp;&nbsp;
+		</span>
+	</h4>
+	
+	<div class="data" style="min-height:70px">
+			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic
+				
+			</h4>
+			
+	</div>
+	<div class="data">
+		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
+		<table style="margin:25px">
+				<tr><td float="right">Ime:</td><td><input type="text" name="ime"/></td></tr>
+				<tr><td>Prezime:</td><td><input type="text" name="prezime"/></td></tr>
+				<tr><td>Korisnicko ime:</td><td><input type="text" name="email"/></td></tr>
+				<tr><td>Pol:</td> 
+					<td><select name="sex" id="sex" required>
+									<option value="MUSKI">Muški</option>
+									<option value="ZENSKI">Ženski</option>
+						</select>
+					</td></tr>
+				<tr><td>Uloga:</td><td><input type="text" name="role" disabled/></td></tr>
+				<tr><td><button class="btn" style="border:1px solid grey">Odustani</button></td></td>
+				<td><button class="btn btn-primary" style="width:100%">Sačuvaj izmene</button></td></tr>
+		</table>
+	</div>
+</body>
+</html>

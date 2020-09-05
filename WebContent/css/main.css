@@ -1,0 +1,25 @@
+body {
+  background-image: url("travel.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.text-primary{
+	font-size:200%
+}
+
+.blueButton{
+	background-color: blue;
+}
+
+.disabledLink{
+        cursor: default;
+        pointer-events: none;        
+        text-decoration: none;
+        color: grey;
+}
+
+table.centerSearch{
+    float: right; 
+	margin-right: 10%;
+}
