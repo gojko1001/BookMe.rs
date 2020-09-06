@@ -22,8 +22,12 @@
 			text-align: right;
 			padding: 10px;
 		}
-		#sex {
-			width: 100%;
+		
+		.btnclose{
+			border:1px solid grey;
+		}
+		.btnclose:hover{
+			background-color: #ddd;
 		}
 	</style>
 </head>
@@ -40,9 +44,7 @@
 	</h4>
 	
 	<div class="data" style="min-height:70px">
-			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic
-				
-			</h4>
+			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic</h4>
 			
 	</div>
 	<div class="data">
@@ -50,15 +52,17 @@
 		<table style="margin:25px">
 				<tr><td float="right">Ime:</td><td><input type="text" name="ime"/></td></tr>
 				<tr><td>Prezime:</td><td><input type="text" name="prezime"/></td></tr>
-				<tr><td>Korisnicko ime:</td><td><input type="text" name="email"/></td></tr>
+				<tr><td>Korisnicko ime:</td><td><input type="text" name="email" disabled/></td></tr>
 				<tr><td>Pol:</td> 
 					<td><select name="sex" id="sex" required>
 									<option value="MUSKI">Muški</option>
 									<option value="ZENSKI">Ženski</option>
 						</select>
 					</td></tr>
-				<tr><td>Uloga:</td><td><input type="text" name="role" disabled/></td></tr>
-				<tr><td><button class="btn" style="border:1px solid grey">Odustani</button></td></td>
+				<tr style="border-bottom:1px solid black"><td>Uloga:</td><td><input type="text" name="role" disabled/></td></tr>
+				<tr><td>Nova lozinka:</td><td><input type="password" name="lozinka"/></td></tr>
+				<tr><td>Potvrda lozinke:</td><td><input type="password" name="lozinka"/></td></tr>
+				<tr><td><button class="btn btnClose">Odustani</button></td></td>
 				<td><button class="btn btn-primary" style="width:100%">Sačuvaj izmene</button></td></tr>
 		</table>
 	</div>
