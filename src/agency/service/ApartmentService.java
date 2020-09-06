@@ -11,6 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import agency.dao.ApartmentDao;
+import agency.dao.ReservationDao;
+import agency.dto.ApartmentDTO;
 import agency.model.Apartment;
 
 @Path("/apartments")
@@ -24,8 +26,12 @@ public class ApartmentService {
 	@PostConstruct
 	public void init() {
 		System.out.println("apartmentinit");
+		if (context.getAttribute("reservationDao") == null) {
+			ReservationDao reservationDao = new ReservationDao(context.getRealPath(""));
+	    	context.setAttribute("reservationDao", reservationDao);
+		}
 		if (context.getAttribute("apartmentDao") == null) {
-			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""));
+			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""),((ReservationDao)context.getAttribute("reservationDao")).reservations);
 	    	context.setAttribute("apartmentDao", apartmentDao);
 		}
 	}
@@ -34,7 +40,7 @@ public class ApartmentService {
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Apartment> getAllApartments() {
+	public List<ApartmentDTO> getAllApartments() {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.getAllApartments();

@@ -9,11 +9,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import agency.dto.ApartmentDTO;
+import agency.dto.ReservationDTO;
+import agency.model.Apartment;
 import agency.model.Reservation;
 import agency.model.User;
 
 public class ReservationDao {
-	private List<Reservation> reservations = new ArrayList<Reservation>();
+	public List<Reservation> reservations = new ArrayList<Reservation>();
 	private String path;
 	
 	public ReservationDao(String path) {
@@ -22,8 +25,13 @@ public class ReservationDao {
 		loadReservationsFromJson();
 	}
 	
-	public List<Reservation> getAllReservations(){
-		return reservations;
+	public List<ReservationDTO> getAllReservations(){
+		List<ReservationDTO> reservationsDTO = new ArrayList<ReservationDTO>();
+		for(Reservation r : reservations) {
+			reservationsDTO.add(new ReservationDTO(r));
+		}
+		
+		return reservationsDTO;
 	}
 	
 	public void loadReservationsFromJson() {

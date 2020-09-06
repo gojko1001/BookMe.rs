@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import agency.dto.AuthenticationDTO;
+import agency.dto.GuestDTO;
+import agency.dto.HostDTO;
 import agency.model.Administrator;
 import agency.model.Apartment;
 import agency.model.Guest;
@@ -28,10 +30,57 @@ public class UserDao {
 	//private List<User> users = new ArrayList<User>();
 	private String path;
 	
-	public UserDao(String path) {
+	public UserDao(String path, List<Apartment> apartments, List<Reservation> reservations) {
 		this.path = path + "json/users.json";
 		//System.out.println(this.path);
 		loadUsersFromJson();
+		mapUsersToReservations(reservations, apartments);
+	}
+	
+	public User getUserFromUsername(String username) {
+		List<User> allUsers = getAllUsers();
+		for(User u : allUsers) {
+			if(u.getUsername().equals(username)) {
+				return u;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	public void mapUsersToReservations(List<Reservation> reservations, List<Apartment> apartments) {
+		for(Reservation r : reservations) {
+			Guest g = (Guest)this.getUserFromUsername(r.getGuest().getUsername());
+			g.getReservations().add(r);
+			r.setGuest(g);
+			
+			Apartment a = null;
+			
+			for(Apartment apart : apartments) {
+				if(apart.getId().equals(r.getApartment().getId())) {
+					a = apart;
+				}
+			}
+			
+			if(!g.getApartmentsRented().contains(a)) {
+				g.getApartmentsRented().add(a);
+			}
+		}
+	}
+	
+	public List<User> getAllUsersDTOs(){
+		List<User> all = new ArrayList<User>();
+		all.addAll(admins);
+		for(Guest g : guests) {
+			all.add(new GuestDTO(g));
+		}
+		
+		for(Host h : hosts) {
+			all.add(new HostDTO(h));
+		}
+		
+		return all;
 	}
 	
 	public List<User> getAllUsers(){
@@ -137,7 +186,13 @@ public class UserDao {
 					e.printStackTrace();
 				}
 				
-				return u;
+				if(u.getRole() == Role.Administrator) {
+					return u;
+				}else if (u.getRole() == Role.Host) {
+					return new HostDTO((Host) u);
+				}else {
+					return new GuestDTO((Guest) u);
+				}
 			}
 		}
 		return null;

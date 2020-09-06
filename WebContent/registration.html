@@ -9,7 +9,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <script src="js/registration.js"></script>
+    <script type="text/javascript" src="js/registration.js"></script>
 </head>
 <body>
 	<h4 align="right">
@@ -23,11 +23,11 @@
         <table>
             <tr><td>Korisničko ime:</td><td><input type="text" name="username" id="username"></td></tr>
             <tr><td>Ime:</td><td><input type="text" name="name" id="name"  pattern="[a-zA-ZćĆžŽĐđšŠčČ]*" title="Prvo morate uneti slova!" required></td></tr>
-            <tr><td>Prezime:</td><td><input type="text" name="lastname" id="lastname" pattern="^([a-zA-ZćĆžŽĐđšŠčČ]+)[1-9]*" title="Prvo morate uneti slova!" required></td></tr>
+            <tr><td>Prezime:</td><td><input type="text" name="lastName" id="lastName" pattern="^([a-zA-ZćĆžŽĐđšŠčČ]+)[1-9]*" title="Prvo morate uneti slova!" required></td></tr>
 			<tr><td>Pol:</td> 
 					<td><select name="sex" id="sex" required>
-									<option value="MUSKI">Muški</option>
-									<option value="ZENSKI">Ženski</option>
+									<option value="true">Muški</option>
+									<option value="false">Ženski</option>
 						</select>
 			</td></tr>
 			<tr><td>Lozinka:</td> <td><input type="text" name="password" id="password" required></td></tr>
@@ -35,7 +35,7 @@
 			<tr><td></td> <td><p><a href="#" class="text-primary" style="font-size:12px;">Imate nalog? Prijavite se.</a></p></td></tr>
         </table>
         <br>
-		<button type="submit" id="submitBtn" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
+		<button type="button" id="submitBtn" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="registration()">Potvrdi</button>
     </form>
 </body>
 </html>

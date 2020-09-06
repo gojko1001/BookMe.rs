@@ -52,6 +52,7 @@ $(document).ready(function(){
 });
 */
 
+
 function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
 	let username = $("#username").val();
 	let name = $("#name").val();
@@ -59,13 +60,19 @@ function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pr
 	let sex = $("#sex").val();
 	let password = $("#password").val();
 	
+	console.log("pera");
+
+	
 	var jsonRegistration = JSON.stringify({
 		"username":username,
 		"name":name,
 		"lastName":lastName,
-		"sex":sex,
+		"male":sex,
 		"password":password,
+		"role":"Guest"
 	});
+
+	console.log(jsonRegistration);
 	
 	$.ajax({
 		method:"POST",
@@ -77,6 +84,7 @@ function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pr
 		console.log(data);
 	});
 	
-};
+	
+}
 
 

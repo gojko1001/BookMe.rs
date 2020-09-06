@@ -14,9 +14,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import agency.dao.ApartmentDao;
+import agency.dao.ReservationDao;
 import agency.dao.UserDao;
 import agency.dto.AuthenticationDTO;
-import agency.model.Role;
 import agency.model.User;
 
 @Path("/users")
@@ -34,8 +35,16 @@ public class UserService {
 	@PostConstruct
 	public void init() {
 		//System.out.println("userinit");
+		if (context.getAttribute("reservationDao") == null) {
+			ReservationDao reservationDao = new ReservationDao(context.getRealPath(""));
+	    	context.setAttribute("reservationDao", reservationDao);
+		}
+		if (context.getAttribute("apartmentDao") == null) {
+			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""),((ReservationDao)context.getAttribute("reservationDao")).reservations);
+	    	context.setAttribute("apartmentDao", apartmentDao);
+		}
 		if (context.getAttribute("userDao") == null) {
-			UserDao userDao = new UserDao(context.getRealPath(""));
+			UserDao userDao = new UserDao(context.getRealPath(""), ((ApartmentDao)context.getAttribute("apartmentDao")).apartments, ((ReservationDao)context.getAttribute("reservationDao")).reservations);
 	    	context.setAttribute("userDao", userDao);
 		}
 	}
@@ -47,8 +56,9 @@ public class UserService {
 	public List<User> getAllUsers() {
 		UserDao userDao = (UserDao) context.getAttribute("userDao");
 		
-		return userDao.getAllUsers();
+		return userDao.getAllUsersDTOs();
 	}
+	
 	
 	/*
 	@GET

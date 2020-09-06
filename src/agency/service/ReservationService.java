@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 
 import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
+import agency.dto.ReservationDTO;
 import agency.model.Apartment;
 import agency.model.Reservation;
 
@@ -35,7 +36,7 @@ public class ReservationService {
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Reservation> getAllReservations() {
+	public List<ReservationDTO> getAllReservations() {
 		ReservationDao reservationDao = (ReservationDao) context.getAttribute("reservationDao");
 		
 		return reservationDao.getAllReservations();

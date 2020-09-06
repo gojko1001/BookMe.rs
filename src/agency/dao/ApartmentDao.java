@@ -9,23 +9,38 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import agency.dto.ApartmentDTO;
 import agency.model.Apartment;
 import agency.model.Reservation;
-import agency.model.User;
 
 public class ApartmentDao {
-	private List<Apartment> apartments = new ArrayList<Apartment>();
+	public List<Apartment> apartments = new ArrayList<Apartment>();
 	private String path;
 	
-	public ApartmentDao(String path) {
+	public ApartmentDao(String path, List<Reservation> reservations) {
 		this.path = path + "json/apartments.json";
 		//System.out.println(this.path);
 		loadApartmentsFromJson();
+		mapReservationsAndApartments(reservations);
 	}
 	
-	public List<Apartment> getAllApartments(){
+	public List<ApartmentDTO> getAllApartments(){
+		List<ApartmentDTO> apartmentsDto = new ArrayList<ApartmentDTO>();
+		for(Apartment a : apartments) {
+			apartmentsDto.add(new ApartmentDTO(a));
+		}
 		
-		return apartments;
+		return apartmentsDto;
+	}
+	
+	public Apartment getApartment(String id) {
+		for(Apartment a : apartments) {
+			if(a.getId().equals(id)) {
+				return a;
+			}
+		}
+		
+		return null;
 	}
 	
 	public void loadApartmentsFromJson() {
@@ -41,4 +56,17 @@ public class ApartmentDao {
 			}
 			
 	}
+	
+	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
+		for(Reservation r : reservations) {
+			Apartment a = this.getApartment(r.getApartment().getId());
+			a.getReservations().add(r);
+			r.setApartment(a);
+		}
+	}
+	
+	
+	
+	
+	
 }
