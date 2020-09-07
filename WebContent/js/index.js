@@ -10,6 +10,7 @@ function getUsers(){
 	
 }
 
+
 $(document).ready(function(){
 	// ModalBox Registration/Login
 	$("#aLogin").click(function() {
@@ -42,3 +43,36 @@ $(document).ready(function(){
 	  }
 	});*/
 })
+
+
+function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
+	let username = $("#username").val();
+	let name = $("#name").val();
+	let lastName = $("#lastName").val();
+	let sex = $("#sex").val();
+	let password = $("#password").val();
+
+	
+	var jsonRegistration = JSON.stringify({
+		"username":username,
+		"name":name,
+		"lastName":lastName,
+		"male":sex,
+		"password":password,
+		"role":"Guest"
+	});
+
+	//console.log(jsonRegistration);
+	
+	$.ajax({
+		method:"POST",
+		url:"../TuristickaAgencija/rest/users/registration",
+		contentType:"application/json",
+		data:jsonRegistration,
+		datatype:"text"
+	}).done(function(data){
+		console.log(data);
+	});
+	
+	
+}

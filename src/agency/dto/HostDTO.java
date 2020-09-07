@@ -8,7 +8,7 @@ import agency.model.Host;
 import agency.model.User;
 
 public class HostDTO extends User{
-	private List<ApartmentDTO> apartmentsForRentDto = new ArrayList<ApartmentDTO>();
+	private List<ApartmentDTO> apartmentsForRentDTO = new ArrayList<ApartmentDTO>();
 	
 	public HostDTO() {}
 	
@@ -20,18 +20,18 @@ public class HostDTO extends User{
 		this.setMale(host.isMale());
 		this.setLastName(host.getLastName());
 		
-		for(Apartment a : host.getApartmentsForRent()) {
-			this.apartmentsForRentDto.add(new ApartmentDTO(a));
+		for(Apartment a : host.getApartmentsForRent()) {				// TODO 4: ne nalazi apartmane host-ova
+			this.apartmentsForRentDTO.add(new ApartmentDTO(a));
 		}
 		
 	}
 
-	public List<ApartmentDTO> getApartmentsForRentDto() {
-		return apartmentsForRentDto;
+	public List<ApartmentDTO> getApartmentsForRentDTO() {
+		return apartmentsForRentDTO;
 	}
 
-	public void setApartmentsForRentDto(List<ApartmentDTO> apartmentsForRentDto) {
-		this.apartmentsForRentDto = apartmentsForRentDto;
+	public void setApartmentsForRentDTO(List<ApartmentDTO> apartmentsForRentDTO) {
+		this.apartmentsForRentDTO = apartmentsForRentDTO;
 	}
 	
 	

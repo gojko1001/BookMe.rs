@@ -20,14 +20,14 @@ public class ApartmentDTO {
 	private List<LocalDate> datesForRent = new ArrayList<LocalDate>();
 	private List<LocalDate> freeDates = new ArrayList<LocalDate>();
 	private String hostUsername;
-	private List<CommentDTO> commentsDto = new ArrayList<CommentDTO>();
+	private List<CommentDTO> commentsDTO = new ArrayList<CommentDTO>();
 	private List<String> photos = new ArrayList<String>();
 	private float price;
 	private int checkInTime = 14;
 	private int checkOutTime = 10;
 	private boolean active;
 	private List<Amenity> amenities = new ArrayList<Amenity>();
-	private List<ReservationDTO> reservationsDto = new ArrayList<ReservationDTO>();
+	private List<ReservationDTO> reservationsDTO = new ArrayList<ReservationDTO>();
 	
 	
 	public ApartmentDTO() {}
@@ -49,11 +49,11 @@ public class ApartmentDTO {
 		this.amenities = apartment.getAmenities();
 		
 		for(Comment c : apartment.getComments()) {
-			this.commentsDto.add(new CommentDTO(c));
+			this.commentsDTO.add(new CommentDTO(c));
 		}
 		
 		for(Reservation r : apartment.getReservations()) {
-			this.reservationsDto.add(new ReservationDTO(r));
+			this.reservationsDTO.add(new ReservationDTO(r));
 		}
 	}
 	
@@ -106,11 +106,11 @@ public class ApartmentDTO {
 	public void setHostUsername(String hostUsername) {
 		this.hostUsername = hostUsername;
 	}
-	public List<CommentDTO> getCommentsDto() {
-		return commentsDto;
+	public List<CommentDTO> getCommentsDTO() {
+		return commentsDTO;
 	}
-	public void setCommentsDto(List<CommentDTO> commentsDto) {
-		this.commentsDto = commentsDto;
+	public void setCommentsDTO(List<CommentDTO> commentsDTO) {
+		this.commentsDTO = commentsDTO;
 	}
 	public List<String> getPhotos() {
 		return photos;
@@ -148,11 +148,11 @@ public class ApartmentDTO {
 	public void setAmenities(List<Amenity> amenities) {
 		this.amenities = amenities;
 	}
-	public List<ReservationDTO> getReservationsDto() {
-		return reservationsDto;
+	public List<ReservationDTO> getReservationsDTO() {
+		return reservationsDTO;
 	}
-	public void setReservationsDto(List<ReservationDTO> reservationsDto) {
-		this.reservationsDto = reservationsDto;
+	public void setReservationsDTO(List<ReservationDTO> reservationsDTO) {
+		this.reservationsDTO = reservationsDTO;
 	}
 	
 	

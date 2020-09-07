@@ -3,14 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Početna</title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
 	<link href="css/main.css" rel="stylesheet"></link>
 	<link href="css/modalBox.css" rel="stylesheet"></link>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+	<script type="text/javascript" src="js/index.js"></script>
 </head>
 <body>
 	<h4 style="background-color:lightgrey">
@@ -31,23 +31,23 @@
 			<span class="close">&times;</span>
 			<p class="text-primary"><b>REGISTRACIJA</b></p>
 			<form id="registration" method="POST">
-				<table>
-					<tr><td>Korisničko ime:</td><td><input type="text" name="username" id="username"></td></tr>
-					<tr><td>Ime:</td><td><input type="text" name="name" id="name"  pattern="[a-zA-ZćĆžŽĐđšŠčČ]*" title="Prvo morate uneti slova!" required></td></tr>
-					<tr><td>Prezime:</td><td><input type="text" name="lastname" id="lastname" pattern="^([a-zA-ZćĆžŽĐđšŠčČ]+)[1-9]*" title="Prvo morate uneti slova!" required></td></tr>
+		        <table>
+		            <tr><td>Korisničko ime:</td><td><input type="text" name="username" id="username"></td></tr>
+		            <tr><td>Ime:</td><td><input type="text" name="name" id="name"  pattern="[a-zA-ZćĆžŽĐđšŠčČ]*" title="Prvo morate uneti slova!" required></td></tr>
+		            <tr><td>Prezime:</td><td><input type="text" name="lastName" id="lastName" pattern="^([a-zA-ZćĆžŽĐđšŠčČ]+)[1-9]*" title="Prvo morate uneti slova!" required></td></tr>
 					<tr><td>Pol:</td> 
-							<td><select name="sex" id="sex" style="width:100%" required>
-											<option value="MUSKI">Muški</option>
-											<option value="ZENSKI">Ženski</option>
+							<td><select name="sex" id="sex" required>
+											<option value="true">Muški</option>
+											<option value="false">Ženski</option>
 								</select>
 					</td></tr>
 					<tr><td>Lozinka:</td> <td><input type="text" name="password" id="password" required></td></tr>
 					<tr><td>Kontrolno polje za lozinku:</td> <td><input type="text" name="controlPassword" id="controlPassword" title="Unesite ponovo lozinku radi provere!" required></td></tr>
-					<tr><td></td> <td><p><a href="#" class="text-primary" id="regToLog" style="font-size:12px">Imate nalog? Prijavite se.</a></p></td></tr>
-				</table>
-				<br>
-				<button type="submit" id="submitBtn" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
-			</form>
+					<tr><td></td> <td><p><a href="#" class="text-primary" style="font-size:12px;">Imate nalog? Prijavite se.</a></p></td></tr>
+		        </table>
+		        <br>
+				<button type="button" id="submitBtn" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="registration()">Potvrdi</button>
+    		</form>
 		</div>
 	</div>
 	
@@ -61,7 +61,7 @@
 					<tr><td>Lozinka:</td> <td><input type="text" name="lozinka" required></td></tr>
 					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a><br><a href="#" class="text-primary" style="font-size:12px;">Zaboravio/la sam šifru.</a></p></td></tr>
 				</table>
-				<button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
+				<button type="button" id="btnLogin" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Potvrdi</button>
 			</form>
 		</div>
 	</div>

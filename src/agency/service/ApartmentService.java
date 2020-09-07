@@ -25,7 +25,7 @@ public class ApartmentService {
 	
 	@PostConstruct
 	public void init() {
-		System.out.println("apartmentinit");
+		//System.out.println("apartmentinit");
 		if (context.getAttribute("reservationDao") == null) {
 			ReservationDao reservationDao = new ReservationDao(context.getRealPath(""));
 	    	context.setAttribute("reservationDao", reservationDao);

@@ -9,8 +9,8 @@ import agency.model.Reservation;
 import agency.model.User;
 
 public class GuestDTO extends User{
-	private List<ApartmentDTO> apartmentsRentedDto = new ArrayList<ApartmentDTO>();
-	private List<ReservationDTO> reservationsDto = new ArrayList<ReservationDTO>();
+	private List<ApartmentDTO> apartmentsRentedDTO = new ArrayList<ApartmentDTO>();
+	private List<ReservationDTO> reservationsDTO = new ArrayList<ReservationDTO>();
 	
 	
 	public GuestDTO() {
@@ -26,24 +26,24 @@ public class GuestDTO extends User{
 		this.setLastName(guest.getLastName());
 		
 		for(Reservation r : guest.getReservations()) {
-			this.reservationsDto.add(new ReservationDTO(r));
+			this.reservationsDTO.add(new ReservationDTO(r));
 		}
 		
 		for(Apartment a : guest.getApartmentsRented()) {
-			this.apartmentsRentedDto.add(new ApartmentDTO(a));
+			this.apartmentsRentedDTO.add(new ApartmentDTO(a));
 		}
 	}
 	
-	public List<ApartmentDTO> getApartmentsRentedDto() {
-		return apartmentsRentedDto;
+	public List<ApartmentDTO> getApartmentsRentedDTO() {
+		return apartmentsRentedDTO;
 	}
-	public void setApartmentsRentedDto(List<ApartmentDTO> apartmentsRentedDto) {
-		this.apartmentsRentedDto = apartmentsRentedDto;
+	public void setApartmentsRentedDTO(List<ApartmentDTO> apartmentsRentedDTO) {
+		this.apartmentsRentedDTO = apartmentsRentedDTO;
 	}
-	public List<ReservationDTO> getReservationsDto() {
-		return reservationsDto;
+	public List<ReservationDTO> getReservationsDTO() {
+		return reservationsDTO;
 	}
-	public void setReservationsDto(List<ReservationDTO> reservationsDto) {
-		this.reservationsDto = reservationsDto;
+	public void setReservationsDTO(List<ReservationDTO> reservationsDTO) {
+		this.reservationsDTO = reservationsDTO;
 	}
 }
