@@ -45,8 +45,13 @@ $(document).ready(function(){
 	});*/
 })
 
+// TODO 6: slucaj nevalidnog profila
+function openLogin() {				// otvara se odmah posle registracije
+	$(".modal").hide(200);
+	$("div#logModal").slideDown("fast");
+}
 
-function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
+function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
 	let username = $("#username").val();
 	let name = $("#name").val();
 	let lastName = $("#lastName").val();
@@ -102,8 +107,11 @@ function registration(){	//preuzeti unete vrednosti iz input-a u promenljive, pr
 		datatype:"text"
 	}).done(function(data){
 		//console.log(data);
-		alert(data);
-		window.location.href="http://localhost:8080/TuristickaAgencija/index.html";
+		if(data == "Uspešno ste se registrovali."){
+			alert(data);
+			openLogin();
+		}
+		//window.location.href="http://localhost:8080/TuristickaAgencija/";
 	});
 }
 
@@ -111,6 +119,19 @@ function login(){
 	let username = $("#username").val();
 	let password = $("#password").val();
 
+	// PROVERA POLJA
+	let allTds = $('td');
+	if(username == ''){
+		allTds[2].append("Morate uneti Vaše korisničko ime.");
+		$(allTds[2]).css("color", "red")
+		$(allTds[2]).css("font-size", "10px")
+	}
+	if(password == ''){
+		allTds[5].append("Morate uneti Vaše ime.");
+		$(allTds[5]).css("color", "red")
+		$(allTds[5]).css("font-size", "10px")
+	}
+	
 	
 	var jsonRegistration = JSON.stringify({
 		"username":username,
@@ -126,7 +147,12 @@ function login(){
 		data:jsonRegistration,			
 		datatype:"text"
 	}).done(function(data){
-		console.log(data);
+		alert(data);
+		//console.log(data);
+		if(data = "Uspešno ulogovan korisnik."){
+			window.location.href="http://localhost:8080/TuristickaAgencija/home.html";
+		}
+		
 	});
 }
 

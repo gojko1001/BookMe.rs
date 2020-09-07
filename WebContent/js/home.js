@@ -1,5 +1,5 @@
 
-getAllApartments();
+//getAllApartments();
 
 // TODO 5: f-ja za userInfo treba
 
@@ -19,3 +19,20 @@ function getAllApartments(){
 		console.log(data);
 	});	
 }
+
+
+$(document).ready(function(){
+	$("#aLogout").click(function() {
+		$.ajax({
+			method:"POST",
+			url:"../TuristickaAgencija/rest/users/logout",	
+			datatype:"text"
+		}).done(function(data){
+			alert(data);
+			//console.log(data);
+			window.location.href="http://localhost:8080/TuristickaAgencija/";
+		});
+	});
+
+	
+})
