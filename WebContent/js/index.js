@@ -38,11 +38,21 @@ $(document).ready(function(){
 	  $(".modal").hide(200);
 	})
 
-/*	$(window).click(function(event) {
-	  if (event.target == $(".modal")) {
-	   $(".modal").hide();
-	  }
-	});*/
+	$("#filterBtn").click(function(){
+			$("#filterTable").slideToggle();
+	})
+	
+	$("#filterSearch").click(function(){
+		let dateFrom = $("#dateFrom").val();
+		let dateto = $("#dateTo").val();
+		let country = $("#country").val();
+		let city = $("#city").val();
+		let priceFrom = $("#priceFrom").val();
+		let priceTo = $("#priceTo").val();
+		let roomFrom = $("#roomFrom").val();
+		let roomTo = $("#roomTo").val();
+		let spotNum = $("#spotNum").val();
+	})
 })
 
 // TODO 6: slucaj nevalidnog profila
@@ -59,32 +69,38 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	let password = $("#password").val();
 	let controlPassword = $("#controlPassword").val();
 	
-	// PROVERA POLJA
-	let allTds = $('td');
-	if(username == ''){
-		allTds[2].append("Morate uneti Vaše korisničko ime.");
-		$(allTds[2]).css("color", "red")
-		$(allTds[2]).css("font-size", "10px")
+	// VALIDACIJA POLJA
+
+	if(!username){
+		$("#username").css("border-color", "red");
+		$("#invalidUser").css("font-size", "10px");
+	}else{
+		$("#username").css("border-color", "grey");
+		$("#invalidUser").css("font-size", "0px");
 	}
-	if(name == ''){
-		allTds[5].append("Morate uneti Vaše ime.");
-		$(allTds[5]).css("color", "red")
-		$(allTds[5]).css("font-size", "10px")
+	if(!name){
+		$("#name").css("border-color", "red");
+		$("#invalidName").css("font-size", "10px");
+	}else{
+		$("#name").css("border-color", "grey");
+		$("#invalidName").css("font-size", "0px");
 	}
-	if(lastName == ''){
-		allTds[8].append("Morate uneti Vaše prezime.");
-		$(allTds[8]).css("color", "red")
-		$(allTds[8]).css("font-size", "10px")
+	if(!lastName){
+		$("#lastName").css("border-color", "red");
+		$("#invalidLastName").css("font-size", "10px");
+	}else{
+		$("#lastName").css("border-color", "grey");
+		$("#invalidLastName").css("font-size", "0px");
 	}
-	if(password == ''){
-		allTds[13].append("Morate uneti Vašu jedinstvenu lozinku.");
-		$(allTds[13]).css("color", "red")
-		$(allTds[13]).css("font-size", "10px")
+	if(password.length < 8){
+		$("#invalidPass").css("font-size", "10px");
+	}else{
+		$("#invalidPass").css("font-size", "0px");
 	}
-	if(controlPassword == ''){
-		allTds[16].append("Morate ponovo uneti Vašu jedinstvenu lozinku.");
-		$(allTds[16]).css("color", "red")
-		$(allTds[16]).css("font-size", "10px")
+	if(controlPassword != password){
+		$("#invalidControlPass").css("font-size", "10px");
+	}else{
+		$("#invalidControlPass").css("font-size", "0px");
 	}
 
 	
@@ -115,7 +131,7 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 }
 
 function openHome() {				
-	window.location.href="http://localhost:8080/TuristickaAgencija/home.html";
+	window.location.assign(window.location.origin += "/TuristickaAgencija/home.html");
 }
 
 
@@ -125,16 +141,14 @@ function login(){
 	let password1 = $("#password1").val();
 	
 	// TODO: PROVERA POLJA -- nakon svake potvrde se ponovi poruka...
-	let allTds1 = $('td');
-	if(username1 == ''){
-		allTds1[21].append("Morate uneti Vaše korisničko ime.");
-		$(allTds1[21]).css("color", "red")
-		$(allTds1[21]).css("font-size", "10px")
+	
+	if(!username1){
+		$("#emptyUser").css("font-size", "10px")
+	}else{
+		$("#emptyUser").css("font-size", "0px")
 	}
-	if(password1 == ''){
-		allTds1[24].append("Morate uneti Vaše ime.");
-		$(allTds1[24]).css("color", "red")
-		$(allTds1[24]).css("font-size", "10px")
+	if(!password1){
+		$("#emptyPass").css("font-size", "10px")
 	}
 	
 

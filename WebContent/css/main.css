@@ -4,8 +4,12 @@ body {
   background-size: 100%;
 }
 
+td {
+	padding: 7px;
+}
+
 .text-primary{
-	font-size:200%
+	font-size:200%;
 }
 
 .blueButton{
@@ -26,4 +30,20 @@ table.centerSearch{
 
 #sex {
 	width: 100%;
+}
+
+.filterGroup{
+	border-bottom:2px solid grey;
+	font-weight: bold;
+}
+
+#filterBtn{
+	border:0px
+}
+
+.valid{
+	display:block;
+	font-size:0;
+	color:red;
+	font-weight:bold;
 }

@@ -30,7 +30,7 @@ $(document).ready(function(){
 		}).done(function(data){
 			alert(data);
 			//console.log(data);
-			window.location.href="http://localhost:8080/TuristickaAgencija/";
+			window.location.assign(window.location.origin += "/TuristickaAgencija/");
 		});
 	});
 
