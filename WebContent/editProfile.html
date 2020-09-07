@@ -45,14 +45,14 @@
 	
 	<div class="data" style="min-height:70px">
 			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic</h4>
-			
+	
 	</div>
 	<div class="data">
 		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
 		<table style="margin:25px">
-				<tr><td float="right">Ime:</td><td><input type="text" name="ime"/></td></tr>
-				<tr><td>Prezime:</td><td><input type="text" name="prezime"/></td></tr>
-				<tr><td>Korisnicko ime:</td><td><input type="text" name="email" disabled/></td></tr>
+				<tr><td>Ime:</td><td><input type="text" name="ime" id="name" required/></td></tr>
+				<tr><td>Prezime:</td><td><input type="text" name="prezime" id="lastName" required/></td></tr>
+				<tr><td>Korisnicko ime:</td><td><input type="text" name="username" disabled/></td></tr>
 				<tr><td>Pol:</td> 
 					<td><select name="sex" id="sex" required>
 									<option value="MUSKI">Muški</option>
@@ -60,11 +60,24 @@
 						</select>
 					</td></tr>
 				<tr style="border-bottom:1px solid black"><td>Uloga:</td><td><input type="text" name="role" disabled/></td></tr>
-				<tr><td>Nova lozinka:</td><td><input type="password" name="lozinka"/></td></tr>
-				<tr><td>Potvrda lozinke:</td><td><input type="password" name="lozinka"/></td></tr>
+				<tr><td>Nova lozinka:</td><td><input type="password" name="pass"/></td></tr>
+				<tr><td>Potvrda lozinke:</td><td><input type="password" name="confirmPass"/></td></tr>
 				<tr><td><button class="btn btnClose">Odustani</button></td></td>
-				<td><button class="btn btn-primary" style="width:100%">Sačuvaj izmene</button></td></tr>
+				<td><button id="save" class="btn btn-primary" style="width:100%">Sačuvaj izmene</button></td></tr>
 		</table>
 	</div>
+	<script>
+		$.ajax({
+			method: "GET",
+			url: "../TuristickaAgencija/rest/users/update",
+			contentType: "application/json",
+			data: jsonRegistration,
+			datatype: "text"
+		}).done(function(data){
+			$("#name").val = data.name;
+			$("#lastName").val = data.lastName;
+			$("#username").val = data.username;
+		})
+	</script>
 </body>
 </html>

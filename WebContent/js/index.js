@@ -11,7 +11,6 @@ function getUsers(){
 }
 
 
-
 $(document).ready(function(){
 	// ModalBox Registration/Login
 	$("#aLogin").click(function() {
@@ -143,12 +142,14 @@ function login(){
 	// TODO: PROVERA POLJA -- nakon svake potvrde se ponovi poruka...
 	
 	if(!username1){
-		$("#emptyUser").css("font-size", "10px")
+		$("#emptyUser").css("font-size", "10px");
 	}else{
-		$("#emptyUser").css("font-size", "0px")
+		$("#emptyUser").css("font-size", "0px");
 	}
 	if(!password1){
-		$("#emptyPass").css("font-size", "10px")
+		$("#emptyPass").css("font-size", "10px");
+	}else{
+		$("#emptyPass").css("font-size", "0px");
 	}
 	
 
@@ -169,7 +170,6 @@ function login(){
 		if(data == "Uspešno ste se ulogovali."){
 			openHome();
 		}
-		//window.location.href="http://localhost:8080/TuristickaAgencija/";
 	});
 }
 

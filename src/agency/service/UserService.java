@@ -11,6 +11,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -47,6 +48,15 @@ public class UserService {
 			UserDao userDao = new UserDao(context.getRealPath(""), ((ApartmentDao)context.getAttribute("apartmentDao")).apartments, ((ReservationDao)context.getAttribute("reservationDao")).reservations);
 	    	context.setAttribute("userDao", userDao);
 		}
+	}
+	
+	@GET
+	@Path("/getUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getUser(@QueryParam("username") String username) {
+		UserDao userDao = (UserDao) context.getAttribute("userDao");
+		
+		return userDao.getUserFromUsername(username);
 	}
 
 	
