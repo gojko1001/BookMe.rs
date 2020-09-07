@@ -1,14 +1,14 @@
 
 getAllApartments();
 
-function getAllApartments(){
-	//let inputElem = $("#username");
-	
+// TODO 5: f-ja za userInfo treba
+
+function getAllApartments(){	
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/apartments/all",
 		datatype:"application/json"
-	}).success(function(data){
+	}).done(function(data){
 		var i;
 		for(i=0; i<data.length; i++){
 			var content = "<p>";
@@ -17,8 +17,5 @@ function getAllApartments(){
 			$("#listOfApartments").append(content);
 		}
 		console.log(data);
-	});
-	
-	
-	
+	});	
 }

@@ -2,12 +2,14 @@ package agency.dao;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -94,6 +96,8 @@ public class UserDao {
 	
 	public void loadUsersFromJson() {
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		System.out.println(path);
 		File file = new File(path);
 			try {
 				List<User> users = mapper.readValue(file, new TypeReference<List<User>>() {});
@@ -121,15 +125,18 @@ public class UserDao {
 	// TODO 2: ne pamti zauvek..
 	public void addUsersToFile() throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
+		
 		ObjectWriter ow = mapper.writer(new DefaultPrettyPrinter());			// da se lepo napise u JSON-u
-		ow.writeValue(new File(path), getAllUsers());
-		//ow.writeValue(new File("/json/users.json"), getAllUsers());
+		ow.writeValue(new File(path), getAllUsersDTOs());
+		
+		//ow.writeValue(new File("/json/users.json"), getAllUsersDTOs());
 	}
 	
 	public String addUser(User user) {
 		List<User> allUsers = getAllUsers();
 		for(User u : allUsers) {
 			if(u.getUsername().equals(user.getUsername())) {
+				System.out.println(u.getUsername());
 				return "Korisnik sa prosledjenim korisničkim imenom već postoji.";
 			}
 		}

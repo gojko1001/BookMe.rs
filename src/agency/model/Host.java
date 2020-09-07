@@ -3,7 +3,10 @@ package agency.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Host extends User {
+	@JsonIgnore
 	private List<Apartment> apartmentsForRent = new ArrayList<Apartment>();
 	
 	public Host() {}
