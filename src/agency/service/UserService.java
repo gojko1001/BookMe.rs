@@ -92,13 +92,13 @@ public class UserService {
 		User user = userDao.loginUser(authentication);
 		
 		if(user == null) {
-			return "Korisnik unetom šifrom i korisničkim imenom ne postoji.";
+			return "Pokušajte ponovo. Greška prilikom prijave.";
 		}else {
 			// TODO 1: da li je vec ulogovan?
 			request.getSession().setAttribute("loginUser", user);
 			System.out.println(((User)request.getSession().getAttribute("loginUser")).getUsername());
 			
-			return "Uspešno ulogovan korisnik.";
+			return "Uspešno ste se ulogovali.";
 		}	
 	}
 	

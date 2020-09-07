@@ -131,13 +131,17 @@ public class UserDao {
 	
 	public String addUser(User user) {
 		List<User> allUsers = getAllUsers();
+		
+		// TODO 7: NE RADI
 		for(User u : allUsers) {
 			if(u.getUsername().equals(user.getUsername())) {
-				System.out.println(u.getUsername());
 				return "Korisnik sa prosleđenim korisničkim imenom već postoji.";
 			}
 		}
-		//if(user.getUsername().equals(null) )
+		
+		if(user.getUsername().equals("") || user.getName().equals("") || user.getLastName().equals("") || user.getPassword().equals("")) {
+			return "Niste popunili sva polja.";
+		}
 		
 		Guest guest = new Guest(user.getUsername(), user.getPassword(), user.getName(), user.getLastName(), user.isMale(), user.getRole());
 		
@@ -160,12 +164,15 @@ public class UserDao {
 	
 	public User loginUser(AuthenticationDTO authentication) {
 		List<User> allUsers = getAllUsers();
-		for(User u : allUsers) {
-			if(u.getUsername().equals(authentication.getUsername()) && u.getPassword().equals(authentication.getPassword())) {
-				return u;
+		
+		if(!authentication.getUsername().equals("") && !authentication.getPassword().equals("")) {
+			for(User u : allUsers) {
+				if(u.getUsername().equals(authentication.getUsername()) && u.getPassword().equals(authentication.getPassword())) {
+					return u;
+				}
 			}
 		}
-		
+
 		return null;
 	}
 	

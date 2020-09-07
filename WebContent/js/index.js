@@ -106,53 +106,57 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 		data:jsonRegistration,
 		datatype:"text"
 	}).done(function(data){
-		//console.log(data);
+		alert(data);
 		if(data == "Uspešno ste se registrovali."){
-			alert(data);
 			openLogin();
 		}
 		//window.location.href="http://localhost:8080/TuristickaAgencija/";
 	});
 }
 
-function login(){	
-	let username = $("#username").val();
-	let password = $("#password").val();
+function openHome() {				
+	window.location.href="http://localhost:8080/TuristickaAgencija/home.html";
+}
 
-	// PROVERA POLJA
-	let allTds = $('td');
-	if(username == ''){
-		allTds[2].append("Morate uneti Vaše korisničko ime.");
-		$(allTds[2]).css("color", "red")
-		$(allTds[2]).css("font-size", "10px")
+
+
+function login(){	
+	let username1 = $("#username1").val();
+	let password1 = $("#password1").val();
+	
+	// TODO: PROVERA POLJA -- nakon svake potvrde se ponovi poruka...
+	let allTds1 = $('td');
+	if(username1 == ''){
+		allTds1[21].append("Morate uneti Vaše korisničko ime.");
+		$(allTds1[21]).css("color", "red")
+		$(allTds1[21]).css("font-size", "10px")
 	}
-	if(password == ''){
-		allTds[5].append("Morate uneti Vaše ime.");
-		$(allTds[5]).css("color", "red")
-		$(allTds[5]).css("font-size", "10px")
+	if(password1 == ''){
+		allTds1[24].append("Morate uneti Vaše ime.");
+		$(allTds1[24]).css("color", "red")
+		$(allTds1[24]).css("font-size", "10px")
 	}
 	
+
 	
 	var jsonRegistration = JSON.stringify({
-		"username":username,
-		"password":password,
+		"username":username1,
+		"password":password1
 	});
-
-	//console.log(jsonRegistration);
 	
 	$.ajax({
 		method:"POST",
 		url:"../TuristickaAgencija/rest/users/login",
 		contentType:"application/json",
-		data:jsonRegistration,			
+		data:jsonRegistration,
 		datatype:"text"
 	}).done(function(data){
 		alert(data);
-		//console.log(data);
-		if(data = "Uspešno ulogovan korisnik."){
-			window.location.href="http://localhost:8080/TuristickaAgencija/home.html";
+		if(data == "Uspešno ste se ulogovali."){
+			openHome();
 		}
-		
+		//window.location.href="http://localhost:8080/TuristickaAgencija/";
 	});
 }
+
 
