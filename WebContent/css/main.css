@@ -25,8 +25,8 @@ td {
 
 table.centerSearch{
     float: right; 
-	margin-right: 10%;
 }
+
 
 #sex {
 	width: 100%;
@@ -38,7 +38,8 @@ table.centerSearch{
 }
 
 #filterBtn{
-	border:0px
+	border:0px;
+	font-size:30px;
 }
 
 .valid{

@@ -1,3 +1,5 @@
+
+
 function getUsers(){
 	
 	$.ajax({
@@ -54,7 +56,7 @@ $(document).ready(function(){
 	})
 })
 
-// TODO 6: slucaj nevalidnog profila
+
 function openLogin() {				// otvara se odmah posle registracije
 	$(".modal").hide(200);
 	$("div#logModal").slideDown("fast");
@@ -67,6 +69,7 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	let sex = $("#sex").val();
 	let password = $("#password").val();
 	let controlPassword = $("#controlPassword").val();
+	let notRed = false;
 	
 	// VALIDACIJA POLJA
 
@@ -92,47 +95,48 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 		$("#invalidLastName").css("font-size", "0px");
 	}
 	if(password.length < 8){
+		$("#password").css("border-color", "red");
 		$("#invalidPass").css("font-size", "10px");
 	}else{
 		$("#invalidPass").css("font-size", "0px");
+		notRed = true;
 	}
 	if(controlPassword != password){
+		$("#controlPassword").css("border-color", "red");
 		$("#invalidControlPass").css("font-size", "10px");
 	}else{
 		$("#invalidControlPass").css("font-size", "0px");
-	}
-
-	
-	var jsonRegistration = JSON.stringify({
-		"username":username,
-		"name":name,
-		"lastName":lastName,
-		"male":sex,
-		"password":password,
-		"role":"Guest"
-	});
-
-	//console.log(jsonRegistration);
-	
-	$.ajax({
-		method:"POST",
-		url:"../TuristickaAgencija/rest/users/registration",
-		contentType:"application/json",
-		data:jsonRegistration,
-		datatype:"text"
-	}).done(function(data){
-		alert(data);
-		if(data == "Uspešno ste se registrovali."){
-			openLogin();
+		
+		if(notRed == true){
+			var jsonRegistration = JSON.stringify({
+			"username":username,
+			"name":name,
+			"lastName":lastName,
+			"male":sex,
+			"password":password,
+			"role":"Guest"
+		});
+		
+		$.ajax({
+			method:"POST",
+			url:"../TuristickaAgencija/rest/users/registration",
+			contentType:"application/json",
+			data:jsonRegistration,
+			datatype:"text"
+		}).done(function(data){
+			alert(data);
+			if(data == "Uspešno ste se registrovali."){
+				openLogin();
+			}
+		});
+		
 		}
-		//window.location.href="http://localhost:8080/TuristickaAgencija/";
-	});
+	}
 }
 
 function openHome() {				
 	window.location.assign(window.location.origin += "/TuristickaAgencija/home.html");
 }
-
 
 
 function login(){	
@@ -151,8 +155,6 @@ function login(){
 	}else{
 		$("#emptyPass").css("font-size", "0px");
 	}
-	
-
 	
 	var jsonRegistration = JSON.stringify({
 		"username":username1,

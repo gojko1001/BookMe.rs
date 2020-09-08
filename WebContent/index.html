@@ -33,11 +33,11 @@
 			<form id="registration" method="POST">
 		        <table>
 		            <tr><td>Korisničko ime:</td><td><input type="text" name="username" id="username" title="Unesite jedinstveno korisničko ime." required></td>
-					<td><label id="invalidUser" class="valid">Obavezno polje!</label></td></tr>
+					<td><label id="invalidUser" class="valid">Unesite Vaše jedinstveno korisničko ime.</label></td></tr>
 		            <tr><td>Ime:</td><td><input type="text" name="name" id="name"  pattern="[a-zA-ZćĆžŽĐđšŠčČ]*" title="Prvo morate uneti slova." required></td>
-					<td><label id="invalidName" class="valid">Obavezno polje!</label></td></tr>
+					<td><label id="invalidName" class="valid">Unesite Vaše ime.</label></td></tr>
 		            <tr><td>Prezime:</td><td><input type="text" name="lastName" id="lastName" pattern="^([a-zA-ZćĆžŽĐđšŠčČ]+)[1-9]*" title="Prvo morate uneti slova." required></td>
-					<td><label id="invalidLastName" class="valid">Obavezno polje!</label></td></tr>
+					<td><label id="invalidLastName" class="valid">Unesite Vaše prezime.</label></td></tr>
 					<tr><td>Pol:</td> 
 							<td><select name="sex" id="sex" required>
 											<option value="true">Muški</option>
@@ -63,8 +63,8 @@
 			<form action="login" method="POST" id="logForm">
 				<table>
 					<tr><td>Korisničko ime:</td><td><input type="text" name="username1" id="username1" title="Unesite Vaše korisničko ime." required></td>
-					<td><label id="emptyUser" class="valid">Unesite korisničko ime!</label></td></tr>
-					<tr><td>Lozinka:</td> <td><input type="text" name="password1" id="password1" title="Unesite Vašu lozinku." required></td>
+					<td><label id="emptyUser" class="valid">Unesite Vaše korisničko ime.</label></td></tr>
+					<tr><td>Lozinka:</td> <td><input type="password" name="password1" id="password1" title="Unesite Vašu lozinku." required></td>
 					<td><label id="emptyPass" class="valid">Pogrešna lozinka!</label></td></tr>
 					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a><br><a href="#" class="text-primary" style="font-size:12px;">Zaboravio/la sam šifru.</a></p></td></tr>
 				</table>
@@ -73,19 +73,21 @@
 		</div>
 	</div>
 	
-	<form action="pretraga" method="GET">
-        <table class="centerSearch">
-            	<tr><td>Pretraga apartmana:</td>
-				<td><input type="text" name="search" placeholder="Gde idete?"></td>
-				<td><input type="text" name="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')" value=""></td><td><b>-</b></td>
-				<td><input type="text" name="dateTo" placeholder="Do datuma" onfocus="(this.type='date')"></td>
-				<td><button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Pretraga</button></td></tr>
-        </table>
-        <br>
-		
-    </form>
 	
-	<div style="float:left; margin-left:10%; padding:5px 10px; width:auto; background:#f2f2f2; border:1px solid grey">
+	
+	<div style="float:center; margin-left:10%; margin-right:10%; padding:5px 10px; width:auto; background:#f2f2f2; border:1px solid grey">
+		<form action="pretraga" method="POST">
+	        <table class="centerSearch">
+	        	<tr>
+	            	<!-- <td>Pretraga apartmana:</td> -->
+					<td><input type="text" name="search" placeholder="Naziv apartmana"></td>
+					<td><input type="text" name="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')" value=""></td><td><b>-</b></td>
+					<td><input type="text" name="dateTo" placeholder="Do datuma" onfocus="(this.type='date')"></td>
+					<td><button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Pretraga</button></td></tr>
+	        </table>
+			
+	    </form>
+		
 		<button class="text-primary btn-light" id="filterBtn">☰ Filteri</button>
 		<div id="filterTable" style="display:none">
 		<table >

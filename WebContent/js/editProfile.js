@@ -1,4 +1,4 @@
-$(document).ready(function{
+$(document).ready(function(){
 	$("button#save").click(function(){
 		let username = $("#username").val();
 		let name = $("#name").val();
