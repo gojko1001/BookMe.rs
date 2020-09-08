@@ -8,6 +8,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script type="text/javascript" src="js/editProfile.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
 	
 	<style>
 		.data {
@@ -23,10 +25,10 @@
 			padding: 10px;
 		}
 		
-		.btnclose{
+		.btnClose{
 			border:1px solid grey;
 		}
-		.btnclose:hover{
+		.btnClose:hover{
 			background-color: #ddd;
 		}
 	</style>
@@ -38,45 +40,68 @@
 		&nbsp;
 		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
 		<span style="float:right; padding-right:10%; margin-top:0.5%"">
-		<a href="#"> IZLOGUJ SE </a>
+		<a href="#" id="aLogout"> IZLOGUJ SE </a>
 		&nbsp;&nbsp;
 		</span>
 	</h4>
 	
 	<div class="data" style="min-height:70px">
-			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic</h4>
+			<h4 id="username1" style="padding-left:15px; padding-top:15px"></h4>
 	
 	</div>
 	<div class="data">
 		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
 		<table style="margin:25px">
-				<tr><td>Ime:</td><td><input type="text" name="ime" id="name" required/></td></tr>
-				<tr><td>Prezime:</td><td><input type="text" name="prezime" id="lastName" required/></td></tr>
-				<tr><td>Korisnicko ime:</td><td><input type="text" name="username" disabled/></td></tr>
+				<tr><td>Ime:</td><td><input type="text" id="name" required/></td>
+				<td><label id="invalidName" class="valid">Ne sme ostati prazno!</label></td></tr>
+				<tr><td>Prezime:</td><td><input type="text" id="lastName"required/></td>
+				<td><label id="invalidLastName" class="valid">Ne sme ostati prazno!</label></td></tr>
+				<tr><td>Korisnicko ime:</td><td><input type="text" id="username" disabled/></td></tr>
 				<tr><td>Pol:</td> 
 					<td><select name="sex" id="sex" required>
-									<option value="MUSKI">Muški</option>
-									<option value="ZENSKI">Ženski</option>
+									<option id="male" value="MUSKI">Muški</option>
+									<option id="female" value="ZENSKI">Ženski</option>
 						</select>
 					</td></tr>
-				<tr style="border-bottom:1px solid black"><td>Uloga:</td><td><input type="text" name="role" disabled/></td></tr>
-				<tr><td>Nova lozinka:</td><td><input type="password" name="pass"/></td></tr>
-				<tr><td>Potvrda lozinke:</td><td><input type="password" name="confirmPass"/></td></tr>
-				<tr><td><button class="btn btnClose">Odustani</button></td></td>
+				<tr style="border-bottom:1px solid black"><td>Uloga:</td><td><input type="text" id="role" disabled/></td></tr>
+				<tr><td>Nova lozinka:</td><td><input type="password" id="pass"/></td>
+				<td><label id="invalidPass" class="valid">Lozinka mora da sadrži najmanje 8 karaktera!</label></td></tr>
+				<tr><td>Potvrda lozinke:</td><td><input type="password" id="controlPass"/></td>
+				<td><label id="invalidConfirmPass" class="valid">Lozinke se ne poklapaju!</label></tr>
+				<tr><td><button type="button" id="btnClose" class="btn btnClose" data-toggle="button" aria-pressed="false" autocomplete="off">Odustani</button></td></td>
 				<td><button id="save" class="btn btn-primary" style="width:100%">Sačuvaj izmene</button></td></tr>
 		</table>
+		<input type="text" id="roleVal" hidden>
+		<input type="password" id="oldPass" hidden>
 	</div>
 	<script>
 		$.ajax({
 			method: "GET",
-			url: "../TuristickaAgencija/rest/users/update",
-			contentType: "application/json",
-			data: jsonRegistration,
-			datatype: "text"
+			url: "../TuristickaAgencija/rest/users/get",
+			datatype: "application/json"
 		}).done(function(data){
-			$("#name").val = data.name;
-			$("#lastName").val = data.lastName;
-			$("#username").val = data.username;
+			$("#name").val(data.name);
+			$("#lastName").val(data.lastName);
+			$("#username").val(data.username);
+			$("#username1").append(data.username);
+			if(data.male){
+				$("#male").attr("selected", "selected");
+			}else{
+				$("#female").attr("selected", "selected");
+			}
+			switch(data.role){
+				case "Administrator":
+					$("#role").val("Administrator");
+					break;
+				case "Host":
+					$("#role").val("Domaćin");
+					break;
+				case "Guest":
+					$("#role").val("Gost");
+					break;
+			}
+			$("#roleVal").val(data.role);
+			$("#oldPass").val(data.password);
 		})
 	</script>
 </body>

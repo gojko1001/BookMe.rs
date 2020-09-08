@@ -1,17 +1,23 @@
 $(document).ready(function(){
 	$("button#save").click(function(){
-		let username = $("#username").val();
 		let name = $("#name").val();
 		let lastName = $("#lastName").val();
-		let sex = $("#sex").val();
-		let password = $("#password").val();
-		let controlPassword = $("#controlPassword").val();
-//TODO: nije zavrseno...		
+		let sex = '';
+		if($("#sex").val() == "MUSKI"){
+			sex = "true";
+		}else{
+			sex = "false";
+		}
+		let pass = $("#pass").val();
+		let controlPass = $("#controlPass").val();
+
+		let valid = true;
 		// VALIDACIJA POLJA
 
 		if(!name){
 			$("#name").css("border-color", "red");
 			$("#invalidName").css("font-size", "10px");
+			valid = false;
 		}else{
 			$("#name").css("border-color", "grey");
 			$("#invalidName").css("font-size", "0px");
@@ -19,46 +25,55 @@ $(document).ready(function(){
 		if(!lastName){
 			$("#lastName").css("border-color", "red");
 			$("#invalidLastName").css("font-size", "10px");
+			valid = false;
 		}else{
 			$("#lastName").css("border-color", "grey");
 			$("#invalidLastName").css("font-size", "0px");
 		}
-		if(password){
-			if(password.length < 8){
+		if(pass){
+			if(pass.length < 8){
 				$("#invalidPass").css("font-size", "10px");
+				valid = false;
 			}else{
 				$("#invalidPass").css("font-size", "0px");
 			}
-			if(controlPassword != password){
-				$("#invalidControlPass").css("font-size", "10px");
+			if(controlPass != pass){
+				$("#invalidConfirmPass").css("font-size", "10px");
+				valid = false;
 			}else{
-				$("#invalidControlPass").css("font-size", "0px");
+				$("#invalidConfirmPass").css("font-size", "0px");
 			}
+		}else{
+			pass = $("#oldPass").val();
+		} 
+		
+		if(valid){
+			var jsonUpdate = JSON.stringify({
+				"username": $("#username").val(),
+				"name":name,
+				"lastName":lastName,
+				"male":sex,
+				"password":pass,
+				"role": $("#roleVal").val()
+			});
+			
+			$.ajax({
+				method: "PUT",
+				url: "../TuristickaAgencija/rest/users/update",
+				contentType: "application/json",
+				data: jsonUpdate,
+				datatype: "application/json"
+			}).done(function(data){
+				if(data != null){
+					alert("Profil uspešno ažuriran!");
+					openProfile();
+				}
+			})
 		}
-		
-		//role: Treba da se uskladi sa bazom
-		var jsonRegistration = JSON.stringify({
-			"username":username,
-			"name":name,
-			"lastName":lastName,
-			"male":sex,
-			"password":password,
-			"role":"Guest"
-		});
-		
-		$.ajax({
-			method: "PUT",
-			url: "../TuristickaAgencija/rest/users/update",
-			contentType: "application/json",
-			data: jsonRegistration,
-			datatype: "text"
-		}).done(function(data){
-			if(data != null){
-				alert("Profil uspešno ažuriran!");
-				openProfile();
-			}
-		})
-		
+	})
+	
+	$("button#btnClose").click(function(){
+		window.history.back();
 	})
 })
 

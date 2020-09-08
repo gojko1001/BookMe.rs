@@ -11,6 +11,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/profile.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
 	<style>
 		.data {
 			margin-left:10%;
@@ -31,33 +32,58 @@
 		&nbsp;
 		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
 		<span style="float:right; padding-right:10%; margin-top:0.5%"">
-		<a href="#"> IZLOGUJ SE </a>
+		<a href="#" id="aLogout"> IZLOGUJ SE </a>
 		&nbsp;&nbsp;
 		</span>
 	</h4>
-	
-	<!--  
+	  
 	<div class="data" style="min-height:70px">
-			<h4 style="padding-left:15px; padding-top:15px">Gojko Novcic
-				<button class="btn btn-primary" style="float:right; margin-right:5%">Izmeni</button>
+			<h4 class="username" style="padding-left:15px; padding-top:15px">
+				<button type="button" id="btnEdit" class="btn btn-primary" style="float:right; margin-right:5%">Izmeni</button>
 			</h4>
 			
 	</div>
 	<div class="data">
 		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
 		<table style="margin:25px">
-				<tr><td float="right">Ime: ...</td></tr>
-				<tr><td>Prezime: ...</td></tr>
-				<tr><td>Korisnicko ime: ...</td></tr>
-				<tr><td>Pol: ...</td></tr>
-				<tr><td>Uloga: ...</td></tr>
+				<tr><td>Ime: </td><td id="name"><td id="name"></td></tr>
+				<tr><td>Prezime: </td><td id="lastName"></td></tr>
+				<tr><td>Korisnicko ime: </td><td class="username"></td></tr>
+				<tr><td>Pol: </td><td id="sex"></td></tr>
+				<tr><td>Uloga: </td><td id="role"></td></tr>
 		</table>
 	</div>
-	-->
 	
 	<div id="myInfo">
 	</div>
-
+	
+	<script>
+		$.ajax({
+			method: "GET",
+			url: "../TuristickaAgencija/rest/users/get",
+			datatype: "application/json"
+		}).done(function(data){
+			$("#name").append(data.name);
+			$("#lastName").append(data.lastName);
+			$(".username").append(data.username);
+			if(data.male){
+				$("#sex").append("Muški");
+			}else{
+				$("#sex").append("Ženski");
+			}
+			switch(data.role){
+				case "Administrator":
+					$("#role").append("Administrator");
+					break;
+				case "Host":
+					$("#role").append("Domaćin");
+					break;
+				case "Guest":
+					$("#role").append("Gost");
+					break;
+			}
+		})
+	</script>
 	
 	
 </body>
