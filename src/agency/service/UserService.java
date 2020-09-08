@@ -58,6 +58,16 @@ public class UserService {
 		
 		return userDao.getUserFromUsername(username);
 	}
+	
+	
+	@GET
+	@Path("/get")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User get() {
+		User user = (User)request.getSession().getAttribute("loginUser");
+		
+		return user;
+	}
 
 	
 	@GET
@@ -104,7 +114,6 @@ public class UserService {
 		if(user == null) {
 			return "Pokušajte ponovo. Greška prilikom prijave.";
 		}else {
-			// TODO 1: da li je vec ulogovan?
 			request.getSession().setAttribute("loginUser", user);
 			System.out.println(((User)request.getSession().getAttribute("loginUser")).getUsername());
 			

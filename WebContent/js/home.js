@@ -33,6 +33,11 @@ $(document).ready(function(){
 			window.location.assign(window.location.origin += "/TuristickaAgencija/");
 		});
 	});
+})
 
-	
+
+$(document).ready(function(){
+	$("#aMyInfo").click(function(){
+		window.location.assign(window.location.origin += "/TuristickaAgencija/profile.html");
+	});	
 })
