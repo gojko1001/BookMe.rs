@@ -10,11 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dto.ReservationDTO;
-import agency.model.Apartment;
-import agency.model.Reservation;
 
 @Path("/reservations")
 public class ReservationService {

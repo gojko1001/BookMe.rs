@@ -2,8 +2,6 @@ package agency.dto;
 
 import java.time.LocalDate;
 
-import agency.model.Apartment;
-import agency.model.Guest;
 import agency.model.Reservation;
 import agency.model.Status;
 

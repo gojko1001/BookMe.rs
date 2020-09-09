@@ -14,6 +14,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import agency.dto.ApartmentDTO;
+import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
 import agency.model.Reservation;
 
@@ -28,15 +29,6 @@ public class ApartmentDao {
 		mapReservationsAndApartments(reservations);
 	}
 	
-	public List<ApartmentDTO> getAllApartments(){
-		List<ApartmentDTO> apartmentsDto = new ArrayList<ApartmentDTO>();
-		for(Apartment a : apartments) {
-			apartmentsDto.add(new ApartmentDTO(a));
-		}
-		
-		return apartmentsDto;
-	}
-	
 	public Apartment getApartment(String id) {
 		for(Apartment a : apartments) {
 			if(a.getId().equals(id)) {
@@ -47,27 +39,20 @@ public class ApartmentDao {
 		return null;
 	}
 	
-	public void loadApartmentsFromJson() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JavaTimeModule());
-		File file = new File(path);
-			try {
-				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
-				
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+	public List<ApartmentDTO> getAllApartments(){
+		List<ApartmentDTO> apartmentsDto = new ArrayList<ApartmentDTO>();
+		for(Apartment a : apartments) {
+			apartmentsDto.add(new ApartmentDTO(a));
+		}
+		
+		return apartmentsDto;
 	}
 	
-	public Boolean addApartment(Apartment apartment) {
-		List<ApartmentDTO> allApartments = getAllApartments();
-		
+	public Boolean addApartment(Apartment apartment) {		
 		if(!apartment.isValid())
 			return false;
 		
-		for(ApartmentDTO a : allApartments)
+		for(Apartment a : apartments)
 			if(a.getId().equalsIgnoreCase(apartment.getId()))
 				return false;
 		
@@ -89,7 +74,57 @@ public class ApartmentDao {
 		
 		return true;
 	}
+
+	public List<Apartment> applyFilter(ApartmentFilterDTO filter){
+		List<Apartment> filtered = new ArrayList<>();
+		
+		for(Apartment a : apartments) {
+			if(!filter.getCountry().equals(""))
+				if(!a.getLocation()
+						.getAddress()
+						.getCountry()
+						.contains(filter.getCountry()))
+					continue;
+			if(!filter.getCity().equals(""))
+				if(!a.getLocation()
+						.getAddress()
+						.getPlace()
+						.contains(filter.getCity()))
+					continue;
+			if(filter.getPriceFrom() != -1)
+				if(a.getPrice() < filter.getPriceFrom())
+					continue;
+			if(filter.getPriceTo() != -1)
+				if(a.getPrice() > filter.getPriceTo())
+					continue;
+			if(filter.getRoomFrom() != -1)
+				if(a.getNumberOfRooms() < filter.getRoomFrom())
+					continue;
+			if(filter.getRoomTo() != -1)
+				if(a.getNumberOfRooms() > filter.getRoomTo())
+					continue;
+			if(filter.getSpotNum() != -1)
+				if(a.getNumberOfGuests() != filter.getSpotNum())
+					continue;
+			//TODO: Filter za datum + filteri po rolama
+			filtered.add(a);
+		}
+		return filtered;
+	}
 	
+	public void loadApartmentsFromJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		File file = new File(path);
+			try {
+				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+	}
+
 	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
 		for(Reservation r : reservations) {
 			Apartment a = this.getApartment(r.getApartment().getId());
@@ -97,9 +132,4 @@ public class ApartmentDao {
 			r.setApartment(a);
 		}
 	}
-	
-	
-	
-	
-	
 }

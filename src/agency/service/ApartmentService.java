@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dto.ApartmentDTO;
+import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
 
 @Path("/apartments")
@@ -37,6 +38,24 @@ public class ApartmentService {
 	    	context.setAttribute("apartmentDao", apartmentDao);
 		}
 	}
+
+	@GET
+	@Path("/getOne")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Apartment getAppartment(String id) {
+		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		
+		return apartmentDao.getApartment(id);
+	}
+	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<ApartmentDTO> getAllApartments() {
+		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		
+		return apartmentDao.getAllApartments();
+	}
 	
 	@POST
 	@Path("/add")
@@ -47,14 +66,14 @@ public class ApartmentService {
 		
 		return apartmentDao.addApartment(apartment);
 	}
-
 	
-	@GET
-	@Path("/all")
+	@POST
+	@Path("/filter")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<ApartmentDTO> getAllApartments() {
+	@Consumes(MediaType.TEXT_PLAIN)
+	public List<Apartment> applyFilter(ApartmentFilterDTO filter) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
-		return apartmentDao.getAllApartments();
+		return apartmentDao.applyFilter(filter);
 	}
 }

@@ -1,8 +1,6 @@
 package agency.dto;
 
-import agency.model.Apartment;
 import agency.model.Comment;
-import agency.model.Guest;
 
 public class CommentDTO {
 	private String guestUsername;
