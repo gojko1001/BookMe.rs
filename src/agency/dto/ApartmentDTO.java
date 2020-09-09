@@ -28,8 +28,7 @@ public class ApartmentDTO {
 	private boolean active;
 	private List<Amenity> amenities = new ArrayList<Amenity>();
 	private List<ReservationDTO> reservationsDTO = new ArrayList<ReservationDTO>();
-	
-	
+		
 	public ApartmentDTO() {}
 	
 	public ApartmentDTO(Apartment apartment) {

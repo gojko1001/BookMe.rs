@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -34,6 +36,16 @@ public class ApartmentService {
 			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""),((ReservationDao)context.getAttribute("reservationDao")).reservations);
 	    	context.setAttribute("apartmentDao", apartmentDao);
 		}
+	}
+	
+	@POST
+	@Path("/add")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Boolean addApartment(Apartment apartment) {
+		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		
+		return apartmentDao.addApartment(apartment);
 	}
 
 	

@@ -5,8 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import agency.dto.ApartmentDTO;
@@ -55,6 +59,35 @@ public class ApartmentDao {
 				e.printStackTrace();
 			}
 			
+	}
+	
+	public Boolean addApartment(Apartment apartment) {
+		List<ApartmentDTO> allApartments = getAllApartments();
+		
+		if(!apartment.isValid())
+			return false;
+		
+		for(ApartmentDTO a : allApartments)
+			if(a.getId().equalsIgnoreCase(apartment.getId()))
+				return false;
+		
+		apartments.add(apartment);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+		try {
+			writer.writeValue(new File(path), getAllApartments());
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			System.out.println("Neuspesno mapiranje.");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Greska u radu sa fajlovima");
+			e.printStackTrace();
+		}
+		
+		return true;
 	}
 	
 	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
