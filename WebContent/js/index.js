@@ -141,8 +141,6 @@ function login(){
 	let username1 = $("#username1").val();
 	let password1 = $("#password1").val();
 	
-	// TODO: PROVERA POLJA -- nakon svake potvrde se ponovi poruka...
-	
 	if(!username1){
 		$("#emptyUser").css("font-size", "10px");
 	}else{
@@ -172,5 +170,62 @@ function login(){
 		}
 	});
 }
+
+
+$(document).ready(function(){
+	$.ajax({
+		method:"GET",
+		url:"../TuristickaAgencija/rest/apartments/all",
+		datatype:"application/json"
+	}).done(function(data){
+		var i;
+		for(i=0; i<data.length; i++){
+			var content = '<div class="data">';
+			content += '<table style="margin:25px">';
+			content += '<tr><td float="right">Naziv apartmana: &nbsp';
+			content += data[i].id;
+			content += '</td></tr>';
+			content += '<tr><td>Tip: &nbsp';
+			content += data[i].type;
+			content += '</td></tr>';
+			content += '<tr><td>Broj soba: &nbsp';
+			content += data[i].numberOfRooms;
+			content += '</td></tr>';
+			content += '<tr><td>Broj gostiju: &nbsp';
+			content += data[i].numberOfGuests;
+			content += '</td></tr>';
+			content += '<tr><td>Lokacija: &nbsp';
+			content += data[i].location.address.country;
+			content += ', ';
+			content += data[i].location.address.place;
+			content += ', ';
+			content += data[i].location.address.postalCode;
+			content += '<br>&nbsp;&nbsp;';
+			content += data[i].location.address.street;
+			content += ', ';
+			content += data[i].location.address.number;
+			content += '<br>&nbsp;&nbsp;';
+			content += data[i].location.latitude;
+			content += ', ';
+			content += data[i].location.longitude;
+			content += '</td></tr>';
+			content +='<tr><td>Domaćin: &nbsp';
+			content += data[i].hostUsername;
+			content += '</td></tr>';
+			content += '</table></div>';
+
+			$("#listOfApartments").append(content);
+		}
+		console.log(data);
+	});	
+})
+
+$(document).ready(function(){
+	$("#no1").click(function(){
+		window.location.assign(window.location.origin += "/TuristickaAgencija/profile.html");
+	});	
+})
+
+
 
 
