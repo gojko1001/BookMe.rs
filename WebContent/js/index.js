@@ -180,12 +180,66 @@ $(document).ready(function(){
 	}).done(function(data){
 		var i;
 		for(i=0; i<data.length; i++){
-			var content = '<div class="data">';
+			var content = '';
+			content = '<div class="card" style="width: 15rem; height: 15rem;">';
+			content += '<img class="card-img-top" src="..." alt="SLIKA APARTMANA">';
+			content += '<div class="card-body">';
+			content += '<div class="data">';
 			content += '<table style="margin:25px">';
-			content += '<tr><td float="right">Naziv apartmana: &nbsp';
+			content += '<tr><td float="right">Naziv apartmana:</td><td>';
 			content += data[i].id;
 			content += '</td></tr>';
-			content += '<tr><td>Tip: &nbsp';
+			content +='<tr><td>Domaćin:</td><td>';
+			content += data[i].hostUsername;
+			content += '</td></tr>';
+			content += '</table></div>';
+			content += '<button type="button" class="i">Pogledaj</button>';
+			content += '</div></div>';
+			var contentModal = '';
+			contentModal = '<table>';
+			contentModal += '<tr><td>Broj soba:</td><td>';
+			contentModal += data[i].numberOfRooms;
+			contentModal += '</td></tr>';
+			contentModal += '</table>';
+
+			$("#listOfApartments").append(content);
+			$('#moreAboutApartment').append(contentModal);
+			
+			$(".i").click(function(){
+				$("div#apartmentModal").slideDown("fast");
+			})
+			
+			
+		}
+		
+		
+		
+		$(".close").click(function() {
+			  $(".modal").hide(200);
+		})
+		
+		console.log(data);
+	});	
+})
+
+
+/*
+ <div class="modal" id="apartmentModal">
+		<div class="modalContent">
+			<span class="close">&times;</span>
+			<form action="login" method="GET">
+				<table>
+				</table>
+				<button type="button" id="btnLogin" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="login()">Potvrdi</button>
+			</form>
+		</div>
+	</div>
+ */
+
+
+
+
+/*content += '<tr><td>Tip: &nbsp';
 			content += data[i].type;
 			content += '</td></tr>';
 			content += '<tr><td>Broj soba: &nbsp';
@@ -208,23 +262,7 @@ $(document).ready(function(){
 			content += data[i].location.latitude;
 			content += ', ';
 			content += data[i].location.longitude;
-			content += '</td></tr>';
-			content +='<tr><td>Domaćin: &nbsp';
-			content += data[i].hostUsername;
-			content += '</td></tr>';
-			content += '</table></div>';
-
-			$("#listOfApartments").append(content);
-		}
-		console.log(data);
-	});	
-})
-
-$(document).ready(function(){
-	$("#no1").click(function(){
-		window.location.assign(window.location.origin += "/TuristickaAgencija/profile.html");
-	});	
-})
+			content += '</td></tr>';*/
 
 
 

@@ -132,7 +132,6 @@ public class UserDao {
 	public String addUser(User user) {
 		List<User> allUsers = getAllUsers();
 		
-		// TODO 7: NE RADI
 		for(User u : allUsers) {
 			if(u.getUsername().equals(user.getUsername())) {
 				return "Korisnik sa prosleđenim korisničkim imenom već postoji.";
