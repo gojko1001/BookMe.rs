@@ -40,7 +40,7 @@ public class ApartmentService {
 	}
 
 	@POST
-	@Path("/getApartment")
+	@Path("/getById")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.TEXT_PLAIN)
 	public ApartmentDTO getAppartment(String id) {
