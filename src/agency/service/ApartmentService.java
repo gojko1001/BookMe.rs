@@ -39,13 +39,14 @@ public class ApartmentService {
 		}
 	}
 
-	@GET
-	@Path("/getOne")
+	@POST
+	@Path("/getApartment")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Apartment getAppartment(String id) {
+	@Consumes(MediaType.TEXT_PLAIN)
+	public ApartmentDTO getAppartment(String id) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
-		return apartmentDao.getApartment(id);
+		return apartmentDao.getApartmentDTO(id);
 	}
 	
 	@GET

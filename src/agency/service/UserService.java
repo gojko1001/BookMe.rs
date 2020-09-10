@@ -50,18 +50,10 @@ public class UserService {
 		}
 	}
 	
+	
+	
 	@GET
 	@Path("/getUser")
-	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@QueryParam("username") String username) {
-		UserDao userDao = (UserDao) context.getAttribute("userDao");
-		
-		return userDao.getUserFromUsername(username);
-	}
-	
-	
-	@GET
-	@Path("/get")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User get() {
 		User user = (User)request.getSession().getAttribute("loginUser");

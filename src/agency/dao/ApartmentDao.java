@@ -8,9 +8,11 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import agency.dto.ApartmentDTO;
@@ -27,6 +29,14 @@ public class ApartmentDao {
 		//System.out.println(this.path);
 		loadApartmentsFromJson();
 		mapReservationsAndApartments(reservations);
+	}
+	
+	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
+		for(Reservation r : reservations) {
+			Apartment a = this.getApartment(r.getApartment().getId());
+			a.getReservations().add(r);
+			r.setApartment(a);
+		}
 	}
 	
 	public Apartment getApartment(String id) {
@@ -48,6 +58,38 @@ public class ApartmentDao {
 		return apartmentsDto;
 	}
 	
+	
+	public ApartmentDTO getApartmentDTO(String id) {
+		ApartmentDTO apartmentDTO = null;
+		List<ApartmentDTO> allApartments = getAllApartments();
+		for(ApartmentDTO a : allApartments) {
+			if(a.getId().equals(id)) {
+				apartmentDTO = a;
+				return apartmentDTO;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	
+	
+	public void loadApartmentsFromJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		File file = new File(path);
+			try {
+				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+	}
+
+	
+	// TODO: datumi ne rade! + ponovnim pokretanjem servera ne radi!
 	public Boolean addApartment(Apartment apartment) {		
 		if(!apartment.isValid())
 			return false;
@@ -59,6 +101,7 @@ public class ApartmentDao {
 		apartments.add(apartment);
 		
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 		try {
 			writer.writeValue(new File(path), getAllApartments());
@@ -112,24 +155,7 @@ public class ApartmentDao {
 		return filtered;
 	}
 	
-	public void loadApartmentsFromJson() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JavaTimeModule());
-		File file = new File(path);
-			try {
-				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			
-	}
+	
 
-	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
-		for(Reservation r : reservations) {
-			Apartment a = this.getApartment(r.getApartment().getId());
-			a.getReservations().add(r);
-			r.setApartment(a);
-		}
-	}
+	
 }

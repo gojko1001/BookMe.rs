@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import agency.dto.ApartmentDTO;
+
 public class Apartment {
 	private String id;
 	private Type type;
@@ -46,6 +48,7 @@ public class Apartment {
 		this.amenities = amenities;
 		this.reservations = reservations;
 	}
+
 
 	public String getId() {
 		return id;
@@ -175,7 +178,6 @@ public class Apartment {
 		this.reservations = reservations;
 	}
 	
-	
 	public Boolean isValid() {
 		if(this.id == null || this.host.getUsername().equals("") ||
 				this.numberOfGuests <= 0 || this.numberOfRooms <= 0 ||
@@ -183,4 +185,5 @@ public class Apartment {
 			return false;
 		return true;
 	}
+	
 }
