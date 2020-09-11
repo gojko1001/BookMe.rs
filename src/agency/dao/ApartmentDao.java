@@ -2,7 +2,10 @@ package agency.dao;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -23,6 +26,8 @@ import agency.model.Reservation;
 public class ApartmentDao {
 	public List<Apartment> apartments = new ArrayList<Apartment>();
 	private String path;
+	
+	public SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy.");
 	
 	public ApartmentDao(String path, List<Reservation> reservations) {
 		this.path = path + "json/apartments.json";
@@ -152,7 +157,20 @@ public class ApartmentDao {
 			if(filter.getSpotNum() != -1)
 				if(a.getNumberOfGuests() != filter.getSpotNum())
 					continue;
-			//TODO: Filter za datum + filteri po rolama
+			if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
+				Date start = new Date();
+				Date due = new Date();
+				
+				try {
+					start = sdf.parse(filter.getStartDate());
+					due = sdf.parse(filter.getDueDate());
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				
+				//TODO: Filter za datum
+			}
+			
 			filtered.add(a);
 		}
 		return filtered;

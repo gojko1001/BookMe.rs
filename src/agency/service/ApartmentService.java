@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -39,11 +40,10 @@ public class ApartmentService {
 		}
 	}
 
-	@POST
+	@GET
 	@Path("/getById")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.TEXT_PLAIN)
-	public ApartmentDTO getAppartment(String id) {
+	public ApartmentDTO getAppartment(@QueryParam("id") String id) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.getApartmentDTO(id);
@@ -71,7 +71,7 @@ public class ApartmentService {
 	@POST
 	@Path("/filter")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public List<Apartment> applyFilter(ApartmentFilterDTO filter) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		

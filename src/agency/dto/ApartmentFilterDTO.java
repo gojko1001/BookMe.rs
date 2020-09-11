@@ -1,10 +1,9 @@
 package agency.dto;
 
-import java.time.LocalDate;
 
 public class ApartmentFilterDTO {
-	private LocalDate startDate;
-	private LocalDate dueDate;
+	private String startDate;
+	private String dueDate;
 	private String country;
 	private String city;
 	private float priceFrom;
@@ -13,7 +12,7 @@ public class ApartmentFilterDTO {
 	private int roomTo;
 	private int spotNum;
 	
-	public ApartmentFilterDTO(LocalDate startDate, LocalDate dueDate, String country, String city, float priceFrom,
+	public ApartmentFilterDTO(String startDate, String dueDate, String country, String city, float priceFrom,
 			float priceTo, int roomFrom, int roomTo, int spotNum) {
 		super();
 		this.startDate = startDate;
@@ -27,19 +26,19 @@ public class ApartmentFilterDTO {
 		this.spotNum = spotNum;
 	}
 
-	public LocalDate getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getDueDate() {
+	public String getDueDate() {
 		return dueDate;
 	}
 
-	public void setDueDate(LocalDate dueDate) {
+	public void setDueDate(String dueDate) {
 		this.dueDate = dueDate;
 	}
 

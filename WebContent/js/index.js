@@ -1,5 +1,5 @@
 
-$(".myButtonClass").on('click', function(event){
+/*$(".myButtonClass").on('click', function(event){
     alert(this.id);
 });
 
@@ -14,11 +14,20 @@ function getUsers(){
 	});
 	
 	
+}*/
+
+window.onload = function(event){
+	$.ajax({
+		method:"GET",
+		url:"../TuristickaAgencija/rest/apartments/all",
+		datatype:"application/json"
+	}).done(function(data){
+		showApartments(data);
+	});
 }
 
-
 $(document).ready(function(){
-	// ModalBox Registration/Login
+// ModalBox Registration/Login
 	$("#aLogin").click(function() {
 	  $("div#logModal").slideDown("fast");
 	});
@@ -43,23 +52,68 @@ $(document).ready(function(){
 	  $(".modal").hide(200);
 	})
 
+// Filteri
 	$("#filterBtn").click(function(){
-			$("#filterTable").slideToggle();
+		$("#filterTable").slideToggle();
 	})
 	
 	$("#filterSearch").click(function(){
-		let dateFrom = $("#dateFrom").val();
-		let dateto = $("#dateTo").val();
-		let country = $("#country").val();
-		let city = $("#city").val();
-		let priceFrom = $("#priceFrom").val();
-		let priceTo = $("#priceTo").val();
-		let roomFrom = $("#roomFrom").val();
-		let roomTo = $("#roomTo").val();
-		let spotNum = $("#spotNum").val();
+		var jsonFilter = {
+			"startDate": $("#startDate").val(),
+			"dueDate": $("#dueDate").val(),
+			"country": $("#country").val(),
+			"city": $("#city").val(),
+			"priceFrom": $("#priceFrom").val(),
+			"priceTo": $("#priceTo").val(),
+			"roomFrom": $("#roomFrom").val(),
+			"roomTo": $("#roomTo").val(),
+			"spotNum": $("#spotNum").val()
+		}
+		
+		$.ajax({
+			method: "POST",
+			url: "../TuristickaAgencija/rest/apartments/filter",
+			data: jsonFilter,
+			contenttype: "application/json",
+			dataType: "application/json",
+		}).done(function(data){
+			$("#listOfApartments").html("");
+			showApartments(data);
+		});
 	})
 });
 
+function showApartments(data){
+	var i;
+	
+		for(i=0; i<data.length; i++){
+			if(data[i].active == true){
+				content = '<div class="card" style="width: 15rem; height: 15rem;">';
+				content += '<img class="card-img-top" src="..." alt="SLIKA APARTMANA">';
+				content += '<div class="card-body">';
+				content += '<div class="data">';
+				content += '<table style="margin:25px">';
+				content += '<tr><td float="right">Naziv apartmana:</td><td>';
+				content += data[i].id;
+				content += '</td></tr>';
+				content +='<tr><td>Domacin:</td><td>';
+				content += data[i].hostUsername;
+				content += '</td></tr>';
+				content += '</table></div>';
+				content += '<button type="button" class="viewApartment btn" id="';
+				content += data[i].id;
+				content += '" onclick="viewApartment(this)" >Pogledaj</button>';
+				content += '</div></div>';
+			}		
+		}
+		
+		$("#listOfApartments").append(content);
+		console.log(data);
+}
+
+function viewApartment(event){
+	window.location.assign(window.location.origin += "/TuristickaAgencija/apartment.html?id=" + event.id);
+}
 
 function openLogin() {				// otvara se odmah posle registracije
 	$(".modal").hide(200);
@@ -73,13 +127,14 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	let sex = $("#sex").val();
 	let password = $("#password").val();
 	let controlPassword = $("#controlPassword").val();
-	let notRed = false;
+	let valid = true;
 	
 	// VALIDACIJA POLJA
 
 	if(!username){
 		$("#username").css("border-color", "red");
 		$("#invalidUser").css("font-size", "10px");
+		valid = false;
 	}else{
 		$("#username").css("border-color", "grey");
 		$("#invalidUser").css("font-size", "0px");
@@ -87,6 +142,7 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	if(!name){
 		$("#name").css("border-color", "red");
 		$("#invalidName").css("font-size", "10px");
+		valid = false;
 	}else{
 		$("#name").css("border-color", "grey");
 		$("#invalidName").css("font-size", "0px");
@@ -94,6 +150,7 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	if(!lastName){
 		$("#lastName").css("border-color", "red");
 		$("#invalidLastName").css("font-size", "10px");
+		valid = false;
 	}else{
 		$("#lastName").css("border-color", "grey");
 		$("#invalidLastName").css("font-size", "0px");
@@ -101,38 +158,39 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	if(password.length < 8){
 		$("#password").css("border-color", "red");
 		$("#invalidPass").css("font-size", "10px");
+		valid = false;
 	}else{
 		$("#invalidPass").css("font-size", "0px");
-		notRed = true;
 	}
 	if(controlPassword != password){
 		$("#controlPassword").css("border-color", "red");
 		$("#invalidControlPass").css("font-size", "10px");
+		valid = false;
 	}else{
 		$("#invalidControlPass").css("font-size", "0px");
 		
-		if(notRed == true){
-			var jsonRegistration = JSON.stringify({
-			"username":username,
-			"name":name,
-			"lastName":lastName,
-			"male":sex,
-			"password":password,
-			"role":"Guest"
-		});
+	if(valid == true){
+		var jsonRegistration = JSON.stringify({
+		"username":username,
+		"name":name,
+		"lastName":lastName,
+		"male":sex,
+		"password":password,
+		"role":"Guest"
+	});
 		
-		$.ajax({
-			method:"POST",
-			url:"../TuristickaAgencija/rest/users/registration",
-			contentType:"application/json",
-			data:jsonRegistration,
-			datatype:"text"
-		}).done(function(data){
-			alert(data);
-			if(data == "Uspešno ste se registrovali."){
-				openLogin();
-			}
-		});
+	$.ajax({
+		method:"POST",
+		url:"../TuristickaAgencija/rest/users/registration",
+		contentType:"application/json",
+		data:jsonRegistration,
+		datatype:"text"
+	}).done(function(data){
+		alert(data);
+		if(data == "Uspešno ste se registrovali."){
+			openLogin();
+		}
+	});
 		
 		}
 	}
@@ -141,7 +199,6 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 function openHome() {				
 	window.location.assign(window.location.origin += "/TuristickaAgencija/home.html");
 }
-
 
 function login(){	
 	let username1 = $("#username1").val();
@@ -158,7 +215,7 @@ function login(){
 		$("#emptyPass").css("font-size", "0px");
 	}
 	
-	var jsonRegistration = JSON.stringify({
+	var jsonLogin = JSON.stringify({
 		"username":username1,
 		"password":password1
 	});
@@ -167,7 +224,7 @@ function login(){
 		method:"POST",
 		url:"../TuristickaAgencija/rest/users/login",
 		contentType:"application/json",
-		data:jsonRegistration,
+		data:jsonLogin,
 		datatype:"text"
 	}).done(function(data){
 		alert(data);
@@ -181,7 +238,7 @@ function login(){
 
 
 
-$(document).ready(function(){
+/*$(document).ready(function(){
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/apartments/all",
@@ -267,26 +324,8 @@ $(document).ready(function(){
 		$("#listOfApartments").append(content);
 
 		console.log(data);
-	});	
-});
-
-
-
-
-
-/*
- <div class="modal" id="apartmentModal">
-		<div class="modalContent">
-			<span class="close">&times;</span>
-			<form action="login" method="GET">
-				<table>
-				</table>
-				<button type="button" id="btnLogin" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="login()">Potvrdi</button>
-			</form>
-		</div>
-	</div>
- */
-
+	});
+});*/
 
 
 
