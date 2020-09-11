@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import agency.dto.ApartmentDTO;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 public class Apartment {
 	private String id;
@@ -12,8 +14,8 @@ public class Apartment {
 	private int numberOfRooms;
 	private int numberOfGuests;
 	private Location location;
-	private List<LocalDate> datesForRent = new ArrayList<LocalDate>();
-	private List<LocalDate> freeDates = new ArrayList<LocalDate>();
+	private List<String> datesForRent = new ArrayList<String>();
+	private List<String> freeDates = new ArrayList<String>();
 	private Host host;			
 	private List<Comment> comments = new ArrayList<Comment>();
 	private List<String> photos = new ArrayList<String>();
@@ -27,7 +29,7 @@ public class Apartment {
 	public Apartment() {}
 
 	public Apartment(String id, Type type, int numberOfRooms, int numberOfGuests, Location location,
-			List<LocalDate> datesForRent, List<LocalDate> freeDates, Host host, List<Comment> comments,
+			List<String> datesForRent, List<String> freeDates, Host host, List<Comment> comments,
 			List<String> photos, float price, int checkInTime, int checkOutTime, boolean active,
 			List<Amenity> amenities, List<Reservation> reservations) {
 		super();
@@ -90,19 +92,19 @@ public class Apartment {
 		this.location = location;
 	}
 
-	public List<LocalDate> getDatesForRent() {
+	public List<String> getDatesForRent() {
 		return datesForRent;
 	}
 
-	public void setDatesForRent(List<LocalDate> datesForRent) {
+	public void setDatesForRent(List<String> datesForRent) {
 		this.datesForRent = datesForRent;
 	}
 
-	public List<LocalDate> getFreeDates() {
+	public List<String> getFreeDates() {
 		return freeDates;
 	}
 
-	public void setFreeDates(List<LocalDate> freeDates) {
+	public void setFreeDates(List<String> freeDates) {
 		this.freeDates = freeDates;
 	}
 
@@ -179,7 +181,7 @@ public class Apartment {
 	}
 	
 	public Boolean isValid() {
-		if(this.id == null || this.host.getUsername().equals("pera") ||
+		if(this.id == null || this.host.getUsername().equals("") ||
 				this.numberOfGuests <= 0 || this.numberOfRooms <= 0 ||
 				this.location == null)
 			return false;

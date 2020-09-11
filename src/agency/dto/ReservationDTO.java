@@ -7,7 +7,7 @@ import agency.model.Status;
 
 public class ReservationDTO {
 	private String apartmentId;			// na ovaj nacin rezervacija nema apartmentDto, a apartmentDto ima rezervaciju
-	private LocalDate beginDate;
+	private String beginDate;
 	private int nights = 1;
 	private float totalPrice;
 	private String message;
@@ -34,11 +34,11 @@ public class ReservationDTO {
 		this.apartmentId = apartmentId;
 	}
 
-	public LocalDate getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(LocalDate beginDate) {
+	public void setBeginDate(String beginDate) {
 		this.beginDate = beginDate;
 	}
 

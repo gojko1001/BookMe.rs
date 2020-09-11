@@ -1,3 +1,9 @@
+
+$(".myButtonClass").on('click', function(event){
+    alert(this.id);
+});
+
+
 function getUsers(){
 	
 	$.ajax({
@@ -52,7 +58,7 @@ $(document).ready(function(){
 		let roomTo = $("#roomTo").val();
 		let spotNum = $("#spotNum").val();
 	})
-})
+});
 
 
 function openLogin() {				// otvara se odmah posle registracije
@@ -172,6 +178,9 @@ function login(){
 }
 
 
+
+
+
 $(document).ready(function(){
 	$.ajax({
 		method:"GET",
@@ -211,7 +220,7 @@ $(document).ready(function(){
 				content += ', ';
 				content += data[i].location.longitude;
 				content += '</td><td>';
-				content += data[i].hostUsername;
+				content += data[i].host.username;
 				content += '</td><td>';
 				
 				var c;
@@ -242,12 +251,15 @@ $(document).ready(function(){
 				content += 'h</td><td>';
 				
 				var a;
+				let myId = data[i].id;
 				for(a=0; a<data[i].amenities.length; a++){
 					content += data[i].amenities[a].name;
 					content += ', &nbsp';
 				}
 
-				content += '</td></tr>';
+				content += '</td>';
+				//content += "<td><button id=\"" +myId + "\" class=\"myButtonClass\"> Rezervisi </button></td>";
+				content += '</tr>';
 			}		
 		}
 		content += '</table>';
@@ -256,7 +268,10 @@ $(document).ready(function(){
 
 		console.log(data);
 	});	
-})
+});
+
+
+
 
 
 /*

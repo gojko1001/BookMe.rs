@@ -60,7 +60,7 @@
 	<script>
 		$.ajax({
 			method: "GET",
-			url: "../TuristickaAgencija/rest/users/get",
+			url: "../TuristickaAgencija/rest/users/getUser",
 			datatype: "application/json"
 		}).done(function(data){
 			$("#name").append(data.name);

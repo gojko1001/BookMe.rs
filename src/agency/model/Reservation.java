@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Reservation {
 	private Apartment apartment;
-	private LocalDate beginDate;
+	private String beginDate;
 	private int nights = 1;
 	private float totalPrice;
 	private String message;
@@ -13,7 +13,7 @@ public class Reservation {
 	
 	public Reservation() {}
 
-	public Reservation(Apartment apartment, LocalDate beginDate, int nights, float totalPrice, String message,
+	public Reservation(Apartment apartment, String beginDate, int nights, float totalPrice, String message,
 			Guest guest, Status status) {
 		super();
 		this.apartment = apartment;
@@ -33,11 +33,11 @@ public class Reservation {
 		this.apartment = apartment;
 	}
 
-	public LocalDate getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(LocalDate beginDate) {
+	public void setBeginDate(String beginDate) {
 		this.beginDate = beginDate;
 	}
 

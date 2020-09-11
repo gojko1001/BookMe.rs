@@ -36,6 +36,7 @@ public class UserDao {
 		//System.out.println(this.path);
 		loadUsersFromJson();
 		mapUsersToReservations(reservations, apartments);
+		mapHostsToApartments(apartments);
 	}
 	
 	public User getUserFromUsername(String username) {
@@ -67,6 +68,14 @@ public class UserDao {
 			if(!g.getApartmentsRented().contains(a)) {
 				g.getApartmentsRented().add(a);
 			}
+		}
+	}
+	
+	public void mapHostsToApartments(List<Apartment> apartments) {
+		for(Apartment a : apartments) {
+			Host h = (Host) this.getUserFromUsername(a.getHost().getUsername());
+			h.getApartmentsForRent().add(a);
+			
 		}
 	}
 	

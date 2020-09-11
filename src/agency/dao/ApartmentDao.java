@@ -39,6 +39,8 @@ public class ApartmentDao {
 		}
 	}
 	
+	
+	
 	public Apartment getApartment(String id) {
 		for(Apartment a : apartments) {
 			if(a.getId().equals(id)) {
@@ -102,6 +104,7 @@ public class ApartmentDao {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 		try {
 			writer.writeValue(new File(path), getAllApartments());

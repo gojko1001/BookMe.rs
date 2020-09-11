@@ -4,9 +4,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+
 import agency.model.Amenity;
 import agency.model.Apartment;
 import agency.model.Comment;
+import agency.model.Host;
 import agency.model.Location;
 import agency.model.Reservation;
 import agency.model.Type;
@@ -17,9 +22,9 @@ public class ApartmentDTO {
 	private int numberOfRooms;
 	private int numberOfGuests;
 	private Location location;
-	private List<LocalDate> datesForRent = new ArrayList<LocalDate>();
-	private List<LocalDate> freeDates = new ArrayList<LocalDate>();
-	private String hostUsername;
+	private List<String> datesForRent = new ArrayList<String>();
+	private List<String> freeDates = new ArrayList<String>();
+	private Host host;
 	private List<CommentDTO> commentsDTO = new ArrayList<CommentDTO>();
 	private List<String> photos = new ArrayList<String>();
 	private float price;
@@ -39,7 +44,8 @@ public class ApartmentDTO {
 		this.location = apartment.getLocation();
 		this.datesForRent = apartment.getDatesForRent();
 		this.freeDates = apartment.getFreeDates();
-		this.hostUsername = apartment.getHost().getUsername();  
+		this.host = new Host();
+		this.host.setUsername(apartment.getHost().getUsername());
 		this.photos = apartment.getPhotos();
 		this.price = apartment.getPrice();
 		this.checkInTime = apartment.getCheckInTime();
@@ -87,24 +93,27 @@ public class ApartmentDTO {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	public List<LocalDate> getDatesForRent() {
+	public List<String> getDatesForRent() {
 		return datesForRent;
 	}
-	public void setDatesForRent(List<LocalDate> datesForRent) {
+	public void setDatesForRent(List<String> datesForRent) {
 		this.datesForRent = datesForRent;
 	}
-	public List<LocalDate> getFreeDates() {
+	public List<String> getFreeDates() {
 		return freeDates;
 	}
-	public void setFreeDates(List<LocalDate> freeDates) {
+	public void setFreeDates(List<String> freeDates) {
 		this.freeDates = freeDates;
 	}
-	public String getHostUsername() {
-		return hostUsername;
+	
+	public Host getHost() {
+		return host;
 	}
-	public void setHostUsername(String hostUsername) {
-		this.hostUsername = hostUsername;
+
+	public void setHost(Host host) {
+		this.host = host;
 	}
+
 	public List<CommentDTO> getCommentsDTO() {
 		return commentsDTO;
 	}
