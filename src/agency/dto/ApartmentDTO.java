@@ -39,7 +39,7 @@ public class ApartmentDTO {
 		this.location = apartment.getLocation();
 		this.datesForRent = apartment.getDatesForRent();
 		this.freeDates = apartment.getFreeDates();
-		this.hostUsername = apartment.getHost().getUsername();
+		this.hostUsername = apartment.getHost().getUsername();  
 		this.photos = apartment.getPhotos();
 		this.price = apartment.getPrice();
 		this.checkInTime = apartment.getCheckInTime();

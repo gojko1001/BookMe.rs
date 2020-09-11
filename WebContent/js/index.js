@@ -180,7 +180,7 @@ $(document).ready(function(){
 	}).done(function(data){
 		var i;
 		
-		var content = '<table border="2" style="margin:25px">';
+		var content = '<table border="2" style="margin:25px; margin-left: auto; margin-right: auto;">';
 		content += '<tr> <th>Apartman</th> <th>Tip</th> <th>Broj soba</th> <th>Broj gostiju</th> <th>Lokacija</th> <th>Domaćin</th> <th>Komentari</th> <th>Slike</th> <th>Cena (noć)</th> <th>Vreme za prijavu</th> <th>Vreme za odjavu</th> <th>Sadržaj apartmana</th></tr>';
 		for(i=0; i<data.length; i++){
 			if(data[i].active == true){

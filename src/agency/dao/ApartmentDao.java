@@ -68,7 +68,7 @@ public class ApartmentDao {
 				return apartmentDTO;
 			}
 		}
-		
+		 
 		return null;
 	}
 	
@@ -101,7 +101,7 @@ public class ApartmentDao {
 		apartments.add(apartment);
 		
 		ObjectMapper mapper = new ObjectMapper();
-		//mapper.registerModule(new JavaTimeModule());
+		mapper.registerModule(new JavaTimeModule());
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 		try {
 			writer.writeValue(new File(path), getAllApartments());

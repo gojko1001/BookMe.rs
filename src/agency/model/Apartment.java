@@ -14,7 +14,7 @@ public class Apartment {
 	private Location location;
 	private List<LocalDate> datesForRent = new ArrayList<LocalDate>();
 	private List<LocalDate> freeDates = new ArrayList<LocalDate>();
-	private Host host;			// posle resiti
+	private Host host;			
 	private List<Comment> comments = new ArrayList<Comment>();
 	private List<String> photos = new ArrayList<String>();
 	private float price;
@@ -179,7 +179,7 @@ public class Apartment {
 	}
 	
 	public Boolean isValid() {
-		if(this.id == null || this.host.getUsername().equals("") ||
+		if(this.id == null || this.host.getUsername().equals("pera") ||
 				this.numberOfGuests <= 0 || this.numberOfRooms <= 0 ||
 				this.location == null)
 			return false;
