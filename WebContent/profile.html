@@ -5,13 +5,14 @@
 	<title>Moj profil</title>
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
-	<link href="css/main.css" rel="stylesheet"></link>
+	<link href="css/main.css" rel="stylesheet" />
+	<link href="css/dropDownMenu.css" rel="stylesheet" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/profile.js"></script>
-	<script type="text/javascript" src="js/home.js"></script>
+	<script type="text/javascript" src="js/logedUser.js"></script>
 	<style>
 		.data {
 			margin-left:10%;
@@ -31,15 +32,23 @@
 		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
 		&nbsp;
 		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
-		<span style="float:right; padding-right:10%; margin-top:0.5%">
+		<div class="dropdown logedIn" style="float:right; margin-right:10%;">
+			<button id="btnDropDown" class="dropbtn"></button>
+			<div id="userMenu" class="dropdown-content">
+				<a href="#Profile" class="MyProfile">Moj profil</a>
+				<a href="#EditProfile" class="EditProfile">Izmeni profil</a>
+				<a href="#LogOut" class="Logout">Odjavi se</a>
+			</div>
+		</div>
+<!--		<span style="float:right; padding-right:10%; margin-top:0.5%">
 		<a href="#" id="aLogout"> IZLOGUJ SE </a>
 		&nbsp;&nbsp;
-		</span>
+		</span>-->
 	</h4>
 	  
 	<div class="data" style="min-height:70px">
 			<h4 class="username" style="padding-left:15px; padding-top:15px">
-				<button type="button" id="btnEdit" class="btn btn-primary" style="float:right; margin-right:5%">Izmeni</button>
+				<button type="button" id="btnEdit" class="btn btn-primary aEdit" style="float:right; margin-right:5%">Izmeni</button>
 			</h4>
 			
 	</div>
@@ -52,39 +61,6 @@
 				<tr><td>Pol: </td><td id="sex"></td></tr>
 				<tr><td>Uloga: </td><td id="role"></td></tr>
 		</table>
-	</div>
-	
-	<div id="myInfo">
-	</div>
-	
-	<script>
-		$.ajax({
-			method: "GET",
-			url: "../TuristickaAgencija/rest/users/getUser",
-			datatype: "application/json"
-		}).done(function(data){
-			$("#name").append(data.name);
-			$("#lastName").append(data.lastName);
-			$(".username").append(data.username);
-			if(data.male){
-				$("#sex").append("Muški");
-			}else{
-				$("#sex").append("Ženski");
-			}
-			switch(data.role){
-				case "Administrator":
-					$("#role").append("Administrator");
-					break;
-				case "Host":
-					$("#role").append("Domaćin");
-					break;
-				case "Guest":
-					$("#role").append("Gost");
-					break;
-			}
-		})
-	</script>
-	
-	
+	</div>	
 </body>
 </html>

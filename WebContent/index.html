@@ -7,10 +7,12 @@
 	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
 	<link href="css/main.css" rel="stylesheet"></link>
 	<link href="css/modalBox.css" rel="stylesheet"></link>
+	<link href="css/dropDownMenu.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/logedUser.js"></script>
 </head>
 <body>
 	<h4 style="background-color:lightgrey">
@@ -18,12 +20,20 @@
 		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
 		&nbsp;
 		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
-		<span style="float:right; padding-right:10%; margin-top:0.5%">
-		<a href="#" id="aRegistration"> REGISTRACIJA </a>
+		<span style="float:right; padding-right:10%; margin-top:0.5%; display:none" class="logedOut">
+		<a href="#Register" id="aRegistration"> REGISTRACIJA </a>
 		&nbsp;
-		<a href="#" id="aLogin"> PRIJAVA </a>
+		<a href="#Login" id="aLogin"> PRIJAVA </a>
 		&nbsp;&nbsp;
 		</span>
+		<div class="dropdown logedIn" style="float:right; margin-right:10%; display:none">
+			<button id="btnDropDown" class="dropbtn"></button>
+			<div id="userMenu" class="dropdown-content">
+				<a href="#Profile" class="MyProfile">Moj profil</a>
+				<a href="#EditProfile" class="EditProfile">Izmeni profil</a>
+				<a href="#LogOut" class="Logout">Odjavi se</a>
+			</div>
+		</div>
 	</h4>
 	
 	<div class="modal" id="regModal">

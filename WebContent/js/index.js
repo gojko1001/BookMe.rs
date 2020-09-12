@@ -1,4 +1,3 @@
-
 /*$(".myButtonClass").on('click', function(event){
     alert(this.id);
 });
@@ -15,7 +14,6 @@ function getUsers(){
 	
 	
 }*/
-
 window.onload = function(event){
 	$.ajax({
 		method:"GET",
@@ -24,11 +22,24 @@ window.onload = function(event){
 	}).done(function(data){
 		showApartments(data);
 	});
+	
+	$.ajax({
+			method: "GET",
+			url: "../TuristickaAgencija/rest/users/getUser",
+			datatype: "application/json"
+	}).done(function(data){
+		if(!data){
+			$(".logedOut").show();
+		}else{
+			$("#btnDropDown").html(data.username);
+			$(".logedIn").show();
+		}
+	})
 }
 
 $(document).ready(function(){
 // ModalBox Registration/Login
-	$("#aLogin").click(function() {
+	$("#aLogin").click(function(event) {
 	  $("div#logModal").slideDown("fast");
 	});
 
@@ -108,16 +119,10 @@ function showApartments(data){
 		}
 		
 		$("#listOfApartments").append(content);
-		console.log(data);
 }
 
 function viewApartment(event){
 	window.location.assign(window.location.origin += "/TuristickaAgencija/apartment.html?id=" + event.id);
-}
-
-function openLogin() {				// otvara se odmah posle registracije
-	$(".modal").hide(200);
-	$("div#logModal").slideDown("fast");
 }
 
 function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
@@ -196,10 +201,6 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	}
 }
 
-function openHome() {				
-	window.location.assign(window.location.origin += "/TuristickaAgencija/home.html");
-}
-
 function login(){	
 	let username1 = $("#username1").val();
 	let password1 = $("#password1").val();
@@ -234,7 +235,14 @@ function login(){
 	});
 }
 
+function openHome() {				
+	window.location.assign(window.location.origin += "/TuristickaAgencija/");
+}
 
+function openLogin() {				// otvara se odmah posle registracije
+	$(".modal").hide(200);
+	$("div#logModal").slideDown("fast");
+}
 
 
 

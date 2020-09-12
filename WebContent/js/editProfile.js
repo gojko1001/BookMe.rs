@@ -1,3 +1,39 @@
+window.onload = function(){
+	$.ajax({
+		method: "GET",
+		url: "../TuristickaAgencija/rest/users/getUser",
+		datatype: "application/json"
+	}).done(function(data){
+		if(!data){
+			alert("Morate biti ulogovani!");
+			window.history.back();
+		}
+		$("#btnDropDown").html(data.username);
+		$("#name").val(data.name);
+		$("#lastName").val(data.lastName);
+		$("#username").val(data.username);
+		$("#username1").append(data.username);
+		if(data.male){
+			$("#male").attr("selected", "selected");
+		}else{
+			$("#female").attr("selected", "selected");
+		}
+		switch(data.role){
+			case "Administrator":
+				$("#role").val("Administrator");
+				break;
+			case "Host":
+				$("#role").val("Domaćin");
+				break;
+			case "Guest":
+				$("#role").val("Gost");
+				break;
+		}
+		$("#roleVal").val(data.role);
+		$("#oldPass").val(data.password);
+	})
+}
+
 $(document).ready(function(){
 	$("button#save").click(function(){
 		let name = $("#name").val();
