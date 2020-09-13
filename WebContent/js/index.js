@@ -108,17 +108,18 @@ function showApartments(data){
 				content += data[i].id;
 				content += '</td></tr>';
 				content +='<tr><td>Domacin:</td><td>';
-				content += data[i].hostUsername;
+				content += data[i].host.username;
 				content += '</td></tr>';
 				content += '</table></div>';
 				content += '<button type="button" class="viewApartment btn" id="';
 				content += data[i].id;
 				content += '" onclick="viewApartment(this)" >Pogledaj</button>';
 				content += '</div></div>';
-			}		
+			}
+			$("#listOfApartments").append(content);
 		}
 		
-		$("#listOfApartments").append(content);
+		
 }
 
 function viewApartment(event){
