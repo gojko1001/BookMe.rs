@@ -1,19 +1,3 @@
-/*$(".myButtonClass").on('click', function(event){
-    alert(this.id);
-});
-
-
-function getUsers(){
-	
-	$.ajax({
-		url:"../TuristickaAgencija/rest/users/all",
-		method: "GET"
-	}).success(function(data){
-		console.log(data);
-	});
-	
-	
-}*/
 window.onload = function(event){
 	$.ajax({
 		method:"GET",
@@ -99,11 +83,16 @@ function showApartments(data){
 	
 		for(i=0; i<data.length; i++){
 			if(data[i].active == true){
-				content = '<div class="card" style="width: 15rem; height: 15rem;">';
-				content += '<img class="card-img-top" src="..." alt="SLIKA APARTMANA">';
+				content = '<div class="card" onclick="viewApartment(this)" id="';
+				content += data[i].id;
+				content += '">';
+				content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
+				content += data[i].id;
+				content += data[i].photos[0];
+				content += '" alt="SLIKA APARTMANA">';
 				content += '<div class="card-body">';
 				content += '<div class="data">';
-				content += '<table style="margin:25px">';
+				content += '<table style="margin:10px">';
 				content += '<tr><td float="right">Naziv apartmana:</td><td>';
 				content += data[i].id;
 				content += '</td></tr>';
@@ -111,9 +100,6 @@ function showApartments(data){
 				content += data[i].host.username;
 				content += '</td></tr>';
 				content += '</table></div>';
-				content += '<button type="button" class="viewApartment btn" id="';
-				content += data[i].id;
-				content += '" onclick="viewApartment(this)" >Pogledaj</button>';
 				content += '</div></div>';
 			}
 			$("#listOfApartments").append(content);

@@ -1,12 +1,7 @@
 package agency.dto;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
 
 import agency.model.Amenity;
 import agency.model.Apartment;

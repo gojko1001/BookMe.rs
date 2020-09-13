@@ -54,5 +54,13 @@
 		"lastName":"Milic",
 		"male":false,
 		"role":"Host"
+	},
+	{
+		"username":"marko",
+		"password":"12",
+		"name":"Marko",
+		"lastName":"Markovic",
+		"male":true,
+		"role":"Guest"
 	}
 ]

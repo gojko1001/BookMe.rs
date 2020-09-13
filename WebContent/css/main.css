@@ -1,6 +1,6 @@
 body {
   background-image: url("travel.jpg");
-  background-repeat: no-repeat;
+  background-repeat: repeat-y;
   background-size: 100%;
 }
 
@@ -47,4 +47,17 @@ table.centerSearch{
 	font-size:0;
 	color:red;
 	font-weight:bold;
+}
+
+div.card{
+	margin:5px;
+	padding:5px;
+	display:inline-block;
+	width: 300px;
+	transition: width 1s;
+}
+
+div.card:hover{
+	cursor:pointer;
+	width: 325px;
 }

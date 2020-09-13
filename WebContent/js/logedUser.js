@@ -1,9 +1,16 @@
-
-//getAllApartments();
-
-// TODO 5: f-ja za userInfo treba
+/*window.onload = function(){
+	$.ajax({
+			method: "GET",
+			url: "../TuristickaAgencija/rest/users/getUser",
+			datatype: "application/json"
+	}).done(function(data){
+		loadContent(data);
+	});
+}*/
 
 $(document).ready(function(){
+	
+	
 	$("#btnDropDown").click(function(){
 			$("#userMenu").toggle();
 		})

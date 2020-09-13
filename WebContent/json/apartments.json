@@ -34,7 +34,9 @@
 				"rate":5
 			}
 		],
-		"photos":[],
+		"photos":["/OR11-1.jpg", "/OR11-2.jpg",
+					"/OR11-3.jpg", "/OR11-4.jpg",
+					"/OR11-5.jpg", "/OR11-6.jpg"],
 		"price":500,
 		"checkInTime":15,
 		"checkOutTime":8,
@@ -84,10 +86,60 @@
 				"rate":4
 			}
 		],
-		"photos":[],
+		"photos":["/LG23-1.jpg", "/LG23-2.jpg", "/LG23-3.jpg", "/LG23-4.jpg"],
 		"price":350,
 		"checkInTime":14,
 		"checkOutTime":9,
+		"active":true,
+		"amenities":
+		[
+			{
+				"id":"wf",
+				"name":"WI-FI"
+			}
+		],
+		"reservations":[]
+	},
+	
+	{
+		"id":"BCA2",
+		"type":"wholeApartment",
+		"numberOfRooms":2,
+		"numberOfGuests":4,
+		"location":{
+			"latitude":30.6,
+			"longitude":28.7,
+			"address":{
+				"country":"Serbia",
+				"place":"Beograd",
+				"postalCode":11000,
+				"street":"Bulevar Crvene Armije",
+				"number":"2"
+			}
+		},
+		"datesForRent":["2020-09-10", "2020-09-11", "2020-09-12"],
+		"freeDates":["2020-09-10", "2020-09-11"],
+		"host":{
+			"username":"kaca"
+		},
+		"comments":[
+			{
+				"guest": 
+				{
+					"username":"marko"
+				},
+				"apartment":
+				{
+					"id":"BCA2"
+				},
+				"text":"Odlicno",
+				"rate":5
+			}
+		],
+		"photos":["/BCA2-1.jpg", "/BCA2-2.jpg", "/BCA2-3.jpg", "/BCA2-4.jpg", "/BCA2-5.jpg", "/BCA2-6.jpg"],
+		"price":5000,
+		"checkInTime":14,
+		"checkOutTime":12,
 		"active":true,
 		"amenities":
 		[

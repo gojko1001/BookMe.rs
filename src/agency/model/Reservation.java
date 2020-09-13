@@ -1,6 +1,5 @@
 package agency.model;
 
-import java.time.LocalDate;
 
 public class Reservation {
 	private Apartment apartment;
