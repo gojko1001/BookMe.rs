@@ -40,6 +40,7 @@ table.centerSearch{
 #filterBtn{
 	border:0px;
 	font-size:30px;
+	background:transparent;
 }
 
 .valid{
@@ -50,14 +51,15 @@ table.centerSearch{
 }
 
 div.card{
-	margin:5px;
+	margin:10px;
 	padding:5px;
 	display:inline-block;
 	width: 300px;
-	transition: width 1s;
+	transition: width 0.5s;
 }
 
 div.card:hover{
 	cursor:pointer;
-	width: 325px;
+	width: 320px;
+	margin:0px;
 }

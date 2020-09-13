@@ -50,6 +50,7 @@ $(document).ready(function(){
 // Filteri
 	$("#filterBtn").click(function(){
 		$("#filterTable").slideToggle();
+		$(".centerSearch").toggle();
 	})
 	
 	$("#filterSearch").click(function(){
