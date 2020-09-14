@@ -21,8 +21,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
-import agency.model.Host;
 import agency.model.Reservation;
+import agency.model.User;
 
 public class ApartmentDao {
 	public List<Apartment> apartments = new ArrayList<Apartment>();
@@ -177,11 +177,11 @@ public class ApartmentDao {
 	}
 	
 	
-	public List<ApartmentDTO> getApartmentsByHost(String hostUsername){
+	public List<ApartmentDTO> getApartmentsByHost(User userHost){
 		List<ApartmentDTO> allApartments = getAllApartments();
 		List<ApartmentDTO> hostApartments = new ArrayList<ApartmentDTO>();
 		for(ApartmentDTO a : allApartments) {
-			if(a.getHost().getUsername().equals(hostUsername)) {
+			if(a.getHost().getUsername().equals(userHost.getUsername())) {
 				hostApartments.add(a);
 			}
 		}

@@ -1,26 +1,47 @@
 //window.onload = function(event){
 function loadContent(data){
+	console.log(data);
+		
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/apartments/all",
 		datatype:"application/json"
 	}).done(function(data){
-		showApartments(data);
+		showActiveApartments(data);
+	});	
+}
+
+
+function loadContentHost(data){
+	console.log(data);
+	var username = data.username;
+	var name = data.name;
+	var lastName = data.lastName;
+	var sex = data.male;
+	var password = data.password;
+	var role = data.role;
+	
+	var jsonHost = JSON.stringify({
+		"username":username,
+		"name":name,
+		"lastName":lastName,
+		"male":sex,
+		"password":password,
+		"role":role
 	});
 	
-/*	$.ajax({
-			method: "GET",
-			url: "../TuristickaAgencija/rest/users/getUser",
-			datatype: "application/json"
+	
+	$.ajax({
+		method:"POST",
+		url:"../TuristickaAgencija/rest/apartments/hostApartments",
+		contentType: "application/json",
+		data: jsonHost,
+		datatype:"application/json"
 	}).done(function(data){
-		if(!data){
-			$(".logedOut").show();
-		}else{
-			$("#btnDropDown").html(data.username);
-			$(".logedIn").show();
-		}
-	})*/
+		showActiveApartments(data);
+	});
 }
+
 
 $(document).ready(function(){
 // ModalBox Registration/Login
@@ -80,7 +101,7 @@ $(document).ready(function(){
 	})
 });
 
-function showApartments(data){
+function showActiveApartments(data){
 	var i;
 	
 		for(i=0; i<data.length; i++){
@@ -105,6 +126,34 @@ function showApartments(data){
 				content += '</div></div>';
 			}
 			$("#listOfApartments").append(content);
+		}	
+}
+
+function showInactiveApartments(data){
+	var i;
+	
+		for(i=0; i<data.length; i++){
+			if(data[i].active == false){
+				content = '<div class="card" onclick="viewApartment(this)" id="';
+				content += data[i].id;
+				content += '">';
+				content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
+				content += data[i].id;
+				content += data[i].photos[0];
+				content += '" alt="SLIKA APARTMANA">';
+				content += '<div class="card-body">';
+				content += '<div class="data">';
+				content += '<table style="margin:10px">';
+				content += '<tr><td float="right">Naziv apartmana:</td><td>';
+				content += data[i].id;
+				content += '</td></tr>';
+				content +='<tr><td>Domacin:</td><td>';
+				content += data[i].host.username;
+				content += '</td></tr>';
+				content += '</table></div>';
+				content += '</div></div>';
+			}
+			$("#listOfInactiveApartments").append(content);
 		}	
 }
 

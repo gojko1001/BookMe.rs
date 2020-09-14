@@ -18,7 +18,7 @@ import agency.dao.ReservationDao;
 import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
-import agency.model.Host;
+import agency.model.User;
 
 @Path("/apartments")
 public class ApartmentService {
@@ -82,11 +82,11 @@ public class ApartmentService {
 	@POST
 	@Path("/hostApartments")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.TEXT_PLAIN)
-	public List<ApartmentDTO> getHostApartment(String hostUsername) {
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<ApartmentDTO> getHostApartment(User userHost) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
-		return apartmentDao.getApartmentsByHost(hostUsername);
+		return apartmentDao.getApartmentsByHost(userHost);
 	}
 	
 }

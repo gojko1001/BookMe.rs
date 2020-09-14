@@ -6,17 +6,24 @@ window.onload = function(){
 	}).done(function(data){
 		if(!data){
 			$(".logedOut").show();
+			loadContent(data);
 		}else{
 			$("#btnDropDown").html(data.username);
 			$(".logedIn").show();
 			if(data.role == "Host"){
 				$(".addApartment").show();
 				$(".viewReservations").show();
+				$(".inactiveApartments").show();
+				loadContentHost(data);
+			}else{
+				loadContent(data);
 			}
 		}
-		loadContent(data);
+		
 	});
 }
+
+
 
 $(document).ready(function(){	
 	$("#btnDropDown").click(function(){
@@ -47,6 +54,10 @@ $(document).ready(function(){
 	
 	$(".viewReservations").click(function(){
 		
+	})
+	
+	$(".inactiveApartments").click(function(){
+		window.location.assign(window.location.origin + "/TuristickaAgencija/inactiveApartments.html");
 	})
 
 })
