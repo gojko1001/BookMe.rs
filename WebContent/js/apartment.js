@@ -1,8 +1,9 @@
-window.onload = function(event){ 
+//window.onload = function(event){
+function loadContent(data){	
 	$.ajax({
 		method: "GET",
 		url: "../TuristickaAgencija/rest/apartments/getById",
-		contentType: "text",
+		contentType: "text;charset=utf-8",
 		data: {
 			id: window.location.search.substring(4)
 		},

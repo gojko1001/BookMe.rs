@@ -14,45 +14,36 @@
 	<script type="text/javascript" src="js/profile.js"></script>
 	<script type="text/javascript" src="js/logedUser.js"></script>
 	<style>
-		.data {
-			margin-left:10%;
-			margin-right:10%;
-			margin-top:50px;
-			background:white;
-			border: 1px solid grey;
-		}
 		td {
 			padding: 10px;
 		}
 	</style>
 </head>
 <body>
-	<h4 style="background-color:lightgrey; flex-wrap:wrap">
-		&nbsp;
-		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
-		&nbsp;
-		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
-		<div class="dropdown logedIn" style="float:right; margin-right:10%;">
+	<h4 style="background-color:lightgrey; padding:0 10%;">
+		<span id="siteLogo" onclick="openIndex()">
+			<img src="css/favicon.ico" height=50 style="padding-bottom:10px;">
+			<b style="font-size:40px;"> BookMe.rs</b>
+		</span>
+		<div class="dropdown logedIn" style="float:right;">
 			<button id="btnDropDown" class="dropbtn"></button>
 			<div id="userMenu" class="dropdown-content">
 				<a href="#Profile" class="MyProfile">Moj profil</a>
 				<a href="#EditProfile" class="EditProfile">Izmeni profil</a>
+				<a href="#AddApartment" class="addApartment" style="display:none">Dodaj apartman</a>
+				<a href="#ViewReservations" class="viewReservations" style="display:none">Rezervacije</a>
 				<a href="#LogOut" class="Logout">Odjavi se</a>
 			</div>
 		</div>
-<!--		<span style="float:right; padding-right:10%; margin-top:0.5%">
-		<a href="#" id="aLogout"> IZLOGUJ SE </a>
-		&nbsp;&nbsp;
-		</span>-->
 	</h4>
 	  
-	<div class="data" style="min-height:70px">
+	<div class="dataBox" style="min-height:70px">
 			<h4 class="username" style="padding-left:15px; padding-top:15px">
 				<button type="button" class="btn btn-primary EditProfile" style="float:right; margin-right:5%">Izmeni</button>
 			</h4>
 			
 	</div>
-	<div class="data">
+	<div class="dataBox">
 		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
 		<table style="margin:25px">
 				<tr><td>Ime: </td><td id="name"><td id="name"></td></tr>

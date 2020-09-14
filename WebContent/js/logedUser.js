@@ -1,16 +1,24 @@
-/*window.onload = function(){
+window.onload = function(){
 	$.ajax({
 			method: "GET",
 			url: "../TuristickaAgencija/rest/users/getUser",
 			datatype: "application/json"
 	}).done(function(data){
+		if(!data){
+			$(".logedOut").show();
+		}else{
+			$("#btnDropDown").html(data.username);
+			$(".logedIn").show();
+			if(data.role == "Host"){
+				$(".addApartment").show();
+				$(".viewReservations").show();
+			}
+		}
 		loadContent(data);
 	});
-}*/
+}
 
-$(document).ready(function(){
-	
-	
+$(document).ready(function(){	
 	$("#btnDropDown").click(function(){
 			$("#userMenu").toggle();
 		})
@@ -32,5 +40,13 @@ $(document).ready(function(){
 			window.location.assign(window.location.origin += "/TuristickaAgencija/");
 		});
 	});
+	
+	$(".addApartment").click(function(){
+		window.location.assign(window.location.origin + "/TuristickaAgencija/addApartment.html");
+	})
+	
+	$(".viewReservations").click(function(){
+		
+	})
 
 })

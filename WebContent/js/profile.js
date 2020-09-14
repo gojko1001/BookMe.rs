@@ -1,9 +1,10 @@
-window.onload = function(){
-	$.ajax({
+//window.onload = function(){
+function loadContent(data){
+/*	$.ajax({
 			method: "GET",
 			url: "../TuristickaAgencija/rest/users/getUser",
 			datatype: "application/json"
-	}).done(function(data){
+	}).done(function(data){*/
 		if(!data){
 			alert("Morate biti ulogovani!");
 			window.history.back();
@@ -27,6 +28,6 @@ window.onload = function(){
 				$("#role").append("Gost");
 				break;
 		}
-		$("#btnDropDown").html(data.username);
-	})
+	//	$("#btnDropDown").html(data.username);
+	//})
 }

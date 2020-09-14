@@ -13,20 +13,19 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/index.js"></script>
 	<script type="text/javascript" src="js/logedUser.js"></script>
+	<script type="text/javascript" src="js/LogReg.js"></script>
 </head>
 <body>
-	<h4 style="background-color:lightgrey">
-		&nbsp;
-		<img src="css/favicon.ico" height=50 style="padding-bottom:10px; padding-left:10%">
-		&nbsp;
-		<b style="font-size:40px; margin-top:50px"> BookMe.rs</b>
-		<span style="float:right; padding-right:10%; margin-top:0.5%; display:none" class="logedOut">
-		<a href="#Register" id="aRegistration"> REGISTRACIJA </a>
-		&nbsp;
-		<a href="#Login" id="aLogin"> PRIJAVA </a>
-		&nbsp;&nbsp;
+	<h4 style="background-color:lightgrey; padding:0 10%">
+		<span id="homeBtn" onclick="openIndex()">
+			<img src="css/favicon.ico" height=50 style="padding-bottom:10px;">
+			<b style="font-size:40px;"> BookMe.rs</b>
 		</span>
-		<div class="dropdown logedIn" style="float:right; margin-right:10%; display:none">
+		<span style="float:right; margin-top:15px; display:none;" class="logedOut">
+			<a href="#Register" id="aRegistration"> REGISTRACIJA </a>&nbsp;
+			<a href="#Login" id="aLogin"> PRIJAVA </a>
+		</span>
+		<div class="dropdown logedIn" style="float:right; display:none;">
 			<button id="btnDropDown" class="dropbtn"></button>
 			<div id="userMenu" class="dropdown-content">
 				<a href="#Profile" class="MyProfile">Moj profil</a>
@@ -89,20 +88,18 @@
 	
 	<div style="float:center; margin-left:10%; margin-right:10%; padding:5px 10px; width:auto; background:#f2f2f2; border:1px solid grey">
 		<form action="pretraga" method="POST">
-	        <table class="centerSearch">
+	        <table class="quickSearch" style="float:right;">
 	        	<tr>
-	            	<!-- <td>Pretraga apartmana:</td> -->
 					<td><input type="text" name="search" placeholder="Naziv apartmana"></td>
 					<td><input type="text" name="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')" value=""></td><td><b>-</b></td>
 					<td><input type="text" name="dateTo" placeholder="Do datuma" onfocus="(this.type='date')"></td>
 					<td><button type="submit" id="potvrdi" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">Pretraga</button></td></tr>
 	        </table>
-			
 	    </form>
 		
 		<button class="text-primary btn-light" id="filterBtn">☰ Filteri</button>
 		<div id="filterTable" style="display:none">
-		<table >
+		<table>
 			<tr class="filterGroup"><td>Datum</td><td></td></tr>
 			<tr><td>Od:</td><td><input type="date" id="startDate"></td></tr>
 			<tr><td>Do:</td><td><input type="date" id="dueDate"></td></tr>
@@ -149,8 +146,5 @@
 	    </li>
 	  </ul>
 	</nav>  -->
-	
-	
-	<!-- <button type="button" class="btn btn-primary" onclick="getUsers()" style="margin-left:10%"> Lista svih korisnika </button> -->
 </body>
 </html>
