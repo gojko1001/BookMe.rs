@@ -21,6 +21,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
+import agency.model.Host;
 import agency.model.Reservation;
 
 public class ApartmentDao {
@@ -96,7 +97,6 @@ public class ApartmentDao {
 	}
 
 	
-	// TODO: datumi ne rade! + ponovnim pokretanjem servera ne radi!
 	public Boolean addApartment(Apartment apartment) {		
 		if(!apartment.isValid())
 			return false;
@@ -176,6 +176,18 @@ public class ApartmentDao {
 		return filtered;
 	}
 	
+	
+	public List<ApartmentDTO> getApartmentsByHost(String hostUsername){
+		List<ApartmentDTO> allApartments = getAllApartments();
+		List<ApartmentDTO> hostApartments = new ArrayList<ApartmentDTO>();
+		for(ApartmentDTO a : allApartments) {
+			if(a.getHost().getUsername().equals(hostUsername)) {
+				hostApartments.add(a);
+			}
+		}
+		
+		return hostApartments;
+	}
 	
 
 	

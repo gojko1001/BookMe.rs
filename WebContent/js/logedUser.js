@@ -50,3 +50,7 @@ $(document).ready(function(){
 	})
 
 })
+
+function openIndex(){
+	window.location.assign(window.location.origin + "/TuristickaAgencija/");
+}
