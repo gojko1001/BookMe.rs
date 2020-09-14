@@ -31,5 +31,52 @@
 			</div>
 		</div>
 	</h4>
+	
+	<div class="dataBox">
+		<h5 style="padding-left:15px; padding-top:15px; color:grey">Dodavanje apartmana</h5>
+		<table style="margin:25px">
+				<tr><td>Id apartmana:</td><td><input type="text" id="idApartment" required/></td>
+				<td><label id="invalidId" class="valid">Ne sme ostati prazno!</label></td></tr>
+				<tr><td>Domaćin:</td><td><input type="text" id="username" disabled/></td></tr>
+				<tr><td>Tip:</td> 
+					<td><select name="type" id="type" required>
+									<option id="wholeApartment" value="CEO_APARTMAN">Ceo apartman</option>
+									<option id="oneRoom" value="JEDNA_SOBA">Jedna soba</option>
+						</select>
+					</td></tr>
+				<tr><td>Broj soba:</td><td><input type="text" id="numberOfRooms"required/></td>
+				<td><label id="invalidNumberOfRooms" class="valid">Ne sme ostati prazno!</label></td></tr>
+				<tr><td>Broj gostiju:</td><td><input type="text" id="numberOfGuests" required/></td></tr>
+				<tr style="border-bottom:1px solid black">
+				<tr><td>Država:</td><td><input type="text" id="country"required/></td>
+				<td><label id="invalidCountry" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Mesto:</td><td><input type="text" id="place"required/></td>
+				<td><label id="invalidPlace" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Poštanski broj:</td><td><input type="text" id="postalCode"required/></td>
+				<td><label id="invalidPostalCode" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Ulica:</td><td><input type="text" id="street"required/></td>
+				<td><label id="invalidStreet" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Broj:</td><td><input type="text" id="number"required/></td>
+				<td><label id="invalidNumber" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Geografska širina:</td><td><input type="text" id="latitude"required/></td>
+				<td><label id="invalidLatitude" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Geografska dužina:</td><td><input type="text" id="longitude"required/></td>
+				<td><label id="invalidLongitude" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr style="border-bottom:1px solid black">
+				<tr><td>Slike:</td><td><input type="file" id="myFile" name="filename" multiple></td></tr>
+				<tr><td>Cena:</td><td><input type="text" id="price"required/>&nbsp; RSD</td>
+				<td><label id="invalidPrice" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Vreme prijave:</td><td><input type="text" id="checkInTime"required/>&nbsp; h</td>
+				<td><label id="invalidCheckInTime" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Vreme odjave:</td><td><input type="text" id="checkOutTime"required/>&nbsp; h</td>
+				<td><label id="invalidCheckOutTime" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td>Aktivnost:</td><td><input type="text" id="active" disabled/></td></tr>
+				<tr><td>Sadržaj:</td><td><input type="text" id="amenities" required/></td></tr>
+
+				<tr><td><button type="button" id="btnClose" class="btn btnClose" data-toggle="button" aria-pressed="false" autocomplete="off">Odustani</button></td>
+				<td><button id="save" class="btn btn-primary" style="width:100%">Dodaj apartman</button></td></tr>
+		</table>
+	</div>
+	
 </body>
 </html>
