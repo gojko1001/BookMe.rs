@@ -1,84 +1,21 @@
 function loadContent(data){
 	console.log(data);
 		
+	if(window.location.search){
+		openLogin();
+	}
+	
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/apartments/all",
 		datatype:"application/json"
 	}).done(function(data){
-		showActiveApartments(data);
+		showApartments(data);
 	});	
 }
 
 
-function loadContentHost(data){
-	console.log(data);
-	var username = data.username;
-	var name = data.name;
-	var lastName = data.lastName;
-	var sex = data.male;
-	var password = data.password;
-	var role = data.role;
-	
-	var jsonHost = JSON.stringify({
-		"username":username,
-		"name":name,
-		"lastName":lastName,
-		"male":sex,
-		"password":password,
-		"role":role
-	});
-	
-	
-	$.ajax({
-		method:"POST",
-		url:"../TuristickaAgencija/rest/apartments/hostApartments",
-		contentType: "application/json",
-		data: jsonHost,
-		datatype:"application/json"
-	}).done(function(data){
-		showActiveApartments(data);
-	});
-	
-	$.ajax({
-		method:"POST",
-		url:"../TuristickaAgencija/rest/apartments/hostApartments",
-		contentType: "application/json",
-		data: jsonHost,
-		datatype:"application/json"
-	}).done(function(data){
-		showInactiveApartments(data);
-	});
-	
-}
-
-
 $(document).ready(function(){
-// ModalBox Registration/Login
-	$("#aLogin").click(function(event) {
-	  $("div#logModal").slideDown("fast");
-	});
-
-	$("#aRegistration").click(function() {
-	  $("div#regModal").slideDown("fast");
-	});
-
-	$("#regToLog").click(function(){
-		$("div#regModal").hide(50, function(){
-			$("div#logModal").fadeIn();
-		});
-	})
-
-	$("#logToReg").click(function(){
-		$("div#logModal").hide(50, function(){
-			$("div#regModal").fadeIn();
-		});
-	})
-
-	$(".close").click(function() {
-	  $(".modal").hide(200);
-	})
-
 // Filteri
 	$("#filterBtn").click(function(){
 		$("#filterTable").slideToggle();
@@ -102,8 +39,8 @@ $(document).ready(function(){
 			method: "POST",
 			url: "../TuristickaAgencija/rest/apartments/filter",
 			data: jsonFilter,
-			contenttype: "application/json",
-			dataType: "application/json",
+			contentType: "application/json",
+			datatype: "application/json",
 		}).done(function(data){
 			$("#listOfApartments").html("");
 			showApartments(data);
@@ -111,36 +48,35 @@ $(document).ready(function(){
 	})
 });
 
-function showActiveApartments(data){
+function showApartments(data){
 	var i;
 	
 		for(i=0; i<data.length; i++){
-			if(data[i].active == true){
-				content = '<div class="card" onclick="viewApartment(this)" id="';
-				content += data[i].id;
-				content += '">';
-				content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
-				content += data[i].id;
-				content += data[i].photos[0];
-				content += '" alt="SLIKA APARTMANA">';
-				content += '<div class="card-body">';
-				content += '<div class="data">';
-				content += '<table style="margin:10px">';
-				content += '<tr><td float="right">Naziv apartmana:</td><td>';
-				content += data[i].id;
-				content += '</td></tr>';
-				content +='<tr><td>Domacin:</td><td>';
-				content += data[i].host.username;
-				content += '</td></tr>';
-				content += '</table></div>';
-				content += '</div></div>';
-				$("#listOfApartments").append(content);
-			}
+			content = '<div class="card" onclick="viewApartment(this)" id="';
+			content += data[i].id;
+			content += '">';
+			content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
+			content += data[i].id;
+			content += data[i].photos[0];
+			content += '" alt="SLIKA APARTMANA">';
+			content += '<div class="card-body">';
+			content += '<div class="data">';
+			content += '<table style="margin:10px">';
+			content += '<tr><td float="right">Naziv apartmana:</td><td>';
+			content += data[i].id;
+			content += '</td></tr>';
+			content +='<tr><td>Domacin:</td><td>';
+			content += data[i].host.username;
+			content += '</td></tr>';
+			content += '</table></div>';
+			content += '</div></div>';
+			
+			$("#listOfApartments").append(content);
 		}	
 }
 
 
-function showInactiveApartments(data){
+/*function showInactiveApartments(data){
 	var i;
 	
 		for(i=0; i<data.length; i++){
@@ -172,7 +108,7 @@ function showInactiveApartments(data){
 				$("#listOfInactiveApartments").append(content);
 			}	
 		}	
-}
+}*/
 
 function viewApartment(event){
 	window.location.assign(window.location.origin += "/TuristickaAgencija/apartment.html?id=" + event.id);
@@ -267,62 +203,3 @@ function viewApartment(event){
 		console.log(data);
 	});
 });*/
-
-
-
-/*content += '<tr><td>Tip: &nbsp';
-			content += data[i].type;
-			content += '</td></tr>';
-			content += '<tr><td>Broj soba: &nbsp';
-			content += data[i].numberOfRooms;
-			content += '</td></tr>';
-			content += '<tr><td>Broj gostiju: &nbsp';
-			content += data[i].numberOfGuests;
-			content += '</td></tr>';
-			content += '<tr><td>Lokacija: &nbsp';
-			content += data[i].location.address.country;
-			content += ', ';
-			content += data[i].location.address.place;
-			content += ', ';
-			content += data[i].location.address.postalCode;
-			content += '<br>&nbsp;&nbsp;';
-			content += data[i].location.address.street;
-			content += ', ';
-			content += data[i].location.address.number;
-			content += '<br>&nbsp;&nbsp;';
-			content += data[i].location.latitude;
-			content += ', ';
-			content += data[i].location.longitude;
-			content += '</td></tr>';*/
-
-
-			/*var content = '';
-			content = '<div class="card" style="width: 15rem; height: 15rem;">';
-			content += '<img class="card-img-top" src="..." alt="SLIKA APARTMANA">';
-			content += '<div class="card-body">';
-			content += '<div class="data">';
-			content += '<table style="margin:25px">';
-			content += '<tr><td float="right">Naziv apartmana:</td><td>';
-			content += data[i].id;
-			content += '</td></tr>';
-			content +='<tr><td>Domaćin:</td><td>';
-			content += data[i].hostUsername;
-			content += '</td></tr>';
-			content += '</table></div>';
-			content += '<button type="button" class="i">Pogledaj</button>';
-			content += '</div></div>';
-			var contentModal = '';
-			contentModal = '<table>';
-			contentModal += '<tr><td>Broj soba:</td><td>';
-			contentModal += data[i].numberOfRooms;
-			contentModal += '</td></tr>';
-			contentModal += '</table>';
-
-			$("#listOfApartments").append(content);
-			$('#moreAboutApartment').append(contentModal);
-			
-			$(".i").click(function(){
-				$("div#apartmentModal").slideDown("fast");
-			})*/
-
-

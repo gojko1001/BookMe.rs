@@ -6,7 +6,6 @@ window.onload = function(){
 	}).done(function(data){
 		if(!data){
 			$(".logedOut").show();
-			loadContent(data);
 		}else{
 			$("#btnDropDown").html(data.username);
 			$(".logedIn").show();
@@ -14,11 +13,9 @@ window.onload = function(){
 				$(".addApartment").show();
 				$(".viewReservations").show();
 				$(".inactiveApartments").show();
-				loadContentHost(data);
-			}else{
-				loadContent(data);
 			}
 		}
+		loadContent(data);
 	});
 }
 
@@ -43,7 +40,7 @@ $(document).ready(function(){
 			url:"../TuristickaAgencija/rest/users/logout",	
 			datatype:"text"
 		}).done(function(data){
-			window.location.assign(window.location.origin += "/TuristickaAgencija/");
+			window.location.assign(window.location.origin += "/TuristickaAgencija?logout=true");
 		});
 	});
 	

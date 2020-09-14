@@ -1,17 +1,13 @@
-//window.onload = function(event){
-function loadContent(data){	
+function loadContent(user){	
 	$.ajax({
 		method: "GET",
-		url: "../TuristickaAgencija/rest/apartments/getById",
-		contentType: "text;charset=utf-8",
-		data: {
-			id: window.location.search.substring(4)
-		},
-		dataType: "application/json",
+		url: "../TuristickaAgencija/rest/apartments/getById" + window.location.search,
+		datatype: "application/json",
 	}).done(function(data){
-		$("#name").append(data.id);
-		$("#loc").append(data.address.street + " " + data.address.number + ", " + data.address.postalCode
-							+ " " + data.address.place + ", " + data.address.country);
+		$("#apartId").html(data.id);
+		$("#loc").append(data.location.address.street + " " + data.location.address.number + 
+				", " + data.location.address.postalCode + " " + data.location.address.place + 
+				", " + data.location.address.country);
 		$("#roomNum").append(data.numberOfRooms);
 		$("#guestNum").append(data.numberOfGuests);
 		if(data.type == "wholeApartment"){
@@ -22,6 +18,20 @@ function loadContent(data){
 		$("#host").append(data.host.username);
 		$("#checkIn").append(data.checkInTime);
 		$("#checkOut").append(data.checkOutTime);
-		$("#price").append(data.price);
-	})
+		$("#price").append(data.price + " RSD");
+		
+		let x;
+		for(x of data.amenities){
+			$("#amenities").append(x.name + "\n");
+		}
+		
+		for(x of data.photos){
+			content = '<img class="gallery" ';
+			content += 'src="Resources/ApartmentPhotos/';
+			content += data.id;
+			content += x;
+			content += '">'
+			$("#pic").append(content);
+		}
+	});
 }

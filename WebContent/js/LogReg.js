@@ -1,3 +1,30 @@
+$(document).ready(function(){
+// ModalBox Registration/Login
+	$("#aLogin").click(function(event) {
+	  $("div#logModal").slideDown("fast");
+	});
+
+	$("#aRegistration").click(function() {
+	  $("div#regModal").slideDown("fast");
+	});
+
+	$("#regToLog").click(function(){
+		$("div#regModal").hide(50, function(){
+			$("div#logModal").fadeIn();
+		});
+	})
+
+	$("#logToReg").click(function(){
+		$("div#logModal").hide(50, function(){
+			$("div#regModal").fadeIn();
+		});
+	})
+
+	$(".close").click(function() {
+	  $(".modal").hide(200);
+	})
+});
+
 function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor
 	let username = $("#username").val();
 	let name = $("#name").val();

@@ -82,16 +82,5 @@ public class ApartmentService {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.applyFilter(filter);
-	}
-	
-	@POST
-	@Path("/hostApartments")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<ApartmentDTO> getHostApartment(User userHost) {
-		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
-		
-		return apartmentDao.getApartmentsByHost(userHost);
-	}
-	
+	}	
 }

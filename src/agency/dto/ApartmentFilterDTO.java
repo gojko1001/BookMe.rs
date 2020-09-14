@@ -12,6 +12,8 @@ public class ApartmentFilterDTO {
 	private int roomTo;
 	private int spotNum;
 	
+	public ApartmentFilterDTO() {}
+	
 	public ApartmentFilterDTO(String startDate, String dueDate, String country, String city, float priceFrom,
 			float priceTo, int roomFrom, int roomTo, int spotNum) {
 		super();

@@ -202,7 +202,7 @@ public class ApartmentDao {
 			        calendar.add(Calendar.DATE, 1);
 			    }
 			    
-			    Boolean fullAvailable = true;		// Flag za ceo  set datuma
+			    Boolean fullAvailable = true;		// Flag za ceo set datuma
 			    for(Date d : datesInRange) {
 			    	Boolean isAvailable = false;	// Pojedinacni flag
 			    	for(String s : a.getFreeDates()) {
@@ -224,21 +224,4 @@ public class ApartmentDao {
 		}
 		return filtered;
 	}
-	
-	
-	public List<ApartmentDTO> getApartmentsByHost(User userHost){
-		List<ApartmentDTO> allApartments = getAllApartments();
-		List<ApartmentDTO> hostApartments = new ArrayList<ApartmentDTO>();
-		for(ApartmentDTO a : allApartments) {
-			if(a.getHost().getUsername().equals(userHost.getUsername())) {
-				hostApartments.add(a);
-			}
-		}
-		
-		return hostApartments;
-	}
-	
-	
-
-	
 }

@@ -67,6 +67,7 @@ div.card:hover{
 	margin-left:10%;
 	margin-right:10%;
 	margin-top:50px;
+	padding: 10px;
 	background:white;
 	border: 1px solid grey;
 }
