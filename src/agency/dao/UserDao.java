@@ -75,7 +75,7 @@ public class UserDao {
 		for(Apartment a : apartments) {
 			Host h = (Host) this.getUserFromUsername(a.getHost().getUsername());
 			h.getApartmentsForRent().add(a);
-			
+			a.setHost(h);
 		}
 	}
 	
@@ -91,6 +91,21 @@ public class UserDao {
 		}
 		
 		return all;
+	}
+	
+	public List<User> getAllUsersByRole(User user){
+		if(user == null || user.getRole() == Role.Guest) {
+			return null;
+		} else if(user.getRole() == Role.Administrator) {
+			return getAllUsersDTOs();
+		} else {
+			List<User> users = new ArrayList<>();
+			for(Apartment a : ((Host) user).getApartmentsForRent())
+				for(Reservation r : a.getReservations())
+					if(!users.contains(r.getGuest()))
+						users.add(r.getGuest());
+			return users;
+		}
 	}
 	
 	public List<User> getAllUsers(){
@@ -235,6 +250,4 @@ public class UserDao {
 		
 	}
 	*/
-
-	
 }

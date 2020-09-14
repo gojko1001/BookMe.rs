@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -25,6 +26,9 @@ public class ApartmentService {
 
 	@Context
 	ServletContext context;
+	
+	@Context
+	HttpServletRequest request;
 	
 	public ApartmentService() {}
 	
@@ -55,8 +59,9 @@ public class ApartmentService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<ApartmentDTO> getAllApartments() {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		return apartmentDao.getAllApartments();
+		return apartmentDao.getAllApartmentsByRole(logedUser);
 	}
 	
 	@POST
@@ -73,7 +78,7 @@ public class ApartmentService {
 	@Path("/filter")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<Apartment> applyFilter(ApartmentFilterDTO filter) {
+	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.applyFilter(filter);

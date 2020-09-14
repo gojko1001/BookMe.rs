@@ -66,8 +66,9 @@ public class UserService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<User> getAllUsers() {
 		UserDao userDao = (UserDao) context.getAttribute("userDao");
+		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		return userDao.getAllUsersDTOs();
+		return userDao.getAllUsersByRole(logedUser);
 	}
 	
 	

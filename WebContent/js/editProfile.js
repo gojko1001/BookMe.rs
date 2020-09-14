@@ -1,15 +1,8 @@
-/*window.onload = function(){
-	$.ajax({
-		method: "GET",
-		url: "../TuristickaAgencija/rest/users/getUser",
-		datatype: "application/json"
-	}).done(function(data){*/
 function loadContent (data){
 		if(!data){
 			alert("Morate biti ulogovani!");
 			window.history.back();
 		}
-	//	$("#btnDropDown").html(data.username);
 		$("#name").val(data.name);
 		$("#lastName").val(data.lastName);
 		$("#username").val(data.username);
@@ -32,7 +25,6 @@ function loadContent (data){
 		}
 		$("#roleVal").val(data.role);
 		$("#oldPass").val(data.password);
-	//})
 }
 
 function loadContentHost(data){

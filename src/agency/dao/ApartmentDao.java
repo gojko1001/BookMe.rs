@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -22,13 +24,14 @@ import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;
 import agency.model.Reservation;
+import agency.model.Role;
 import agency.model.User;
 
 public class ApartmentDao {
 	public List<Apartment> apartments = new ArrayList<Apartment>();
 	private String path;
 	
-	public SimpleDateFormat sdf=new SimpleDateFormat("dd.MM.yyyy.");
+	public SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
 	public ApartmentDao(String path, List<Reservation> reservations) {
 		this.path = path + "json/apartments.json";
@@ -44,8 +47,7 @@ public class ApartmentDao {
 			r.setApartment(a);
 		}
 	}
-	
-	
+		
 	
 	public Apartment getApartment(String id) {
 		for(Apartment a : apartments) {
@@ -66,6 +68,24 @@ public class ApartmentDao {
 		return apartmentsDto;
 	}
 	
+	
+	public List<ApartmentDTO> getAllApartmentsByRole(User user){
+		if(user == null || user.getRole() == Role.Guest) {
+			List<ApartmentDTO> activeApartments = new ArrayList<>();
+			for(ApartmentDTO a : getAllApartments())
+				if(a.isActive())
+					activeApartments.add(a);
+			return activeApartments;
+		} else if(user.getRole() == Role.Administrator) {
+			return getAllApartments();
+		} else {					// Role.Host
+			List<ApartmentDTO> ownApartments = new ArrayList<>();
+			for(ApartmentDTO a : getAllApartments())
+				if(a.getHost().getUsername().equals(user.getUsername()))
+					ownApartments.add(a);
+			return ownApartments;
+		}
+	}
 	
 	public ApartmentDTO getApartmentDTO(String id) {
 		ApartmentDTO apartmentDTO = null;
@@ -126,8 +146,8 @@ public class ApartmentDao {
 		return true;
 	}
 
-	public List<Apartment> applyFilter(ApartmentFilterDTO filter){
-		List<Apartment> filtered = new ArrayList<>();
+	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter){
+		List<ApartmentDTO> filtered = new ArrayList<>();
 		
 		for(Apartment a : apartments) {
 			if(!filter.getCountry().equals(""))
@@ -155,7 +175,7 @@ public class ApartmentDao {
 				if(a.getNumberOfRooms() > filter.getRoomTo())
 					continue;
 			if(filter.getSpotNum() != -1)
-				if(a.getNumberOfGuests() != filter.getSpotNum())
+				if(a.getNumberOfGuests() < filter.getSpotNum())
 					continue;
 			if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
 				Date start = new Date();
@@ -168,10 +188,39 @@ public class ApartmentDao {
 					e.printStackTrace();
 				}
 				
-				//TODO: Filter za datum
-			}
-			
-			filtered.add(a);
+				List<Date> datesInRange = new ArrayList<>();
+			    Calendar calendar = new GregorianCalendar();
+			    calendar.setTime(start);
+			    
+			    Calendar endCalendar = new GregorianCalendar();
+			    endCalendar.setTime(due);
+			 
+			    while (calendar.before(endCalendar)) {
+			        Date result = calendar.getTime();
+			        System.out.println(result);
+			        datesInRange.add(result);
+			        calendar.add(Calendar.DATE, 1);
+			    }
+			    
+			    Boolean fullAvailable = true;		// Flag za ceo  set datuma
+			    for(Date d : datesInRange) {
+			    	Boolean isAvailable = false;	// Pojedinacni flag
+			    	for(String s : a.getFreeDates()) {
+			    		try {
+							if(sdf.parse(s).compareTo(d) == 0)
+								isAvailable = true;
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+			    	}
+			    	if(!isAvailable) {
+			    		break;
+			    	}
+			    }
+			    if(!fullAvailable)
+			    	continue;
+			}	
+			filtered.add(new ApartmentDTO(a));
 		}
 		return filtered;
 	}

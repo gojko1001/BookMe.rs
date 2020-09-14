@@ -19,7 +19,6 @@ window.onload = function(){
 				loadContent(data);
 			}
 		}
-		
 	});
 }
 

@@ -1,4 +1,3 @@
-//window.onload = function(event){
 function loadContent(data){
 	console.log(data);
 		
