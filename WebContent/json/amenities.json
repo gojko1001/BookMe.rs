@@ -1,0 +1,34 @@
+[
+	{
+		"id":"wifi",
+		"name":"wifi"
+	},
+	{
+		"id":"tv",
+		"name":"TV"
+	},
+	{
+		"id":"elevator",
+		"name":"lift"
+	},
+	{
+		"id":"iron",
+		"name":"pegla"
+	},
+	{
+		"id":"coffee",
+		"name":"kuvalo"
+	},
+	{
+		"id":"parking",
+		"name":"parking"
+	},
+	{
+		"id":"towels",
+		"name":"peskiri"
+	},
+	{
+		"id":"heating",
+		"name":"grejanje"
+	}
+]
