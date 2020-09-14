@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Apartman</title>
+	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
+	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
+	<link href="css/main.css" rel="stylesheet"></link>
+	<link href="css/modalBox.css" rel="stylesheet"></link>
+	<link href="css/dropDownMenu.css" rel="stylesheet"></link>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<script type="text/javascript" src="js/apartment.js"></script>
+	<script type="text/javascript" src="js/logedUser.js"></script>
+	<script type="text/javascript" src="js/LogReg.js"></script>
+</head>
+<body>
+	<h4 style="background-color:lightgrey; padding:0 10%">
+		<span id="homeBtn" onclick="openIndex()">
+			<img src="css/favicon.ico" height=50 style="padding-bottom:10px;">
+			<b style="font-size:40px;"> BookMe.rs</b>
+		</span>
+		<span style="float:right; margin-top:15px; display:none;" class="logedOut">
+			<a href="#Register" id="aRegistration"> REGISTRACIJA </a>&nbsp;
+			<a href="#Login" id="aLogin"> PRIJAVA </a>
+		</span>
+		<div class="dropdown logedIn" style="float:right; display:none;">
+			<button id="btnDropDown" class="dropbtn"></button>
+			<div id="userMenu" class="dropdown-content">
+				<a href="#Profile" class="MyProfile">Moj profil</a>
+				<a href="#EditProfile" class="EditProfile">Izmeni profil</a>
+				<a href="#AddApartment" class="addApartment" style="display:none">Dodaj apartman</a>
+				<a href="#ViewReservations" class="viewReservations" style="display:none">Rezervacije</a>
+				<a href="#InactiveApartments" class="inactiveApartments" style="display:none">Neaktivni apartmani</a>
+				<a href="#LogOut" class="Logout">Odjavi se</a>
+			</div>
+		</div>
+	</h4>
+	
+	<h2>Moji NEAKTIVNI apartmani:</h2>
+	<div id="listOfInactiveApartments" style="padding-left:10%; padding-right:10%">
+    </div>
+	
+</body>
+</html>

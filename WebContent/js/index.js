@@ -40,6 +40,17 @@ function loadContentHost(data){
 	}).done(function(data){
 		showActiveApartments(data);
 	});
+	
+	$.ajax({
+		method:"POST",
+		url:"../TuristickaAgencija/rest/apartments/hostApartments",
+		contentType: "application/json",
+		data: jsonHost,
+		datatype:"application/json"
+	}).done(function(data){
+		showInactiveApartments(data);
+	});
+	
 }
 
 
@@ -124,10 +135,11 @@ function showActiveApartments(data){
 				content += '</td></tr>';
 				content += '</table></div>';
 				content += '</div></div>';
+				$("#listOfApartments").append(content);
 			}
-			$("#listOfApartments").append(content);
 		}	
 }
+
 
 function showInactiveApartments(data){
 	var i;
@@ -150,10 +162,16 @@ function showInactiveApartments(data){
 				content +='<tr><td>Domacin:</td><td>';
 				content += data[i].host.username;
 				content += '</td></tr>';
+				content += '<tr><td><button type="button" class="activateApartment btn" id="';
+				content += data[i].id;
+				content += '" onclick="viewApartment(this)" >Aktiviraj</button></td>';
+				content += '<td><button type="button" class="deleteApartment btn" id="';
+				content += data[i].id;
+				content += '" onclick="viewApartment(this)" >Obriši</button></td></tr>';
 				content += '</table></div>';
 				content += '</div></div>';
-			}
-			$("#listOfInactiveApartments").append(content);
+				$("#listOfInactiveApartments").append(content);
+			}	
 		}	
 }
 

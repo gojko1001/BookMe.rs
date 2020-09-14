@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/json/apartments.json=UTF-8
 encoding//src/agency/dao/UserDao.java=UTF-8
 encoding//src/agency/service/UserService.java=UTF-8

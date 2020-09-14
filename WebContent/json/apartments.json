@@ -149,5 +149,104 @@
 			}
 		],
 		"reservations":[]
+	},
+	{
+		"id":"JC56",
+		"type":"wholeApartment",
+		"numberOfRooms":2,
+		"numberOfGuests":2,
+		"location":{
+			"latitude":45.6,
+			"longitude":60.7,
+			"address":{
+				"country":"Serbia",
+				"place":"Novi Sad",
+				"postalCode":21000,
+				"street":"Janka Cmelika",
+				"number":"56"
+			}
+		},
+		"datesForRent":["2020-09-10", "2020-09-11", "2020-09-12"],
+		"freeDates":["2020-09-10", "2020-09-11"],
+		"host":{
+			"username":"milica"
+		},
+		"comments":[
+			{
+				"guest": 
+				{
+					"username":"igor"
+				},
+				"apartment":
+				{
+					"id":"JC56"
+				},
+				"text":"apartman je divan i uredan",
+				"rate":5
+			}
+		],
+		"photos":["/JC56-1.jpg", "/JC56-2.jpg",
+					"/JC56-3.jpg"],
+		"price":500,
+		"checkInTime":15,
+		"checkOutTime":8,
+		"active":true,
+		"amenities":
+		[
+			{
+				"id":"wf",
+				"name":"WI-FI"
+			}
+		],
+		"reservations":[]
+	},
+	{
+		"id":"BO40",
+		"type":"oneRoom",
+		"numberOfRooms":3,
+		"numberOfGuests":1,
+		"location":{
+			"latitude":45.6,
+			"longitude":60.7,
+			"address":{
+				"country":"Serbia",
+				"place":"Novi Sad",
+				"postalCode":21000,
+				"street":"Bulevar Oslobođenja",
+				"number":"40"
+			}
+		},
+		"datesForRent":[],
+		"freeDates":[],
+		"host":{
+			"username":"milica"
+		},
+		"comments":[
+			{
+				"guest": 
+				{
+					"username":"mika"
+				},
+				"apartment":
+				{
+					"id":"BO40"
+				},
+				"text":"soba je okrenuta ka ulici i previse je bucno",
+				"rate":2
+			}
+		],
+		"photos":["/BO50-1.jpg", "/BO50-2.jpg"],
+		"price":100,
+		"checkInTime":15,
+		"checkOutTime":8,
+		"active":false,
+		"amenities":
+		[
+			{
+				"id":"wf",
+				"name":"WI-FI"
+			}
+		],
+		"reservations":[]
 	}
 ]
