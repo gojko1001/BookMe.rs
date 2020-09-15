@@ -12,7 +12,6 @@ window.onload = function(){
 			if(data.role == "Host"){
 				$(".addApartment").show();
 				$(".viewReservations").show();
-				$(".inactiveApartments").show();
 			}
 		}
 		loadContent(data);
@@ -41,6 +40,7 @@ $(document).ready(function(){
 			datatype:"text"
 		}).done(function(data){
 			window.location.assign(window.location.origin += "/TuristickaAgencija?logout=true");
+
 		});
 	});
 	

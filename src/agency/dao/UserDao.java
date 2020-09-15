@@ -28,7 +28,6 @@ public class UserDao {
 	private List<Administrator> admins = new ArrayList<Administrator>();
 	private List<Guest> guests = new ArrayList<Guest>();
 	private List<Host> hosts = new ArrayList<Host>();
-	//private List<User> users = new ArrayList<User>();
 	private String path;
 	
 	public UserDao(String path, List<Apartment> apartments, List<Reservation> reservations) {

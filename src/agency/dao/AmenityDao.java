@@ -45,23 +45,21 @@ public class AmenityDao {
 		List<Amenity> allAmenities = new ArrayList<Amenity>();
 		for(Amenity a : amenities) {
 			allAmenities.add(a);
-			System.out.println(a.getId() + ", ");
+			//System.out.println(a.getId() + ", ");
 		}
 		
 		return allAmenities;
 	}
 	
 	public String addAmenity(Amenity newAmenity) {
-		List<Amenity> allAmenities = getAllAmenities();
-		
 		for(Amenity a : amenities) {
 			if(a.getId().equals(newAmenity.getId())) {
 				return "Sadržaj apartmana nije dodat jer unešen id već postoji.";
-			}//else if(a.getName().equals(newAmenity.getName())){
-				//return "Saadržaj apartmana nije dodat jer unešen naziv već posotji.";
-			//}
+			}else if(a.getName().equals(newAmenity.getName())){
+				return "Saadržaj apartmana nije dodat jer unešen naziv već posotji.";
+			}
 		}
-			allAmenities.add(newAmenity);
+			amenities.add(newAmenity);
 			
 			
 			ObjectMapper mapper = new ObjectMapper();
@@ -78,5 +76,24 @@ public class AmenityDao {
 		
 		return "Dodat novi sadržaj apartmana";
 	}
+	
+	
+	public String removeAmenity(Amenity amenity) {
+		amenities.remove(amenity);
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+		try {
+			writer.writeValue(new File(path), getAllAmenities());
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Greska u radu sa fajlovima");
+			e.printStackTrace();
+		}
+		
+		return "Obrisan";
+	}
+	
 	
 }

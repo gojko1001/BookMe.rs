@@ -3,11 +3,19 @@ package agency.model;
 public class Amenity {
 	private String id;
 	private String name;
+	private boolean deleted=false;
 	
 	public Amenity() {}
-	public Amenity(String id, String name) {
+	public Amenity(String id, String name, boolean deleted) {
 		this.id = id;
 		this.name = name;
+		this.deleted = deleted;
+	}
+	public boolean isDeleted() {
+		return deleted;
+	}
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 	public String getId() {
 		return id;

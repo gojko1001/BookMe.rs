@@ -45,7 +45,8 @@
 		[
 			{
 				"id":"wf",
-				"name":"WI-FI"
+				"name":"WI-FI",
+				"deleted":false
 			}
 		],
 		"reservations":[]
@@ -95,7 +96,8 @@
 		[
 			{
 				"id":"wf",
-				"name":"WI-FI"
+				"name":"WI-FI",
+				"deleted":false
 			}
 		],
 		"reservations":[]
@@ -145,7 +147,8 @@
 		[
 			{
 				"id":"wf",
-				"name":"WI-FI"
+				"name":"WI-FI",
+				"deleted":false
 			}
 		],
 		"reservations":[]
@@ -195,7 +198,8 @@
 		[
 			{
 				"id":"wf",
-				"name":"WI-FI"
+				"name":"WI-FI",
+				"deleted":false
 			}
 		],
 		"reservations":[]
@@ -235,7 +239,7 @@
 				"rate":2
 			}
 		],
-		"photos":["/BO50-1.jpg", "/BO50-2.jpg"],
+		"photos":["/BO40-1.jpg", "/BO40-2.jpg"],
 		"price":100,
 		"checkInTime":15,
 		"checkOutTime":8,
@@ -244,7 +248,8 @@
 		[
 			{
 				"id":"wf",
-				"name":"WI-FI"
+				"name":"WI-FI",
+				"deleted":false
 			}
 		],
 		"reservations":[]

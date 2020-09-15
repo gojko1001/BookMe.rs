@@ -1,34 +1,42 @@
 [
 	{
 		"id":"wifi",
-		"name":"wifi"
+		"name":"wifi",
+		"deleted":false
 	},
 	{
 		"id":"tv",
-		"name":"TV"
+		"name":"TV",
+		"deleted":false
 	},
 	{
 		"id":"elevator",
-		"name":"lift"
+		"name":"lift",
+		"deleted":false
 	},
 	{
 		"id":"iron",
-		"name":"pegla"
+		"name":"pegla",
+		"deleted":false
 	},
 	{
 		"id":"coffee",
-		"name":"kuvalo"
+		"name":"kuvalo",
+		"deleted":false
 	},
 	{
 		"id":"parking",
-		"name":"parking"
+		"name":"parking",
+		"deleted":false
 	},
 	{
 		"id":"towels",
-		"name":"peskiri"
+		"name":"peskiri",
+		"deleted":false
 	},
 	{
 		"id":"heating",
-		"name":"grejanje"
+		"name":"grejanje",
+		"deleted":false
 	}
 ]

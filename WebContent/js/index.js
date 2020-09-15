@@ -1,6 +1,6 @@
 function loadContent(data){
 	console.log(data);
-		
+	
 	if(window.location.search){
 		openLogin();
 	}
@@ -14,9 +14,8 @@ function loadContent(data){
 	});	
 }
 
-
+//FILTERI
 $(document).ready(function(){
-// Filteri
 	$("#filterBtn").click(function(){
 		$("#filterTable").slideToggle();
 		$(".quickSearch").toggle();
@@ -50,65 +49,29 @@ $(document).ready(function(){
 
 function showApartments(data){
 	var i;
-	
 		for(i=0; i<data.length; i++){
-			content = '<div class="card" onclick="viewApartment(this)" id="';
-			content += data[i].id;
-			content += '">';
-			content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
-			content += data[i].id;
-			content += data[i].photos[0];
-			content += '" alt="SLIKA APARTMANA">';
-			content += '<div class="card-body">';
-			content += '<div class="data">';
-			content += '<table style="margin:10px">';
-			content += '<tr><td float="right">Naziv apartmana:</td><td>';
-			content += data[i].id;
-			content += '</td></tr>';
-			content +='<tr><td>Domacin:</td><td>';
-			content += data[i].host.username;
-			content += '</td></tr>';
-			content += '</table></div>';
-			content += '</div></div>';
-			
-			$("#listOfApartments").append(content);
+					content = '<div class="card" onclick="viewApartment(this)" id="';
+					content += data[i].id;
+					content += '">';
+					content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
+					content += data[i].id;
+					content += data[i].photos[0];
+					content += '" alt="SLIKA APARTMANA">';
+					content += '<div class="card-body">';
+					content += '<div class="data">';
+					content += '<table style="margin:10px">';
+					content += '<tr><td float="right">Naziv apartmana:</td><td>';
+					content += data[i].id;
+					content += '</td></tr>';
+					content +='<tr><td>Domaćin:</td><td>';
+					content += data[i].host.username;
+					content += '</td></tr>';
+					content += '</table></div>';
+					content += '</div></div>';
+					
+					$("#listOfApartments").append(content);
 		}	
 }
-
-
-/*function showInactiveApartments(data){
-	var i;
-	
-		for(i=0; i<data.length; i++){
-			if(data[i].active == false){
-				content = '<div class="card" onclick="viewApartment(this)" id="';
-				content += data[i].id;
-				content += '">';
-				content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
-				content += data[i].id;
-				content += data[i].photos[0];
-				content += '" alt="SLIKA APARTMANA">';
-				content += '<div class="card-body">';
-				content += '<div class="data">';
-				content += '<table style="margin:10px">';
-				content += '<tr><td float="right">Naziv apartmana:</td><td>';
-				content += data[i].id;
-				content += '</td></tr>';
-				content +='<tr><td>Domacin:</td><td>';
-				content += data[i].host.username;
-				content += '</td></tr>';
-				content += '<tr><td><button type="button" class="activateApartment btn" id="';
-				content += data[i].id;
-				content += '" onclick="viewApartment(this)" >Aktiviraj</button></td>';
-				content += '<td><button type="button" class="deleteApartment btn" id="';
-				content += data[i].id;
-				content += '" onclick="viewApartment(this)" >Obriši</button></td></tr>';
-				content += '</table></div>';
-				content += '</div></div>';
-				$("#listOfInactiveApartments").append(content);
-			}	
-		}	
-}*/
 
 function viewApartment(event){
 	window.location.assign(window.location.origin += "/TuristickaAgencija/apartment.html?id=" + event.id);

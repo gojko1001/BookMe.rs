@@ -13,7 +13,7 @@ function loadContent(user){
 		if(data.type == "wholeApartment"){
 			$("#type").append('Ceo apartman');
 		}else{
-			$("#type").append('Soba');
+			$("#type").append('Jedna soba');
 		}
 		$("#host").append(data.host.username);
 		$("#checkIn").append(data.checkInTime);

@@ -29,10 +29,10 @@ public class AmenityService {
 	@PostConstruct
 	public void init() {
 		//System.out.println("amenityinit");
-		//if (context.getAttribute("amenityDao") == null) {
+		if (context.getAttribute("amenityDao") == null) {
 			AmenityDao amenityDao = new AmenityDao(context.getRealPath(""));
 	    	context.setAttribute("amenityDao", amenityDao);
-		//}
+		}
 	}
 	
 	@GET
@@ -53,6 +53,16 @@ public class AmenityService {
 		AmenityDao amenityDao = (AmenityDao) context.getAttribute("amenityDao");
 		
 		return amenityDao.addAmenity(amenity);
+	}
+	
+	@POST
+	@Path("/remove")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String removeAmenity(Amenity amenity) {
+		AmenityDao amenityDao = (AmenityDao) context.getAttribute("amenityDao");
+		
+		return amenityDao.removeAmenity(amenity);
 	}
 	
 	

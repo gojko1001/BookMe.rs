@@ -1,11 +1,11 @@
 $(document).ready(function(){
 // ModalBox Registration/Login
 	$("#aLogin").click(function(event) {
-	  $("div#logModal").slideDown("fast");
+		$("div#logModal").slideDown("fast");
 	});
 
 	$("#aRegistration").click(function() {
-	  $("div#regModal").slideDown("fast");
+		$("div#regModal").slideDown("fast");
 	});
 
 	$("#regToLog").click(function(){
@@ -21,7 +21,7 @@ $(document).ready(function(){
 	})
 
 	$(".close").click(function() {
-	  $(".modal").hide(200);
+		$(".modal").hide(200);
 	})
 });
 
