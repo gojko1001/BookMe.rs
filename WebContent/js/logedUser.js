@@ -14,6 +14,7 @@ window.onload = function(){
 				$(".viewReservations").show();
 			}
 			if(data.role == "Administrator"){
+				$(".viewReservations").show();
 				$(".amenities").show();
 			}
 		}

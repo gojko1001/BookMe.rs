@@ -31,6 +31,18 @@
 					"id":"OR11"
 				},
 				"text":"bilo je super",
+				"rate":4
+			},
+			{
+				"guest": 
+				{
+					"username":"igor"
+				},
+				"apartment":
+				{
+					"id":"OR11"
+				},
+				"text":"nemam zamerki, sve preporuke :)",
 				"rate":5
 			}
 		],

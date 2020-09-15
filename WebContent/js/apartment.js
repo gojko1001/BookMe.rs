@@ -33,5 +33,20 @@ function loadContent(user){
 			content += '">'
 			$("#pic").append(content);
 		}
+		
+		var c;
+		var contentC = '<table border="2" style="margin:25px; margin-left: auto; margin-right: auto;">';
+		contentC += '<tr> <th>Gost</th><th>Komentar</th> <th>Ocena</th></tr>';
+		for(c=0; c<data.commentsDTO.length; c++){
+			contentC += '<tr><td>';
+			contentC += data.commentsDTO[c].guestUsername;
+			contentC += '</td><td>';
+			contentC += data.commentsDTO[c].text;
+			contentC += '</td><td>';
+			contentC += data.commentsDTO[c].rate;
+			contentC += '</td></tr>'
+		}
+		contentC += '</table>';
+		$('#comments').append(contentC);
 	});
 }

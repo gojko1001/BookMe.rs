@@ -40,6 +40,16 @@ function viewAllAmenities(data){
 }
 
 
+$(document).ready(function(){
+	$("#addAmenity").click(function(){
+		window.location.assign(window.location.origin += "/TuristickaAgencija/addAmenity.html");
+	})
+	
+	$("button#btnClose").click(function(){
+		window.history.back();
+	})
+})
+
 
 
 function viewAmenity(event){

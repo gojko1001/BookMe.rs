@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
+import agency.dto.ApartmentDTO;
 import agency.model.Amenity;
 import agency.model.Apartment;
 import agency.model.Host;
@@ -75,6 +76,8 @@ public class AmenityDao {
 				return "Sadržaj apartmana nije dodat jer unešen id već postoji.";
 			}else if(a.getName().equals(newAmenity.getName())){
 				return "Saadržaj apartmana nije dodat jer unešen naziv već posotji.";
+			}else if(a.getId().equals("") || a.getName().equals("")) {
+				return "Niste popunili sva polja";
 			}
 		}
 			amenities.add(newAmenity);
@@ -109,7 +112,7 @@ public class AmenityDao {
 			}
 		}
 
-		// TODO: DODATI BRISANJE TOG SADRZAJA KOD APARTMANA
+		// TODO: DODATI BRISANJE TOG SADRZAJA KOD APARTMANA --- napravljena samo treba dodati
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
@@ -123,6 +126,35 @@ public class AmenityDao {
 		}
 		
 		return "Sadržaj je uspešno izmenjen.";
+	}
+	
+
+	public String deleteAmenityFromApartment(List<ApartmentDTO> allApartments, Amenity amenity) {
+		List<Amenity> apartmentAmenities = new ArrayList<Amenity>();
+		for(ApartmentDTO ap : allApartments) {
+			apartmentAmenities = ap.getAmenities();
+			for(Amenity am : apartmentAmenities) {
+				if(am.getId().equals(amenity.getId())) {
+					// TODO: RESITI
+					am.setDeleted(true);
+				}
+			}
+		}
+		
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+		/*
+		try {
+			writer.writeValue(new File(path), getAllApartments(user));
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Greska u radu sa fajlovima");
+			e.printStackTrace();
+		}*/
+		
+		return "Obrisan iz apartmana.";
 	}
 	
 	
