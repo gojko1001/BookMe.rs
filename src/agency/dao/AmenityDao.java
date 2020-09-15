@@ -15,9 +15,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import agency.dto.ApartmentDTO;
 import agency.model.Amenity;
-import agency.model.Apartment;
-import agency.model.Host;
-import agency.model.Reservation;
 import agency.model.Role;
 import agency.model.User;
 

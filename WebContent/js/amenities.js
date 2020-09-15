@@ -1,5 +1,5 @@
-function loadContent(data){
-	console.log(data);
+function loadContent(user){
+	console.log(user);
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/amenities/all",

@@ -22,7 +22,8 @@ function loadContent(user){
 		
 		let x;
 		for(x of data.amenities){
-			$("#amenities").append(x.name + "\n");
+			if(!x.deleted)
+				$("#amenities").append(x.name + ", ");
 		}
 		
 		for(x of data.photos){

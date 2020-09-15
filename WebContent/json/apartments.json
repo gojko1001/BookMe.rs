@@ -56,9 +56,10 @@
 		"amenities":
 		[
 			{
-				"id":"wf",
-				"name":"WI-FI",
-				"deleted":false
+				"id":"wifi"
+			},
+			{
+				"id":"iron"
 			}
 		],
 		"reservations":[]
@@ -107,9 +108,7 @@
 		"amenities":
 		[
 			{
-				"id":"wf",
-				"name":"WI-FI",
-				"deleted":false
+				"id":"wifi"
 			}
 		],
 		"reservations":[]
@@ -158,9 +157,10 @@
 		"amenities":
 		[
 			{
-				"id":"wf",
-				"name":"WI-FI",
-				"deleted":false
+				"id":"wifi"
+			},
+			{
+				"id":"parking"
 			}
 		],
 		"reservations":[]
@@ -209,9 +209,10 @@
 		"amenities":
 		[
 			{
-				"id":"wf",
-				"name":"WI-FI",
-				"deleted":false
+				"id":"wifi"
+			},
+			{
+				"id":"towels"
 			}
 		],
 		"reservations":[]
@@ -259,9 +260,7 @@
 		"amenities":
 		[
 			{
-				"id":"wf",
-				"name":"WI-FI",
-				"deleted":false
+				"id":"wifi"
 			}
 		],
 		"reservations":[]

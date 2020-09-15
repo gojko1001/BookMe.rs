@@ -1,4 +1,4 @@
-function loadContent(data){
+function loadContent(user){
 	if(window.location.search){
 		openLogin();
 	}

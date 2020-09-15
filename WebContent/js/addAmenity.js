@@ -1,5 +1,5 @@
-function loadContent(data){
-	console.log(data);
+function loadContent(user){
+	console.log(user);
 }
 
 $(document).ready(function(){

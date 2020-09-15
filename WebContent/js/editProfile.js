@@ -1,18 +1,18 @@
-function loadContent (data){
-		if(!data){
+function loadContent(user){
+		if(!user){
 			alert("Morate biti ulogovani!");
 			window.history.back();
 		}
-		$("#name").val(data.name);
-		$("#lastName").val(data.lastName);
-		$("#username").val(data.username);
-		$("#username1").append(data.username);
-		if(data.male){
+		$("#name").val(user.name);
+		$("#lastName").val(user.lastName);
+		$("#username").val(user.username);
+		$("#username1").append(user.username);
+		if(user.male){
 			$("#male").attr("selected", "selected");
 		}else{
 			$("#female").attr("selected", "selected");
 		}
-		switch(data.role){
+		switch(user.role){
 			case "Administrator":
 				$("#role").val("Administrator");
 				break;
@@ -23,37 +23,8 @@ function loadContent (data){
 				$("#role").val("Gost");
 				break;
 		}
-		$("#roleVal").val(data.role);
-		$("#oldPass").val(data.password);
-}
-
-function loadContentHost(data){
-	if(!data){
-		alert("Morate biti ulogovani!");
-		window.history.back();
-	}
-	$("#name").val(data.name);
-	$("#lastName").val(data.lastName);
-	$("#username").val(data.username);
-	$("#username1").append(data.username);
-	if(data.male){
-		$("#male").attr("selected", "selected");
-	}else{
-		$("#female").attr("selected", "selected");
-	}
-	switch(data.role){
-		case "Administrator":
-			$("#role").val("Administrator");
-			break;
-		case "Host":
-			$("#role").val("Domaćin");
-			break;
-		case "Guest":
-			$("#role").val("Gost");
-			break;
-	}
-	$("#roleVal").val(data.role);
-	$("#oldPass").val(data.password);
+		$("#roleVal").val(user.role);
+		$("#oldPass").val(user.password);
 }
 
 $(document).ready(function(){

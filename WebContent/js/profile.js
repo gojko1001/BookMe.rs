@@ -1,17 +1,17 @@
-function loadContent(data){
-		if(!data){
+function loadContent(user){
+		if(!user){
 			alert("Morate biti ulogovani!");
 			window.history.back();
 		}
-		$("#name").append(data.name);
-		$("#lastName").append(data.lastName);
-		$(".username").append(data.username);
-		if(data.male){
+		$("#name").append(user.name);
+		$("#lastName").append(user.lastName);
+		$(".username").append(user.username);
+		if(user.male){
 			$("#sex").append("Muški");
 		}else{
 			$("#sex").append("Ženski");
 		}
-		switch(data.role){
+		switch(user.role){
 			case "Administrator":
 				$("#role").append("Administrator");
 				break;
@@ -22,31 +22,4 @@ function loadContent(data){
 				$("#role").append("Gost");
 				break;
 		}
-}
-
-
-function loadContentHost(data){
-			if(!data){
-				alert("Morate biti ulogovani!");
-				window.history.back();
-			}
-			$("#name").append(data.name);
-			$("#lastName").append(data.lastName);
-			$(".username").append(data.username);
-			if(data.male){
-				$("#sex").append("Muški");
-			}else{
-				$("#sex").append("Ženski");
-			}
-			switch(data.role){
-				case "Administrator":
-					$("#role").append("Administrator");
-					break;
-				case "Host":
-					$("#role").append("Domaćin");
-					break;
-				case "Guest":
-					$("#role").append("Gost");
-					break;
-			}
 }

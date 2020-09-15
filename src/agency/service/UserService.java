@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import agency.dao.AmenityDao;
 import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dao.UserDao;
@@ -39,8 +40,13 @@ public class UserService {
 			ReservationDao reservationDao = new ReservationDao(context.getRealPath(""));
 	    	context.setAttribute("reservationDao", reservationDao);
 		}
+		if(context.getAttribute("amenitiyDao") == null) {
+			AmenityDao amenityDao = new AmenityDao(context.getRealPath(""));
+			context.setAttribute("amenityDao", amenityDao);
+		}
 		if (context.getAttribute("apartmentDao") == null) {
-			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""),((ReservationDao)context.getAttribute("reservationDao")).reservations);
+			ApartmentDao apartmentDao = new ApartmentDao(context.getRealPath(""),((ReservationDao)context.getAttribute("reservationDao")).reservations,
+														((AmenityDao)context.getAttribute("amenityDao")).amenities);
 	    	context.setAttribute("apartmentDao", apartmentDao);
 		}
 		if (context.getAttribute("userDao") == null) {

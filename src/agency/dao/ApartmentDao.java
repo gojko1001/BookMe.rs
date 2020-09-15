@@ -22,6 +22,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
+import agency.model.Amenity;
 import agency.model.Apartment;
 import agency.model.Reservation;
 import agency.model.Role;
@@ -33,11 +34,25 @@ public class ApartmentDao {
 	
 	public SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	
-	public ApartmentDao(String path, List<Reservation> reservations) {
+	public ApartmentDao(String path, List<Reservation> reservations, List<Amenity> amenities) {
 		this.path = path + "json/apartments.json";
 		//System.out.println(this.path);
 		loadApartmentsFromJson();
 		mapReservationsAndApartments(reservations);
+		mapAmenitiesToApartments(amenities);
+	}
+	
+	public void loadApartmentsFromJson() {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		File file = new File(path);
+			try {
+				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
 	}
 	
 	public void mapReservationsAndApartments(List<Reservation> reservations) {		// apartman ima celu rezervaciju, a rezervacija apartman
@@ -45,6 +60,20 @@ public class ApartmentDao {
 			Apartment a = this.getApartment(r.getApartment().getId());
 			a.getReservations().add(r);
 			r.setApartment(a);
+		}
+	}
+	
+	public void mapAmenitiesToApartments(List<Amenity> amenities) {  //3 for petlje???
+		for(Apartment a : apartments) {
+			List<Amenity> detailedAmenities = new ArrayList<>();
+			for(Amenity am : a.getAmenities()) {
+				for(Amenity am2 : amenities) {
+					if(am.getId().equals(am2.getId())) {
+						detailedAmenities.add(am2);
+					}
+				}
+			}
+			a.setAmenities(detailedAmenities);
 		}
 	}
 		
@@ -99,23 +128,6 @@ public class ApartmentDao {
 		 
 		return null;
 	}
-	
-	
-	
-	
-	public void loadApartmentsFromJson() {
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.registerModule(new JavaTimeModule());
-		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-		File file = new File(path);
-			try {
-				this.apartments = mapper.readValue(file,new TypeReference<List<Apartment>>() {});
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-			}	
-	}
-
 	
 	public Boolean addApartment(Apartment apartment) {		
 		if(!apartment.isValid())
