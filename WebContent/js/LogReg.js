@@ -130,6 +130,7 @@ function login(){
 	}).done(function(data){
 		alert(data);
 		if(data == "Uspešno ste se ulogovali."){
+			window.location.search = "";
 			window.location.reload();
 		}
 	});

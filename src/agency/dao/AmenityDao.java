@@ -9,14 +9,16 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import agency.model.Amenity;
 import agency.model.Apartment;
+import agency.model.Host;
+import agency.model.Reservation;
+import agency.model.Role;
+import agency.model.User;
 
 public class AmenityDao {
 	public List<Amenity> amenities = new ArrayList<Amenity>();
@@ -41,17 +43,33 @@ public class AmenityDao {
 	}
 	
 	
-	public List<Amenity> getAllAmenities(){
+	public List<Amenity> getAllAmenities(User user){
 		List<Amenity> allAmenities = new ArrayList<Amenity>();
 		for(Amenity a : amenities) {
-			allAmenities.add(a);
-			//System.out.println(a.getId() + ", ");
+			if(user == null || user.getRole() == Role.Guest || user.getRole() == Role.Host) {
+				if(a.isDeleted() == false) {
+					allAmenities.add(a);
+				}
+			} else if(user.getRole() == Role.Administrator) {
+				allAmenities.add(a);
+			} 
 		}
-		
 		return allAmenities;
 	}
 	
-	public String addAmenity(Amenity newAmenity) {
+	
+	public Amenity getAmenity(String id) {
+		for(Amenity a : amenities) {
+			if(a.getId().equals(id)) {
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
+	
+	public String addAmenity(Amenity newAmenity, User user) {
 		for(Amenity a : amenities) {
 			if(a.getId().equals(newAmenity.getId())) {
 				return "Sadržaj apartmana nije dodat jer unešen id već postoji.";
@@ -66,7 +84,7 @@ public class AmenityDao {
 			mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 			ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 			try {
-				writer.writeValue(new File(path), getAllAmenities());
+				writer.writeValue(new File(path), getAllAmenities(user));
 			} catch (JsonGenerationException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -78,13 +96,25 @@ public class AmenityDao {
 	}
 	
 	
-	public String removeAmenity(Amenity amenity) {
-		amenities.remove(amenity);
+	public String updateAmenity(Amenity amenity, User user) {
+		List<Amenity> allAmenities = getAllAmenities(user);
+		if(user == null || user.getRole() == Role.Guest || user.getRole() == Role.Host) {
+			return "Samo administrator može menjati sadržaj.";
+		} else if(user.getRole() == Role.Administrator) {
+			for(Amenity a : allAmenities) {
+				if(a.getId().equals(amenity.getId())) {
+					a.setName(amenity.getName());
+					a.setDeleted(amenity.isDeleted());
+				}
+			}
+		}
+
+		// TODO: DODATI BRISANJE TOG SADRZAJA KOD APARTMANA
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 		try {
-			writer.writeValue(new File(path), getAllAmenities());
+			writer.writeValue(new File(path), getAllAmenities(user));
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -92,7 +122,7 @@ public class AmenityDao {
 			e.printStackTrace();
 		}
 		
-		return "Obrisan";
+		return "Sadržaj je uspešno izmenjen.";
 	}
 	
 	

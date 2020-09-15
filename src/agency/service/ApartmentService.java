@@ -48,7 +48,7 @@ public class ApartmentService {
 	@GET
 	@Path("/getById")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ApartmentDTO getAppartment(@QueryParam("id") String id) {
+	public ApartmentDTO getApartment(@QueryParam("id") String id) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.getApartmentDTO(id);

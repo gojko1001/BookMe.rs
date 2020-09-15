@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Moj profil</title>
+	<title>Izmena sadržaja</title>
 	<script type="text/javascript" src="jquery-3.3.1.min.js"></script>
 	<link rel="icon" href="css/favicon.ico" type="image/x-icon"/>
 	<link href="css/main.css" rel="stylesheet"></link>
@@ -12,12 +12,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/logedUser.js"></script>
-	<script type="text/javascript" src="js/profile.js"></script>
-	<style>
-		td {
-			padding: 10px;
-		}
-	</style>
+	<script type="text/javascript" src="js/editAmenity.js"></script>
 </head>
 <body>
 	<h4 style="background-color:lightgrey; padding:0 10%;">
@@ -37,22 +32,25 @@
 			</div>
 		</div>
 	</h4>
-	  
-	<div class="dataBox" style="min-height:70px">
-			<h4 class="username" style="padding-left:15px; padding-top:15px">
-				<button type="button" class="btn btn-primary EditProfile" style="float:right; margin-right:5%">Izmeni</button>
-			</h4>
-			
-	</div>
+	
 	<div class="dataBox">
-		<h5 style="padding-left:15px; padding-top:15px; color:grey">Detalji o korisniku</h5>
+		<h5 style="padding-left:15px; padding-top:15px; color:grey">Izmeni sadržaj</h5>
 		<table style="margin:25px">
-				<tr><td>Ime: </td><td id="name"><td id="name"></td></tr>
-				<tr><td>Prezime: </td><td id="lastName"></td></tr>
-				<tr><td>Korisnicko ime: </td><td class="username"></td></tr>
-				<tr><td>Pol: </td><td id="sex"></td></tr>
-				<tr><td>Uloga: </td><td id="role"></td></tr>
+				<tr><td>Id sadržaja:</td><td><input type="text" id="idAmenity" disabled/></td>
+				<tr><td>Naziv:</td><td><input type="text" id="name"/></td></tr>
+				<tr style="border-bottom:1px solid black">
+				<tr>
+					<td colspan="2" style="text-align:center">
+						<input type="radio" id="delete" name="isDeleted">
+						<label for="delete">Obrisan &nbsp;</label>
+						<input type="radio" id="dontDelete" name="isDeleted">
+						<label for="dontDelete">Aktivan</label><br>
+					</td></tr>
+				
+				<tr><td><button type="button" id="btnClose" class="btn btnClose" data-toggle="button" aria-pressed="false" autocomplete="off">Odustani</button></td>
+				<td><button id="save" class="btn btn-primary" style="width:100%">Sačuvaj</button></td></tr>
 		</table>
-	</div>	
+	</div>
+	
 </body>
 </html>

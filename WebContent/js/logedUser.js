@@ -13,6 +13,9 @@ window.onload = function(){
 				$(".addApartment").show();
 				$(".viewReservations").show();
 			}
+			if(data.role == "Administrator"){
+				$(".amenities").show();
+			}
 		}
 		loadContent(data);
 	});
@@ -52,8 +55,8 @@ $(document).ready(function(){
 		
 	})
 	
-	$(".inactiveApartments").click(function(){
-		window.location.assign(window.location.origin + "/TuristickaAgencija/inactiveApartments.html");
+	$(".amenities").click(function(){
+		window.location.assign(window.location.origin + "/TuristickaAgencija/amenities.html");
 	})
 
 })
