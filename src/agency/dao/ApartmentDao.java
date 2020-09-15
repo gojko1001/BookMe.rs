@@ -146,10 +146,10 @@ public class ApartmentDao {
 		return true;
 	}
 
-	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter){
+	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter, User user){
 		List<ApartmentDTO> filtered = new ArrayList<>();
 		
-		for(Apartment a : apartments) {
+		for(ApartmentDTO a : getAllApartmentsByRole(user)) {
 			if(!filter.getCountry().equals(""))
 				if(!a.getLocation()
 						.getAddress()
@@ -162,19 +162,19 @@ public class ApartmentDao {
 						.getPlace()
 						.contains(filter.getCity()))
 					continue;
-			if(filter.getPriceFrom() != -1)
+			if(filter.getPriceFrom() > -1)
 				if(a.getPrice() < filter.getPriceFrom())
 					continue;
-			if(filter.getPriceTo() != -1)
+			if(filter.getPriceTo() > -1)
 				if(a.getPrice() > filter.getPriceTo())
 					continue;
-			if(filter.getRoomFrom() != -1)
+			if(filter.getRoomFrom() > 0)
 				if(a.getNumberOfRooms() < filter.getRoomFrom())
 					continue;
-			if(filter.getRoomTo() != -1)
+			if(filter.getRoomTo() > 0)
 				if(a.getNumberOfRooms() > filter.getRoomTo())
 					continue;
-			if(filter.getSpotNum() != -1)
+			if(filter.getSpotNum() > 0)
 				if(a.getNumberOfGuests() < filter.getSpotNum())
 					continue;
 			if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
@@ -220,7 +220,7 @@ public class ApartmentDao {
 			    if(!fullAvailable)
 			    	continue;
 			}	
-			filtered.add(new ApartmentDTO(a));
+			filtered.add(a);
 		}
 		return filtered;
 	}

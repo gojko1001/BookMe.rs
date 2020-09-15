@@ -80,7 +80,8 @@ public class ApartmentService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		return apartmentDao.applyFilter(filter);
+		return apartmentDao.applyFilter(filter, logedUser);
 	}	
 }

@@ -1,6 +1,4 @@
 function loadContent(data){
-	console.log(data);
-	
 	if(window.location.search){
 		openLogin();
 	}
@@ -22,17 +20,37 @@ $(document).ready(function(){
 	})
 	
 	$("#filterSearch").click(function(){
-		var jsonFilter = {
+		let priceFrom = Number($("#priceFrom").val());
+		if(!priceFrom){
+			priceFrom = -1;
+		}
+		let priceTo = Number($("#priceTo").val());
+		if(!priceTo){
+			priceTo = -1;
+		}
+		let roomFrom = Number($("#roomFrom").val());
+		if(!roomFrom){
+			roomFrom = -1;
+		}
+		let roomTo = Number($("#roomTo").val());
+		if(!roomTo){
+			roomTo = -1;
+		}
+		let spotNum = Number($("#spotNum").val());
+		if(!spotNum){
+			spotNum = -1;
+		}
+		var jsonFilter = JSON.stringify({
 			"startDate": $("#startDate").val(),
 			"dueDate": $("#dueDate").val(),
 			"country": $("#country").val(),
 			"city": $("#city").val(),
-			"priceFrom": $("#priceFrom").val(),
-			"priceTo": $("#priceTo").val(),
-			"roomFrom": $("#roomFrom").val(),
-			"roomTo": $("#roomTo").val(),
-			"spotNum": $("#spotNum").val()
-		}
+			"priceFrom": priceFrom,
+			"priceTo": priceTo,
+			"roomFrom": roomFrom,
+			"roomTo": roomTo,
+			"spotNum": spotNum
+		});
 		
 		$.ajax({
 			method: "POST",
