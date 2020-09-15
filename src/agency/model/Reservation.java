@@ -80,4 +80,8 @@ public class Reservation {
 		this.status = status;
 	}
 	
+	public Boolean isObjectValid() {
+		return !(this.apartment == null || this.beginDate.equals("") || this.nights < 1 || 
+				this.totalPrice < 0 || this.guest == null);
+	}
 }

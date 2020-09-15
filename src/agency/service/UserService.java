@@ -78,19 +78,6 @@ public class UserService {
 	}
 	
 	
-	/*
-	@GET
-	@Path("/allByRole")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getAllUsersByRole() {
-		UserDao userDao = (UserDao) context.getAttribute("userDao");
-		User user = (User) request.getSession().getAttribute("loginUser");
-		Role role = user.getRole();
-		
-		return userDao.getAllUsersByRole(role);
-	}
-	*/
-	
 	@POST
 	@Path("/registration")
 	@Produces(MediaType.TEXT_PLAIN)

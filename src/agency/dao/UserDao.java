@@ -230,23 +230,4 @@ public class UserDao {
 		}
 		return null;
 	}
-	
-	/*
-	public List<User> getAllUsersByRole(User user){
-		List<User> allUsers = getAllUsers();
-		List<User> listUsers = new ArrayList<User>();
-		
-		if(user.getRole() == Role.Administrator) {
-			return allUsers;
-		}else if(user.getRole() == Role.Host) {
-			
-			for(Guest g : guests) {
-				for(Apartment a : g.getApartmentsRented()) {
-					
-				}
-			}
-		}
-		
-	}
-	*/
 }

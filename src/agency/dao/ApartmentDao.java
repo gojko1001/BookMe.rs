@@ -199,50 +199,54 @@ public class ApartmentDao {
 				if(a.getNumberOfGuests() < filter.getSpotNum())
 					continue;
 			if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
-				Date start = new Date();
-				Date due = new Date();
-				
-				try {
-					start = sdf.parse(filter.getStartDate());
-					due = sdf.parse(filter.getDueDate());
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
-				
-				List<Date> datesInRange = new ArrayList<>();
-			    Calendar calendar = new GregorianCalendar();
-			    calendar.setTime(start);
-			    
-			    Calendar endCalendar = new GregorianCalendar();
-			    endCalendar.setTime(due);
-			 
-			    while (calendar.before(endCalendar)) {
-			        Date result = calendar.getTime();
-			        System.out.println(result);
-			        datesInRange.add(result);
-			        calendar.add(Calendar.DATE, 1);
-			    }
-			    
-			    Boolean fullAvailable = true;		// Flag za ceo set datuma
-			    for(Date d : datesInRange) {
-			    	Boolean isAvailable = false;	// Pojedinacni flag
-			    	for(String s : a.getFreeDates()) {
-			    		try {
-							if(sdf.parse(s).compareTo(d) == 0)
-								isAvailable = true;
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-			    	}
-			    	if(!isAvailable) {
-			    		break;
-			    	}
-			    }
-			    if(!fullAvailable)
-			    	continue;
+				if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
+					continue;
 			}	
 			filtered.add(a);
 		}
 		return filtered;
+	}
+	
+	
+	public Boolean isDatesInRange(String startStr, String dueStr, List<String> rangeOfDates) {
+		Date start = new Date();
+		Date due = new Date();
+		
+		try {
+			start = sdf.parse(startStr);
+			due = sdf.parse(dueStr);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		List<Date> datesInRange = new ArrayList<>();
+	    Calendar calendar = new GregorianCalendar();
+	    calendar.setTime(start);
+	    
+	    Calendar endCalendar = new GregorianCalendar();
+	    endCalendar.setTime(due);
+	 
+	    while (calendar.before(endCalendar)) {
+	        Date result = calendar.getTime();
+	        System.out.println(result);
+	        datesInRange.add(result);
+	        calendar.add(Calendar.DATE, 1);
+	    }
+	    
+	    for(Date d : datesInRange) {
+	    	Boolean isAvailable = false;
+	    	for(String s : rangeOfDates) {
+	    		try {
+					if(sdf.parse(s).compareTo(d) == 0)
+						isAvailable = true;
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+	    	}
+	    	if(!isAvailable) {
+	    		return false;
+	    	}
+	    }
+	    return true;
 	}
 }

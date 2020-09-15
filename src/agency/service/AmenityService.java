@@ -16,8 +16,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import agency.dao.AmenityDao;
-import agency.dao.ApartmentDao;
-import agency.dto.ApartmentDTO;
 import agency.model.Amenity;
 import agency.model.User;
 
