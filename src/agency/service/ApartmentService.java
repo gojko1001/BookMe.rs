@@ -76,7 +76,7 @@ public class ApartmentService {
 	@Path("/add")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Boolean addApartment(Apartment apartment) {
+	public String addApartment(Apartment apartment) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
 		return apartmentDao.addApartment(apartment);

@@ -1,5 +1,6 @@
 function loadContent(user){
 	console.log(user);
+	$("#username").val(user.username);
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/amenities/all",
@@ -10,11 +11,80 @@ function loadContent(user){
 }
 
 $(document).ready(function(){
+	$("button#save").click(function(){
+		let id = $("#idApartment").val();
+		let type = $('#type').val();
+		let username = $('#username').val();
+		let numberOfRooms = $('#numberOfRooms').val();
+		let numberOfGuests = $('#numberOfGuests').val();
+		let country = $('#country').val();
+		let place = $('#place').val();
+		let postalCode = $('#postalCode').val();
+		let street = $('#street').val();
+		let number = $('#number').val();
+		let latitude = $('#latitude').val();
+		let longitude = $('#longitude').val();
+		let myFile = [];
+		let price = $('#price').val();
+		let checkInTime = $('#checkInTime').val();
+		let checkOutTime = $('#checkOutTime').val();
+		let active = false;
+		let viewAmenity = [];
+		
+
+		var jsonAdd = JSON.stringify({
+			"id":id,
+			"type":type,
+			"numberOfRooms":numberOfRooms,
+			"numberOfGuests":numberOfGuests,
+			"location":{
+				"latitude":latitude,
+				"longitude":longitude,
+				"address":{
+					"country":country,
+					"place":place,
+					"postalCode":postalCode,
+					"street":street,
+					"number":number
+				}
+			},
+			"datesForRent":[],
+			"freeDates":[],
+			"host":{
+				"username":username
+			},			
+			"comments":[],
+			"photos":[],
+			"price":price,
+			"checkInTime":checkInTime,
+			"checkOutTime":checkOutTime,
+			"active":active,
+			"amenities":[],
+			"reservations":[]
+		});
+			
+			$.ajax({
+				method: "POST",
+				url: "../TuristickaAgencija/rest/apartments/add",
+				contentType: "application/json",
+				data: jsonAdd,
+				datatype: "text"
+			}).done(function(data){
+				alert(data);
+				if(data == "Apartman je dodat."){
+					openApartments();
+				}
+			})
+	})
+	
 	$("button#btnClose").click(function(){
 		window.history.back();
 	})
 })
 
+function openApartments(){
+	window.location.assign(window.location.origin += "/TuristickaAgencija/");
+}
 
 function viewAllAmenities(data){
 	var i;

@@ -109,7 +109,6 @@ public class AmenityDao {
 			}
 		}
 
-		// TODO: DODATI BRISANJE TOG SADRZAJA KOD APARTMANA --- napravljena samo treba dodati
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());

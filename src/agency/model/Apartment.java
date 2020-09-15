@@ -175,12 +175,4 @@ public class Apartment {
 		this.reservations = reservations;
 	}
 	
-	public Boolean isValid() {
-		if(this.id == null || this.host.getUsername().equals("") ||
-				this.numberOfGuests <= 0 || this.numberOfRooms <= 0 ||
-				this.location == null)
-			return false;
-		return true;
-	}
-	
 }

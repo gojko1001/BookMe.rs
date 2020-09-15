@@ -63,13 +63,14 @@ public class ApartmentDao {
 		}
 	}
 	
-	public void mapAmenitiesToApartments(List<Amenity> amenities) {  //3 for petlje???
+	public void mapAmenitiesToApartments(List<Amenity> amenities) { 
 		for(Apartment a : apartments) {
 			List<Amenity> detailedAmenities = new ArrayList<>();
 			for(Amenity am : a.getAmenities()) {
 				for(Amenity am2 : amenities) {
 					if(am.getId().equals(am2.getId())) {
 						detailedAmenities.add(am2);
+						break;
 					}
 				}
 			}
@@ -129,14 +130,22 @@ public class ApartmentDao {
 		return null;
 	}
 	
-	public Boolean addApartment(Apartment apartment) {		
-		if(!apartment.isValid())
-			return false;
+	public String addApartment(Apartment apartment) {
+		if(apartment.getId().equals(null) || apartment.getType().equals(null) ||apartment.getNumberOfGuests() == 0 || apartment.getNumberOfRooms() == 0 
+				|| apartment.getLocation().getAddress().equals(null) || apartment.getLocation().getLatitude() == 0|| apartment.getLocation().getLongitude() == 0 
+				|| apartment.getHost().getUsername().equals(null)|| apartment.getPhotos().equals(null) || apartment.getPrice() == 0) {
+			return "Niste popunili sva polja";
+			
+		} else if(apartment.getNumberOfGuests() <= 0 || apartment.getNumberOfRooms() <= 0 || apartment.getPrice() <= 0) {
+			return "Uneti podaci u nevalidnom formatu";
+		}
 		
-		for(Apartment a : apartments)
-			if(a.getId().equalsIgnoreCase(apartment.getId()))
-				return false;
-		
+		for(Apartment a : apartments) {
+			if(a.getId().equalsIgnoreCase(apartment.getId())) {
+				return "Postoji već apartman sa unetim id-om.";
+			}	
+		}
+			
 		apartments.add(apartment);
 		
 		ObjectMapper mapper = new ObjectMapper();
@@ -155,7 +164,7 @@ public class ApartmentDao {
 			e.printStackTrace();
 		}
 		
-		return true;
+		return "Apartman je dodat.";
 	}
 
 	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter, User user){
