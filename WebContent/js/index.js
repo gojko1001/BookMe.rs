@@ -9,6 +9,7 @@ function loadContent(user){
 		datatype:"application/json"
 	}).done(function(data){
 		showApartments(data);
+		console.log(data);
 	});	
 }
 

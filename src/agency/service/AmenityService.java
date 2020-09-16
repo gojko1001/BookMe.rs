@@ -16,6 +16,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import agency.dao.AmenityDao;
+import agency.dao.ApartmentDao;
 import agency.model.Amenity;
 import agency.model.User;
 
@@ -81,7 +82,7 @@ public class AmenityService {
 		AmenityDao amenityDao = (AmenityDao) context.getAttribute("amenityDao");
 		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		return amenityDao.updateAmenity(amenity, logedUser);
+		return amenityDao.updateAmenity(amenity, logedUser, (ApartmentDao)context.getAttribute("apartmentDao"));
 	}
 	
 	

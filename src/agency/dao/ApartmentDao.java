@@ -98,6 +98,10 @@ public class ApartmentDao {
 		return apartmentsDto;
 	}
 	
+	public List<Apartment> getApartments(){
+		return this.apartments;
+	}
+	
 	
 	public List<ApartmentDTO> getAllApartmentsByRole(User user){
 		if(user == null || user.getRole() == Role.Guest) {
@@ -130,7 +134,7 @@ public class ApartmentDao {
 		return null;
 	}
 	
-	public String addApartment(Apartment apartment) {
+	public String addApartment(Apartment apartment, AmenityDao amenityDao) {
 		if(apartment.getId().equals(null) || apartment.getType().equals(null) ||apartment.getNumberOfGuests() == 0 || apartment.getNumberOfRooms() == 0 
 				|| apartment.getLocation().getAddress().equals(null) || apartment.getLocation().getLatitude() == 0|| apartment.getLocation().getLongitude() == 0 
 				|| apartment.getHost().getUsername().equals(null)|| apartment.getPhotos().equals(null) || apartment.getPrice() == 0) {
@@ -143,6 +147,10 @@ public class ApartmentDao {
 			if(a.getId().equalsIgnoreCase(apartment.getId())) {
 				return "Postoji već apartman sa unetim id-om.";
 			}	
+		}
+		
+		for(Amenity am : apartment.getAmenities()) {
+			am = amenityDao.getAmenity(am.getId());
 		}
 			
 		apartments.add(apartment);

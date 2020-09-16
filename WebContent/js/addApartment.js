@@ -29,14 +29,21 @@ $(document).ready(function(){
 		let checkInTime = $('#checkInTime').val();
 		let checkOutTime = $('#checkOutTime').val();
 		let active = false;
+		
 		let amenities = [];
-		amenities = [$("input:checkbox[name=checkboxes]:checked").val()];
+		//amenities = [$("input:checkbox[name=checkboxes]:checked").val()];
 		
 		
-        /*$.each($("input[name='checkboxes']:checked"), function(){            
-            amenities.push($(this).val());
+        $.each($("input[name='checkboxes']:checked"), function(){
+        	console.log($(this).attr('id'));
+        	let amenity = {
+        		"id":$(this).attr('id'),
+        		"name":$(this).val(),
+        		"deleted":false
+        	};
+            amenities.push(amenity);
         });
-        alert("Izabran sadrzaj je: " + amenities.join(", "));*/
+        //alert("Izabran sadrzaj je: " + amenities.join(", "));
 		
 		/*
 		$("input:checkbox[name=type]:checked").each(function(){
@@ -75,6 +82,7 @@ $(document).ready(function(){
 			"reservations":[]
 		});
 			
+		console.log(jsonAdd);
 			$.ajax({
 				method: "POST",
 				url: "../TuristickaAgencija/rest/apartments/add",
@@ -86,6 +94,8 @@ $(document).ready(function(){
 				if(data == "Apartman je dodat."){
 					openApartments();
 				}
+			}).error(function(data){
+				console.log(data);
 			})
 	})
 	
@@ -103,6 +113,8 @@ function viewAllAmenities(data){
 	for(i=0; i<data.length; i++){
 		content = '<input type="checkbox" name="checkboxes" id="';
 		content += data[i].id;
+		content += '" value="';
+		content += data[i].name;
 		content += '"><label for="';
 		content += data[i].id;
 		content += '">&nbsp;'

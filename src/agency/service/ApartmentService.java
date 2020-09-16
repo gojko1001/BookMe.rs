@@ -79,7 +79,7 @@ public class ApartmentService {
 	public String addApartment(Apartment apartment) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		
-		return apartmentDao.addApartment(apartment);
+		return apartmentDao.addApartment(apartment, (AmenityDao)context.getAttribute("amenityDao"));
 	}
 	
 	@POST

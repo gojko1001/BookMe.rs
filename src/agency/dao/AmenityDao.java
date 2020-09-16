@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import agency.dto.ApartmentDTO;
 import agency.model.Amenity;
+import agency.model.Apartment;
 import agency.model.Role;
 import agency.model.User;
 
@@ -96,7 +97,7 @@ public class AmenityDao {
 	}
 	
 	
-	public String updateAmenity(Amenity amenity, User user) {
+	public String updateAmenity(Amenity amenity, User user, ApartmentDao apartmentDao) {
 		List<Amenity> allAmenities = getAllAmenities(user);
 		if(user == null || user.getRole() == Role.Guest || user.getRole() == Role.Host) {
 			return "Samo administrator može menjati sadržaj.";
@@ -105,6 +106,14 @@ public class AmenityDao {
 				if(a.getId().equals(amenity.getId())) {
 					a.setName(amenity.getName());
 					a.setDeleted(amenity.isDeleted());
+					for(Apartment ap : apartmentDao.getApartments()) {
+						for(Amenity am : ap.getAmenities()) {
+							if(am.getId().equals(amenity.getId())) {
+								ap.getAmenities().remove(am);
+								break;
+							}
+						}
+					}
 				}
 			}
 		}

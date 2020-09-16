@@ -4,6 +4,8 @@ function loadContent(user){
 		url: "../TuristickaAgencija/rest/apartments/getById" + window.location.search,
 		datatype: "application/json",
 	}).done(function(data){
+		console.log(data);
+		
 		$("#apartId").html(data.id);
 		$("#loc").append(data.location.address.street + " " + data.location.address.number + 
 				", " + data.location.address.postalCode + " " + data.location.address.place + 
@@ -22,7 +24,7 @@ function loadContent(user){
 		
 		let x;
 		for(x of data.amenities){
-			if(!x.deleted)
+			//if(!x.deleted)
 				$("#amenities").append(x.name + ", ");
 		}
 		
