@@ -29,7 +29,7 @@ function viewAllReservations(data){
 		content += '</td></tr>';
 		content +='<tr><td>Cena:</td><td>';
 		content += data[i].totalPrice;
-		content += '</td></tr>';
+		content += ' RSD</td></tr>';
 		content +='<tr><td>Poruka:</td><td>';
 		content += data[i].message;
 		content += '</td></tr>';

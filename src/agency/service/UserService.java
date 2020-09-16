@@ -19,7 +19,6 @@ import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dao.UserDao;
 import agency.dto.AuthenticationDTO;
-import agency.model.Host;
 import agency.model.User;
 
 @Path("/users")

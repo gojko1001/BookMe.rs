@@ -12,17 +12,24 @@ $(document).ready(function(){
 		$("div#regModal").hide(50, function(){
 			$("div#logModal").fadeIn();
 		});
-	})
+	});
 
 	$("#logToReg").click(function(){
 		$("div#logModal").hide(50, function(){
 			$("div#regModal").fadeIn();
 		});
-	})
+	});
 
 	$(".close").click(function() {
 		$(".modal").hide(200);
-	})
+	});
+	
+	$("#password1").bind("keyup", function(event){
+		if(event.keyCode === 13){
+			event.preventDefault();
+			$("#btnLogin").click();
+		}
+	});
 });
 
 function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, pretvoriti u json objekat, poslati ajax poziv i obraditi odgovor

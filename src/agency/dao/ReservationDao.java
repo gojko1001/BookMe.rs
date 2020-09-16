@@ -98,7 +98,7 @@ public class ReservationDao {
 			return "Zeljeni datum nije na raspolaganju!";
 		
 		reservations.add(reservation);
-		//TODO Azurirati listu freeDates???
+		//TODO Azurirati listu freeDates
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

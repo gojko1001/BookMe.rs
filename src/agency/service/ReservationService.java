@@ -7,7 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -39,7 +39,7 @@ public class ReservationService {
 		}
 	}
 
-//TODO Treba proveriti	/all i /add
+
 	@GET
 	@Path("/all")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -51,9 +51,9 @@ public class ReservationService {
 		return reservationDao.getAllReservationsByRole(logedUser, userDao);
 	}
 	
-	@PUT
+	@POST
 	@Path("/add")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public String createReservation(Reservation reservation) {
 		ReservationDao reservationDao = (ReservationDao) context.getAttribute("reservationDao");

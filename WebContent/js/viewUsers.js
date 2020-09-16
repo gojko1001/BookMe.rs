@@ -14,7 +14,6 @@ function loadContent(user){
 $(document).ready(function(){
 	$("#filterBtn").click(function(){
 		$("#filterTable").slideToggle();
-		$(".quickSearch").toggle();
 	})
 	
 	document.getElementById("oddSex").checked = true;

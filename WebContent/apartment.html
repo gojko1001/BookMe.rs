@@ -105,11 +105,21 @@
 				<tr><td>Domaćin:</td><td id="host"></td></tr>
 				<tr><td>Prijava:</td><td id="checkIn"></td></tr>
 				<tr><td>Odjava:</td><td id="checkOut"></td></tr>
-				<tr><td>Cena po noći:</td><td id="price"></td></tr>
+				<tr><td>Cena po noći:</td><td><span id="price"></span> RSD</td></tr>
 				<tr><td>Sadržaj:</td><td id="amenities"></td></tr>
 			</table>
 		</div>
 		<div id="pic" style="display:inline-block;">
+		</div>
+		<button class="text-primary btn-light" style="display:none" id="reservationBtn">Rezerviši</button>
+		<div id="reservationBox" style="display:none">
+			<table>
+				<tr><td>Datum čekiranja:</td><td><input type='date' id="beginDate" name='doj'  />  </td></tr>
+				<tr><td>Broj noći:</td><td><input type="number" id="nights" min=1></td></tr>
+				<tr><td>Poruka za domaćina:</td><td><textarea id="message"></textarea></td></tr>
+				<tr style="font-weight:bold; border:1px solid red"><td>Ukupna cena:</td><td><span id="totalPrice"></span> RSD</td></tr>
+				<tr><tr><td></td><td><input type="submit" value="Kreiraj rezervaciju" id="reserve" class="btn btn-primary" style="width:100%"></td></tr>
+			</table>
 		</div>
 		<div id="comments">
 		</div>

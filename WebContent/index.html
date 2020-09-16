@@ -116,11 +116,11 @@
 			<tr><td>Država:</td><td><input type="text" id="country"></td></tr>
 			<tr><td>Grad:</td><td><input type="text" id="city"></td></tr>
 			<tr class="filterGroup"><td>Cena</td><td></td></tr>
-			<tr><td><input type="number" placeholder="Od" id="priceFrom"></td><td><input type="number" placeholder="Do" id="priceTo"></td></tr>
+			<tr><td><input type="number" placeholder="Od" id="priceFrom" min=0></td><td><input type="number" placeholder="Do" min=0 id="priceTo"></td></tr>
 			<tr class="filterGroup"><td>Broj soba</td><td></td></tr>
-			<tr><td><input type="number" placeholder="Od" id="roomFrom"></td><td><input type="number" placeholder="Do" id="roomTo"></td></tr>
+			<tr><td><input type="number" placeholder="Od" id="roomFrom" min=1></td><td><input type="number" placeholder="Do" min=1 id="roomTo"></td></tr>
 			<tr class="filterGroup"><td>Broj osoba</td><td></td></tr>
-			<tr><td><input type="number" id="spotNum"></td></tr>
+			<tr><td><input type="number" id="spotNum" min=1></td></tr>
 			<tr><td></td><td><input type="submit" value="Primeni" id="filterSearch" class="btn btn-primary" style="width:100%"></td></tr>
 		</table>
 		</div>
