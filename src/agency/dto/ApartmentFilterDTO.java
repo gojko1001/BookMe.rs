@@ -2,6 +2,7 @@ package agency.dto;
 
 
 public class ApartmentFilterDTO {
+	private int activity;			//0 - svi; 1 - aktivni; 2 - neaktivni
 	private String startDate;
 	private String dueDate;
 	private String country;
@@ -14,9 +15,10 @@ public class ApartmentFilterDTO {
 	
 	public ApartmentFilterDTO() {}
 	
-	public ApartmentFilterDTO(String startDate, String dueDate, String country, String city, float priceFrom,
+	public ApartmentFilterDTO(int activity, String startDate, String dueDate, String country, String city, float priceFrom,
 			float priceTo, int roomFrom, int roomTo, int spotNum) {
 		super();
+		this.setActivity(activity);
 		this.startDate = startDate;
 		this.dueDate = dueDate;
 		this.country = country;
@@ -98,6 +100,14 @@ public class ApartmentFilterDTO {
 
 	public void setSpotNum(int spotNum) {
 		this.spotNum = spotNum;
+	}
+
+	public int getActivity() {
+		return activity;
+	}
+
+	public void setActivity(int activity) {
+		this.activity = activity;
 	}
 	
 	

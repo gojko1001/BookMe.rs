@@ -168,41 +168,119 @@ public class ApartmentDao {
 
 	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter, User user){
 		List<ApartmentDTO> filtered = new ArrayList<>();
-		
-		for(ApartmentDTO a : getAllApartmentsByRole(user)) {
-			if(!filter.getCountry().equals(""))
-				if(!a.getLocation()
-						.getAddress()
-						.getCountry()
-						.contains(filter.getCountry()))
-					continue;
-			if(!filter.getCity().equals(""))
-				if(!a.getLocation()
-						.getAddress()
-						.getPlace()
-						.contains(filter.getCity()))
-					continue;
-			if(filter.getPriceFrom() > -1)
-				if(a.getPrice() < filter.getPriceFrom())
-					continue;
-			if(filter.getPriceTo() > -1)
-				if(a.getPrice() > filter.getPriceTo())
-					continue;
-			if(filter.getRoomFrom() > 0)
-				if(a.getNumberOfRooms() < filter.getRoomFrom())
-					continue;
-			if(filter.getRoomTo() > 0)
-				if(a.getNumberOfRooms() > filter.getRoomTo())
-					continue;
-			if(filter.getSpotNum() > 0)
-				if(a.getNumberOfGuests() < filter.getSpotNum())
-					continue;
-			if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
-				if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
-					continue;
-			}	
+
+		if(filter.getActivity() == 1) {						// PRIKAZ AKTIVNIH APARTMANA
+			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
+				if(a.isActive() == true) {
+					if(!filter.getCountry().equals(""))
+						if(!a.getLocation()
+								.getAddress()
+								.getCountry()
+								.contains(filter.getCountry()))
+							continue;
+					if(!filter.getCity().equals(""))
+						if(!a.getLocation()
+								.getAddress()
+								.getPlace()
+								.contains(filter.getCity()))
+							continue;
+					if(filter.getPriceFrom() > -1)
+						if(a.getPrice() < filter.getPriceFrom())
+							continue;
+					if(filter.getPriceTo() > -1)
+						if(a.getPrice() > filter.getPriceTo())
+							continue;
+					if(filter.getRoomFrom() > 0)
+						if(a.getNumberOfRooms() < filter.getRoomFrom())
+							continue;
+					if(filter.getRoomTo() > 0)
+						if(a.getNumberOfRooms() > filter.getRoomTo())
+							continue;
+					if(filter.getSpotNum() > 0)
+						if(a.getNumberOfGuests() < filter.getSpotNum())
+							continue;
+					if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
+						if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
+							continue;
+					}	
+				filtered.add(a);
+				}
+				
+			}
+		} else if(filter.getActivity() == 2) {							// PRIKAZ NEAKTIVNIH APARTMANA
+			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
+				if(a.isActive() == false) {
+					if(!filter.getCountry().equals(""))
+						if(!a.getLocation()
+								.getAddress()
+								.getCountry()
+								.contains(filter.getCountry()))
+							continue;
+					if(!filter.getCity().equals(""))
+						if(!a.getLocation()
+								.getAddress()
+								.getPlace()
+								.contains(filter.getCity()))
+							continue;
+					if(filter.getPriceFrom() > -1)
+						if(a.getPrice() < filter.getPriceFrom())
+							continue;
+					if(filter.getPriceTo() > -1)
+						if(a.getPrice() > filter.getPriceTo())
+							continue;
+					if(filter.getRoomFrom() > 0)
+						if(a.getNumberOfRooms() < filter.getRoomFrom())
+							continue;
+					if(filter.getRoomTo() > 0)
+						if(a.getNumberOfRooms() > filter.getRoomTo())
+							continue;
+					if(filter.getSpotNum() > 0)
+						if(a.getNumberOfGuests() < filter.getSpotNum())
+							continue;
+					if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
+						if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
+							continue;
+					}	
+				filtered.add(a);
+				}
+			}
+		} else {															// PRIKAZ SVIH APARTMANA
+			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
+				if(!filter.getCountry().equals(""))
+					if(!a.getLocation()
+							.getAddress()
+							.getCountry()
+							.contains(filter.getCountry()))
+						continue;
+				if(!filter.getCity().equals(""))
+					if(!a.getLocation()
+							.getAddress()
+							.getPlace()
+							.contains(filter.getCity()))
+						continue;
+				if(filter.getPriceFrom() > -1)
+					if(a.getPrice() < filter.getPriceFrom())
+						continue;
+				if(filter.getPriceTo() > -1)
+					if(a.getPrice() > filter.getPriceTo())
+						continue;
+				if(filter.getRoomFrom() > 0)
+					if(a.getNumberOfRooms() < filter.getRoomFrom())
+						continue;
+				if(filter.getRoomTo() > 0)
+					if(a.getNumberOfRooms() > filter.getRoomTo())
+						continue;
+				if(filter.getSpotNum() > 0)
+					if(a.getNumberOfGuests() < filter.getSpotNum())
+						continue;
+				if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
+					if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
+						continue;
+				}	
 			filtered.add(a);
+			}
 		}
+		
 		return filtered;
 	}
 	

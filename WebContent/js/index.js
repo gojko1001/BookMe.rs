@@ -19,6 +19,8 @@ $(document).ready(function(){
 		$(".quickSearch").toggle();
 	})
 	
+	document.getElementById("all").checked = true;
+	
 	$("#filterSearch").click(function(){
 		let priceFrom = Number($("#priceFrom").val());
 		if(!priceFrom){
@@ -40,7 +42,18 @@ $(document).ready(function(){
 		if(!spotNum){
 			spotNum = -1;
 		}
+		
+		var activity;
+		if(document.getElementById("active").checked == true){
+			activity = 1;
+		}else if(document.getElementById("inActive").checked == true){
+			activity = 2;
+		}else{
+			activity = 0;
+		}
+		
 		var jsonFilter = JSON.stringify({
+			"activity":activity,
 			"startDate": $("#startDate").val(),
 			"dueDate": $("#dueDate").val(),
 			"country": $("#country").val(),
