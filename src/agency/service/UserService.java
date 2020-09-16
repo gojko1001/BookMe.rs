@@ -19,6 +19,7 @@ import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dao.UserDao;
 import agency.dto.AuthenticationDTO;
+import agency.model.Host;
 import agency.model.User;
 
 @Path("/users")
@@ -130,6 +131,16 @@ public class UserService {
 		return userDao.updateUser(user);
 	}
 	
+	
+	@POST
+	@Path("/registrationHost")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String addHost(User host) {
+		UserDao userDao = (UserDao) context.getAttribute("userDao");
+		
+		return userDao.addUser(host);
+	}
 	
 	
 }

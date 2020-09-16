@@ -25,6 +25,7 @@ window.onload = function(){
 				$(elementsActive[0]).show();
 				$(elementsActive[1]).show();
 				$('.viewAllUsers').show();
+				$('.registrationHost').show();
 			}
 		}
 		loadContent(data);
@@ -71,6 +72,10 @@ $(document).ready(function(){
 	
 	$(".viewAllUsers").click(function(){
 		window.location.assign(window.location.origin + "/TuristickaAgencija/viewUsers.html");
+	})
+	
+	$(".registrationHost").click(function(){
+		window.location.assign(window.location.origin + "/TuristickaAgencija/registrationHost.html");
 	})
 
 })
