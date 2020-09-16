@@ -11,9 +11,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-	<script type="text/javascript" src="js/index.js"></script>
+	<script type="text/javascript" src="js/viewUsers.js"></script>
 	<script type="text/javascript" src="js/logedUser.js"></script>
-	<script type="text/javascript" src="js/LogReg.js"></script>
 </head>
 <body>
 	<h4 style="background-color:lightgrey; padding:0 10%">
@@ -88,9 +87,28 @@
 	
 	
 	
+	<div class="modal" id="logModal">
+		<div class="modalContent">
+			<span class="close">&times;</span>
+			<p class="text-primary"><b>PRIJAVA</b></p>
+			<form action="login" method="POST" id="logForm">
+				<table>
+					<tr><td>Korisničko ime:</td><td><input type="text" name="username1" id="username1" title="Unesite Vaše korisničko ime." required></td>
+					<td><label id="emptyUser" class="valid">Unesite Vaše korisničko ime.</label></td></tr>
+					<tr><td>Lozinka:</td> <td><input type="password" name="password1" id="password1" title="Unesite Vašu lozinku." required></td>
+					<td><label id="emptyPass" class="valid">Pogrešna lozinka!</label></td></tr>
+					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a></p></td></tr>
+				</table>
+				<button type="button" id="btnLogin" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="login()">Potvrdi</button>
+			</form>
+		</div>
+	</div>
+	
+	
+	<h2 style="text-align:center">Pregled svih korisnika:</h2>
 	<div style="float:center; margin-left:10%; margin-right:10%; padding:5px 10px; width:auto; background:#f2f2f2; border:1px solid grey">
 		<form action="pretraga" method="POST">
-	        <table class="quickSearch" style="float:right;">
+	        <table class="quickSearch" style="float:right;" style="display:none">
 	        	<tr>
 					<td><input type="text" name="search" placeholder="Naziv apartmana"></td>
 					<td><input type="text" name="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')" value=""></td><td><b>-</b></td>
@@ -102,33 +120,30 @@
 		<button class="text-primary btn-light" id="filterBtn">☰ Filteri</button>
 		<div id="filterTable" style="display:none">
 		<table>
-			<tr class="filterGroup" style="display:none"><td>Aktivnost apartmana</td><td></td></tr>
-			<tr class="filterGroup" style="display:none">
-				<td><input type="radio" id="all" name="isActive" ><label for="all">Svi</label></td>
-				<td><input type="radio" id="active" name="isActive" ><label for="active">Aktivni</label></td>
-				<td><input type="radio" id="inActive" name="isActive"><label for="inActive">Neaktivni</label></td>
+			<tr class="filterGroup" ><td>Pol</td><td></td></tr>
+			<tr class="filterGroup" >
+				<td><input type="radio" id="oddSex" name="isMale" ><label for="oddSex">Nebitno</label></td>
+				<td><input type="radio" id="male" name="isMale" ><label for="male">Muško</label></td>
+				<td><input type="radio" id="female" name="isMale" ><label for="female">Žensko</label></td>
 			</tr>
-			<tr class="filterGroup"><td>Datum</td><td></td></tr>
-			<tr><td>Od:</td><td><input type="date" id="startDate"></td></tr>
-			<tr><td>Do:</td><td><input type="date" id="dueDate"></td></tr>
-			<tr class="filterGroup"><td>Lokacija</td><td></td></tr>
-			<tr><td>Država:</td><td><input type="text" id="country"></td></tr>
-			<tr><td>Grad:</td><td><input type="text" id="city"></td></tr>
-			<tr class="filterGroup"><td>Cena</td><td></td></tr>
-			<tr><td><input type="number" placeholder="Od" id="priceFrom"></td><td><input type="number" placeholder="Do" id="priceTo"></td></tr>
-			<tr class="filterGroup"><td>Broj soba</td><td></td></tr>
-			<tr><td><input type="number" placeholder="Od" id="roomFrom"></td><td><input type="number" placeholder="Do" id="roomTo"></td></tr>
-			<tr class="filterGroup"><td>Broj osoba</td><td></td></tr>
-			<tr><td><input type="number" id="spotNum"></td></tr>
+			<tr class="filterGroup"><td>Uloga</td><td></td></tr>
+			<tr class="filterGroup">
+				<td><input type="radio" id="oddRole" name="isRole" ><label for="oddRole">Nebitno</label></td>
+				<td><input type="radio" id="guest" name="isRole" ><label for="guest">Gost</label></td>
+				<td><input type="radio" id="host" name="isRole" ><label for="host">Domaćin</label></td>
+				<td><input type="radio" id="administrator" name="isRole" ><label for="administrator">Administrator</label></td>
+			</tr>
+			<tr class="filterGroup"><td>ID</td><td></td></tr>
+			<tr><td>Korisničko ime:</td><td><input type="text" id="username"></td></tr>
+			
 			<tr><td></td><td><input type="submit" value="Primeni" id="filterSearch" class="btn btn-primary" style="width:100%"></td></tr>
 		</table>
 		</div>
 	</div>
 	
 	<br><br>
-
-
-	<div id="listOfApartments" style="padding-left:10%; padding-right:10%">
+	
+	<div id="viewUser" style="padding-left:10%; padding-right:10%">
     </div>
 
 </body>

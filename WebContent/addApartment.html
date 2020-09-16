@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/logedUser.js"></script>
 	<script type="text/javascript" src="js/addApartment.js"></script>
+	
 </head>
 <body>
 	<h4 style="background-color:lightgrey; padding:0 10%;">
@@ -26,6 +27,7 @@
 				<a href="#Profile" class="MyProfile">Moj profil</a>
 				<a href="#EditProfile" class="EditProfile">Izmeni profil</a>
 				<a href="#AddApartment" class="addApartment" style="display:none">Dodaj apartman</a>
+				<a href="#ViewAllUsers" class="viewAllUsers" style="display:none">Pregled svih korisnika</a>
 				<a href="#ViewReservations" class="viewReservations" style="display:none">Rezervacije</a>
 				<a href="#Amenities" class="amenities" style="display:none">Sadržaj apartmana</a>
 				<a href="#LogOut" class="Logout">Odjavi se</a>
@@ -64,7 +66,12 @@
 				<tr><td>Geografska dužina:</td><td><input type="text" id="longitude"required/></td>
 				<td><label id="invalidLongitude" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr style="border-bottom:1px solid black">
-				<tr><td>Slike:</td><td><input type="file" id="myFile" name="filename" multiple></td></tr>
+				<tr><td>Slike:</td><td><input type="file" id="myFile" name="filename" multiple>
+				</td>
+				</tr>
+				<tr style="color:blue;"><td>Putanja mora biti:</td> <td>Resources/ApartmentPhotos/folder/slike</td></tr>
+				<tr style="color:blue;"><td></td> <td>Folder mora da ima naziv kao ID apartmana.</td></tr>
+				<tr style="border-bottom:1px solid black">
 				<tr><td>Cena:</td><td><input type="text" id="price"required/>&nbsp; RSD</td>
 				<td><label id="invalidPrice" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Prijava:</td><td><input type="text" id="checkInTime"required/>&nbsp; h</td>

@@ -15,6 +15,7 @@ window.onload = function(){
 				var elementsActive = document.getElementsByClassName('filterGroup');
 				$(elementsActive[0]).show();
 				$(elementsActive[1]).show();
+				$('.viewAllUsers').show();
 			}
 			if(data.role == "Administrator"){
 				$(".viewReservations").show();
@@ -23,6 +24,7 @@ window.onload = function(){
 				var elementsActive = document.getElementsByClassName('filterGroup');
 				$(elementsActive[0]).show();
 				$(elementsActive[1]).show();
+				$('.viewAllUsers').show();
 			}
 		}
 		loadContent(data);
@@ -65,6 +67,10 @@ $(document).ready(function(){
 	
 	$(".amenities").click(function(){
 		window.location.assign(window.location.origin + "/TuristickaAgencija/amenities.html");
+	})
+	
+	$(".viewAllUsers").click(function(){
+		window.location.assign(window.location.origin + "/TuristickaAgencija/viewUsers.html");
 	})
 
 })
