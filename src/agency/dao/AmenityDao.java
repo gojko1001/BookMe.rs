@@ -146,10 +146,10 @@ public class AmenityDao {
 			}
 		}
 		
-		ObjectMapper mapper = new ObjectMapper();
+		/*ObjectMapper mapper = new ObjectMapper();
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-		/*
+		
 		try {
 			writer.writeValue(new File(path), getAllApartments(user));
 		} catch (JsonGenerationException e) {

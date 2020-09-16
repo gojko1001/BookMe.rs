@@ -24,7 +24,6 @@ import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Amenity;
 import agency.model.Apartment;
-import agency.model.Location;
 import agency.model.Reservation;
 import agency.model.Role;
 import agency.model.User;
@@ -212,13 +211,39 @@ public class ApartmentDao {
 		return null;
 	}
 	
+	public void updateFreeDates(String id) {
+		for(Apartment a : apartments) {
+			if(id.equals(a.getId())) {
+				List<String> takenDates = new ArrayList<>();
+				for(String s : a.getDatesForRent()) {
+					for(Reservation r : a.getReservations()) {
+						System.out.println("Rezervacija: " + r.getBeginDate() + ", broj noci: " + r.getNights());
+						String dueStr = getDueDate(r.getBeginDate(), r.getNights());
+						try {
+							for(Date d : getDatesInRange(sdf.parse(r.getBeginDate()), sdf.parse(dueStr))) {
+								if(d.compareTo(sdf.parse(s)) == 0) 
+									takenDates.add(s);
+							}
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				for(String s : takenDates)
+					a.getFreeDates().remove(s);
+				System.out.println("Apartman: " + id);
+				for(String d : a.getFreeDates())
+					System.out.println("Slobodan dan: " + d);
+				return;
+			}
+		}
+	}
+	
 
 	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter, User user){
 		List<ApartmentDTO> filtered = new ArrayList<>();
 
-		if(filter.getActivity() == 1) {						// PRIKAZ AKTIVNIH APARTMANA
 			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
-				if(a.isActive() == true) {
 					if(!filter.getCountry().equals(""))
 						if(!a.getLocation()
 								.getAddress()
@@ -249,88 +274,23 @@ public class ApartmentDao {
 					if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
 						if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
 							continue;
-					}	
-				filtered.add(a);
-				}
-				
+					}
+					switch(filter.getActivity()) {
+					case 1:
+						if(!a.isActive())
+							continue;
+						break;
+					case 2:
+						if(a.isActive())
+							continue;
+						break;
+					}
+					
+				filtered.add(a);	
 			}
-		} else if(filter.getActivity() == 2) {							// PRIKAZ NEAKTIVNIH APARTMANA
-			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
-				if(a.isActive() == false) {
-					if(!filter.getCountry().equals(""))
-						if(!a.getLocation()
-								.getAddress()
-								.getCountry()
-								.contains(filter.getCountry()))
-							continue;
-					if(!filter.getCity().equals(""))
-						if(!a.getLocation()
-								.getAddress()
-								.getPlace()
-								.contains(filter.getCity()))
-							continue;
-					if(filter.getPriceFrom() > -1)
-						if(a.getPrice() < filter.getPriceFrom())
-							continue;
-					if(filter.getPriceTo() > -1)
-						if(a.getPrice() > filter.getPriceTo())
-							continue;
-					if(filter.getRoomFrom() > 0)
-						if(a.getNumberOfRooms() < filter.getRoomFrom())
-							continue;
-					if(filter.getRoomTo() > 0)
-						if(a.getNumberOfRooms() > filter.getRoomTo())
-							continue;
-					if(filter.getSpotNum() > 0)
-						if(a.getNumberOfGuests() < filter.getSpotNum())
-							continue;
-					if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
-						if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
-							continue;
-					}	
-				filtered.add(a);
-				}
-			}
-		} else {															// PRIKAZ SVIH APARTMANA
-			for(ApartmentDTO a : getAllApartmentsByRole(user)) {
-				if(!filter.getCountry().equals(""))
-					if(!a.getLocation()
-							.getAddress()
-							.getCountry()
-							.contains(filter.getCountry()))
-						continue;
-				if(!filter.getCity().equals(""))
-					if(!a.getLocation()
-							.getAddress()
-							.getPlace()
-							.contains(filter.getCity()))
-						continue;
-				if(filter.getPriceFrom() > -1)
-					if(a.getPrice() < filter.getPriceFrom())
-						continue;
-				if(filter.getPriceTo() > -1)
-					if(a.getPrice() > filter.getPriceTo())
-						continue;
-				if(filter.getRoomFrom() > 0)
-					if(a.getNumberOfRooms() < filter.getRoomFrom())
-						continue;
-				if(filter.getRoomTo() > 0)
-					if(a.getNumberOfRooms() > filter.getRoomTo())
-						continue;
-				if(filter.getSpotNum() > 0)
-					if(a.getNumberOfGuests() < filter.getSpotNum())
-						continue;
-				if(!filter.getStartDate().equals("") || !filter.getDueDate().equals("")) {
-					if(!isDatesInRange(filter.getStartDate(), filter.getDueDate(), a.getFreeDates()))
-						continue;
-				}	
-			filtered.add(a);
-			}
-		}
 		
 		return filtered;
 	}
-	
 	
 	public Boolean isDatesInRange(String startStr, String dueStr, List<String> rangeOfDates) {
 		Date start = new Date();
@@ -342,22 +302,8 @@ public class ApartmentDao {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
-		List<Date> datesInRange = new ArrayList<>();
-	    Calendar calendar = new GregorianCalendar();
-	    calendar.setTime(start);
 	    
-	    Calendar endCalendar = new GregorianCalendar();
-	    endCalendar.setTime(due);
-	 
-	    while (calendar.before(endCalendar)) {
-	        Date result = calendar.getTime();
-	        System.out.println(result);
-	        datesInRange.add(result);
-	        calendar.add(Calendar.DATE, 1);
-	    }
-	    
-	    for(Date d : datesInRange) {
+	    for(Date d : getDatesInRange(start, due)) {
 	    	Boolean isAvailable = false;
 	    	for(String s : rangeOfDates) {
 	    		try {
@@ -372,5 +318,33 @@ public class ApartmentDao {
 	    	}
 	    }
 	    return true;
+	}
+	
+	public List<Date> getDatesInRange(Date start, Date due){
+		List<Date> datesInRange = new ArrayList<>();
+	    Calendar calendar = new GregorianCalendar();
+	    calendar.setTime(start);
+	    
+	    Calendar endCalendar = new GregorianCalendar();
+	    endCalendar.setTime(due);
+	 
+	    while (calendar.before(endCalendar)) {
+	        Date result = calendar.getTime();
+	        System.out.println(result);
+	        datesInRange.add(result);
+	        calendar.add(Calendar.DATE, 1);
+	    }
+	    return datesInRange;
+	}
+	
+	public String getDueDate(String startDate, int daysToAdd) {
+		Calendar c = Calendar.getInstance();
+		try {
+			c.setTime(sdf.parse(startDate));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		c.add(Calendar.DATE, daysToAdd);
+		return sdf.format(c.getTime());
 	}
 }

@@ -9,16 +9,15 @@ window.onload = function(){
 		}else{
 			$("#btnDropDown").html(data.username);
 			$(".logedIn").show();
+			$(".viewReservations").show();
 			if(data.role == "Host"){
 				$(".addApartment").show();
-				$(".viewReservations").show();
 				var elementsActive = document.getElementsByClassName('filterGroup');
 				$(elementsActive[0]).show();
 				$(elementsActive[1]).show();
 				$('.viewAllUsers').show();
 			}
 			if(data.role == "Administrator"){
-				$(".viewReservations").show();
 				$(".amenities").show();
 				$("#activeApartment").show();
 				var elementsActive = document.getElementsByClassName('filterGroup');

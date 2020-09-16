@@ -84,20 +84,15 @@ public class ReservationDao {
 		
 		Apartment a = apartmentDao.getApartment(reservation.getApartment().getId());
 		
-		String dueStr = reservation.getBeginDate();
-		Calendar c = Calendar.getInstance();
-		try {
-			c.setTime(sdf.parse(dueStr));
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
-		c.add(Calendar.DATE, reservation.getNights());
-		dueStr = sdf.format(c.getTime());
+		String dueStr = apartmentDao.getDueDate(reservation.getBeginDate(), reservation.getNights());
  	
 		if(!apartmentDao.isDatesInRange(reservation.getBeginDate(), dueStr, a.getFreeDates()))
 			return "Zeljeni datum nije na raspolaganju!";
 		
 		reservations.add(reservation);
+		apartmentDao.mapReservationsAndApartments(reservations);
+		apartmentDao.updateFreeDates(a.getId());
+		
 		//TODO Azurirati listu freeDates
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
