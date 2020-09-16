@@ -24,6 +24,7 @@ import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Amenity;
 import agency.model.Apartment;
+import agency.model.Location;
 import agency.model.Reservation;
 import agency.model.Role;
 import agency.model.User;
@@ -173,6 +174,44 @@ public class ApartmentDao {
 		
 		return "Apartman je dodat.";
 	}
+	
+	
+	public ApartmentDTO updateApartment(ApartmentDTO apartment) {
+		List<ApartmentDTO> allApartments = getAllApartments();
+		for(ApartmentDTO a : allApartments) {
+			if(a.getId().equals(apartment.getId())) {
+				a.setType(apartment.getType());
+				a.setNumberOfRooms(apartment.getNumberOfRooms());
+				a.setNumberOfGuests(apartment.getNumberOfGuests());
+				a.setLocation(apartment.getLocation());
+				a.setPhotos(apartment.getPhotos());
+				a.setPrice(apartment.getPrice());
+				a.setCheckInTime(apartment.getCheckInTime());
+				a.setCheckOutTime(apartment.getCheckOutTime());
+				a.setAmenities(apartment.getAmenities());
+				
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+				ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+				try {
+					writer.writeValue(new File(path), getAllApartments());
+				} catch (JsonGenerationException e) {
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					System.out.println("Neuspesno mapiranje.");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("Greska u radu sa fajlovima");
+					e.printStackTrace();
+				}
+			
+				return a;
+			}
+		}
+		
+		return null;
+	}
+	
 
 	public List<ApartmentDTO> applyFilter(ApartmentFilterDTO filter, User user){
 		List<ApartmentDTO> filtered = new ArrayList<>();
