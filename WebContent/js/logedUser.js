@@ -62,7 +62,7 @@ $(document).ready(function(){
 	})
 	
 	$(".viewReservations").click(function(){
-		
+		window.location.assign(window.location.origin + "/TuristickaAgencija/reservations.html");
 	})
 	
 	$(".amenities").click(function(){
