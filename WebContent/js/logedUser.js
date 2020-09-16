@@ -12,10 +12,17 @@ window.onload = function(){
 			if(data.role == "Host"){
 				$(".addApartment").show();
 				$(".viewReservations").show();
+				var elementsActive = document.getElementsByClassName('filterGroup');
+				$(elementsActive[0]).show();
+				$(elementsActive[1]).show();
 			}
 			if(data.role == "Administrator"){
 				$(".viewReservations").show();
 				$(".amenities").show();
+				$("#activeApartment").show();
+				var elementsActive = document.getElementsByClassName('filterGroup');
+				$(elementsActive[0]).show();
+				$(elementsActive[1]).show();
 			}
 		}
 		loadContent(data);

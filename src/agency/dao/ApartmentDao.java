@@ -135,10 +135,9 @@ public class ApartmentDao {
 				|| apartment.getLocation().getAddress().equals(null) || apartment.getLocation().getLatitude() == 0|| apartment.getLocation().getLongitude() == 0 
 				|| apartment.getHost().getUsername().equals(null)|| apartment.getPhotos().equals(null) || apartment.getPrice() == 0) {
 			return "Niste popunili sva polja";
-			
 		} else if(apartment.getNumberOfGuests() <= 0 || apartment.getNumberOfRooms() <= 0 || apartment.getPrice() <= 0) {
 			return "Uneti podaci u nevalidnom formatu";
-		}
+		} 
 		
 		for(Apartment a : apartments) {
 			if(a.getId().equalsIgnoreCase(apartment.getId())) {

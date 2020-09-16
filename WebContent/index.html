@@ -78,7 +78,7 @@
 					<td><label id="emptyUser" class="valid">Unesite Vaše korisničko ime.</label></td></tr>
 					<tr><td>Lozinka:</td> <td><input type="password" name="password1" id="password1" title="Unesite Vašu lozinku." required></td>
 					<td><label id="emptyPass" class="valid">Pogrešna lozinka!</label></td></tr>
-					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a><br><a href="#" class="text-primary" style="font-size:12px;">Zaboravio/la sam šifru.</a></p></td></tr>
+					<tr><td></td> <td><p><a href="#" class="text-primary" id="logToReg" style="font-size:12px;">Nemate nalog? Registrujte se.</a></p></td></tr>
 				</table>
 				<button type="button" id="btnLogin" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="login()">Potvrdi</button>
 			</form>
@@ -101,6 +101,12 @@
 		<button class="text-primary btn-light" id="filterBtn">☰ Filteri</button>
 		<div id="filterTable" style="display:none">
 		<table>
+			<tr class="filterGroup" style="display:none"><td>Aktivnost apartmana</td><td></td></tr>
+			<tr class="filterGroup" style="display:none">
+				<td><input type="radio" id="all" name="isActive" ><label for="all">Svi</label></td>
+				<td><input type="radio" id="active" name="isActive" ><label for="active">Aktivni</label></td>
+				<td><input type="radio" id="inActive" name="isActive"><label for="inActive">Neaktivni</label></td>
+			</tr>
 			<tr class="filterGroup"><td>Datum</td><td></td></tr>
 			<tr><td>Od:</td><td><input type="date" id="startDate"></td></tr>
 			<tr><td>Do:</td><td><input type="date" id="dueDate"></td></tr>

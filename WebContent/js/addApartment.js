@@ -29,8 +29,20 @@ $(document).ready(function(){
 		let checkInTime = $('#checkInTime').val();
 		let checkOutTime = $('#checkOutTime').val();
 		let active = false;
-		let viewAmenity = [];
+		let amenities = [];
+		amenities = [$("input:checkbox[name=checkboxes]:checked").val()];
 		
+		
+        /*$.each($("input[name='checkboxes']:checked"), function(){            
+            amenities.push($(this).val());
+        });
+        alert("Izabran sadrzaj je: " + amenities.join(", "));*/
+		
+		/*
+		$("input:checkbox[name=type]:checked").each(function(){
+		    amenities.push($(this).val());
+		});*/
+		//console.log(amenities);
 
 		var jsonAdd = JSON.stringify({
 			"id":id,
@@ -54,12 +66,12 @@ $(document).ready(function(){
 				"username":username
 			},			
 			"comments":[],
-			"photos":[],
+			"photos":myFile,
 			"price":price,
 			"checkInTime":checkInTime,
 			"checkOutTime":checkOutTime,
 			"active":active,
-			"amenities":[],
+			"amenities":amenities,
 			"reservations":[]
 		});
 			
@@ -89,7 +101,7 @@ function openApartments(){
 function viewAllAmenities(data){
 	var i;
 	for(i=0; i<data.length; i++){
-		content = '<input type="checkbox" id="';
+		content = '<input type="checkbox" name="checkboxes" id="';
 		content += data[i].id;
 		content += '"><label for="';
 		content += data[i].id;
@@ -99,4 +111,6 @@ function viewAllAmenities(data){
 		
 		$("#viewAmenity").append(content);
 	}
+
 }
+

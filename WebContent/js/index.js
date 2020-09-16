@@ -84,6 +84,13 @@ function showApartments(data){
 					content +='<tr><td>Domaćin:</td><td>';
 					content += data[i].host.username;
 					content += '</td></tr>';
+					content +='<tr><td>Aktivnost:</td><td>';
+					if(data[i].active == false){
+						content += 'NEAKTIVAN';
+					}else{
+						content += 'AKTIVAN';
+					}
+					content += '</td></tr>';
 					content += '</table></div>';
 					content += '</div></div>';
 					
