@@ -13,9 +13,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import agency.dto.ApartmentDTO;
+import agency.dto.ApartmentFilterDTO;
 import agency.dto.AuthenticationDTO;
 import agency.dto.GuestDTO;
 import agency.dto.HostDTO;
+import agency.dto.UserFilterDTO;
 import agency.model.Administrator;
 import agency.model.Apartment;
 import agency.model.Guest;
@@ -230,4 +233,48 @@ public class UserDao {
 		}
 		return null;
 	}
+	
+	
+	public List<User> filterUsers(UserFilterDTO filter, User user){
+		List<User> filtered = new ArrayList<>();
+			for(User u : getAllUsersByRole(user)) {
+				if(!filter.getRole().equals("")) {
+					if(filter.getRole().equals("host")) {
+						if(u.getRole() != Role.Host) {
+							continue;
+						}
+					}
+					if(filter.getRole().equals("guest")) {
+						if(u.getRole() != Role.Guest) {
+							continue;
+						}
+					}
+					if(filter.getRole().equals("admin")) {
+						if(u.getRole() != Role.Administrator) {
+							continue;
+						}
+					}
+				}if(!filter.getUsername().equals("")) {
+					if(!u.getUsername().contains(filter.getUsername()))
+						continue;
+				}	
+				if(!filter.getSex().equals("")) {
+					if(filter.getSex().equals("male")){
+						if(u.isMale() == false) {
+							continue;
+						}
+					}else {
+						if(u.isMale() == true) {
+							continue;
+						}
+					}
+				}
+				filtered.add(u);
+			}		
+		return filtered;	
+	}
+		
+		
+	
 }
+	

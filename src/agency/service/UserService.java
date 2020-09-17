@@ -18,7 +18,10 @@ import agency.dao.AmenityDao;
 import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
 import agency.dao.UserDao;
+import agency.dto.ApartmentDTO;
+import agency.dto.ApartmentFilterDTO;
 import agency.dto.AuthenticationDTO;
+import agency.dto.UserFilterDTO;
 import agency.model.User;
 
 @Path("/users")
@@ -139,6 +142,18 @@ public class UserService {
 		UserDao userDao = (UserDao) context.getAttribute("userDao");
 		
 		return userDao.addUser(host);
+	}
+	
+	
+	@POST
+	@Path("/filter")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<User> filterUsers(UserFilterDTO userFilter) {
+		UserDao userDao = (UserDao) context.getAttribute("userDao");
+		User logedUser = (User)request.getSession().getAttribute("loginUser");
+		
+		return userDao.filterUsers(userFilter, logedUser);
 	}
 	
 	

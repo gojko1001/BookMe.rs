@@ -14,56 +14,50 @@ function loadContent(user){
 $(document).ready(function(){
 	$("#filterBtn").click(function(){
 		$("#filterTable").slideToggle();
+		$(".quickSearch").toggle();
 	})
 	
 	document.getElementById("oddSex").checked = true;
 	document.getElementById("oddRole").checked = true;
 	
 	$("#filterSearch").click(function(){
-		let priceFrom = Number($("#priceFrom").val());
-		if(!priceFrom){
-			priceFrom = -1;
-		}
-		let priceTo = Number($("#priceTo").val());
-		if(!priceTo){
-			priceTo = -1;
-		}
-		let roomFrom = Number($("#roomFrom").val());
-		if(!roomFrom){
-			roomFrom = -1;
-		}
-		let roomTo = Number($("#roomTo").val());
-		if(!roomTo){
-			roomTo = -1;
-		}
-		let spotNum = Number($("#spotNum").val());
-		if(!spotNum){
-			spotNum = -1;
-		}
-		
-		var activity;
-		if(document.getElementById("active").checked == true){
-			activity = 1;
-		}else if(document.getElementById("inActive").checked == true){
-			activity = 2;
+		var inputUsername = "";
+		inputUsername = $('#inputUsername').val();
+		var role;
+		if(document.getElementById("guest").checked == true){
+			role = "guest";
+		}else if(document.getElementById("host").checked == true){
+			role = "host"
+		}else if(document.getElementById("administrator").checked == true){
+			role = "admin";
 		}else{
-			activity = 0;
+			role = "";
+		}
+		var sex;
+		if(document.getElementById("male").checked == true){
+			sex = "male";
+		}else if(document.getElementById("female").checked == true){
+			sex = "female"
+		}else{
+			sex = "";
 		}
 		
 		var jsonFilter = JSON.stringify({
-			
+			"username":inputUsername,
+		    "role":role,
+		    "sex":sex
 		});
 		
-		/*$.ajax({
+		$.ajax({
 			method: "POST",
-			url: "../TuristickaAgencija/rest/apartments/filter",
+			url: "../TuristickaAgencija/rest/users/filter",
 			data: jsonFilter,
 			contentType: "application/json",
 			datatype: "application/json",
 		}).done(function(data){
-			$("#listOfApartments").html("");
-			showApartments(data);
-		});*/
+			$("#viewUser").html("");
+			showUsers(data);
+		});
 	})
 });
 
