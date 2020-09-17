@@ -95,7 +95,7 @@ $(document).ready(function(){
 			}).done(function(data){
 				alert(data);
 				if(alert == "Apartman je izmenjen."){
-					window.location.assign(window.location.origin += "/TuristickaAgencija/");
+					window.location.assign(window.location.origin + "/TuristickaAgencija/");
 				}
 				
 			}).error(function(data){

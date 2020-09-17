@@ -177,7 +177,6 @@ public class ApartmentDao {
 	}
 	
 	
-	//TODO: MOZDA TREBA PROSLEDITI APARTMENT ??
 	public String updateApartment(Apartment apartment) {
 		for(Apartment a : apartments) {
 			if(a.getId().equals(apartment.getId())) {
@@ -195,7 +194,7 @@ public class ApartmentDao {
 				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 				ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 				try {
-					writer.writeValue(new File(path), getAllApartments());				//TODO: NE ZAPISE IZMENE
+					writer.writeValue(new File(path), getAllApartments());
 				} catch (JsonGenerationException e) {
 					e.printStackTrace();
 				} catch (IOException e) {
