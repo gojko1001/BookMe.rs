@@ -134,6 +134,7 @@ public class AmenityDao {
 	}
 	
 
+	// TODO: OBRISATI ?
 	public String deleteAmenityFromApartment(List<ApartmentDTO> allApartments, Amenity amenity) {
 		List<Amenity> apartmentAmenities = new ArrayList<Amenity>();
 		for(ApartmentDTO ap : allApartments) {

@@ -55,6 +55,14 @@ function loadContent(user){
 		contentC += '</table>';
 		$('#comments').append(contentC);
 		
+		if(user.role == "Host" || user.role == "Administrator"){
+			contentB = '<button id="';
+			contentB += data.id;
+			contentB += '" onclick="viewEditApartment(this)" class="btn btn-primary" style="width:100%">Izmeni apartman</button>';
+			$('#btnEdit').append(contentB);
+		}
+		
+		
 		if(user.role == "Guest"){
 			$("#reservationBtn").show();
 			/*var enableDatesArray=[];  
@@ -90,6 +98,11 @@ function loadContent(user){
 		}
 	});
 }
+
+function viewEditApartment(event){
+	window.location.assign(window.location.origin += "/TuristickaAgencija/editApartment.html?id=" + event.id);
+}
+
 
 $(document).ready(function(){
 	$("#reservationBtn").click(function(){
@@ -129,4 +142,5 @@ $(document).ready(function(){
 				window.location.assign(window.location.origin + "/TuristickaAgencija/reservations.html");
 		});
 	})
+
 });

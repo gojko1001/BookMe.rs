@@ -99,7 +99,7 @@ public class ApartmentService {
 	@Path("/update")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ApartmentDTO updateApartment(ApartmentDTO apartment) {
+	public String updateApartment(ApartmentDTO apartment) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");	
 
 		return apartmentDao.updateApartment(apartment);

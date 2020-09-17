@@ -12,7 +12,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<script type="text/javascript" src="js/logedUser.js"></script>
-	<script type="text/javascript" src="js/addApartment.js"></script>
+	<script type="text/javascript" src="js/editApartment.js"></script>
 	
 </head>
 <body>
@@ -75,7 +75,13 @@
 				<td><label id="invalidCheckInTime" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Odjava:</td><td><input type="text" id="checkOutTime"required/>&nbsp; h</td>
 				<td><label id="invalidCheckOutTime" class="valid">Ne sme ostati prazno!</label></tr>
-				<tr><td>Aktivnost:</td><td><input type="text" id="active" disabled/></td></tr>
+				<tr><td>Aktivnost:</td>
+					<td colspan="2" style="text-align:center">
+						<input type="radio" id="inActive" name="isActive">
+						<label for="inActive">NEAKTIVAN &nbsp;</label>
+						<input type="radio" id="active" name="isActive">
+						<label for="active">AKTIVAN</label><br>
+					</td></tr>
 				<tr style="border-bottom:1px solid black">
 				<tr><td>Sadržaj:</td><td><div id="viewAmenity"></div></td></tr>
 				

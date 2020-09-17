@@ -90,12 +90,13 @@ public class ApartmentDao {
 	}
 	
 	public List<ApartmentDTO> getAllApartments(){
-		List<ApartmentDTO> apartmentsDto = new ArrayList<ApartmentDTO>();
+		List<ApartmentDTO> allApartments = new ArrayList<ApartmentDTO>();
 		for(Apartment a : apartments) {
-			apartmentsDto.add(new ApartmentDTO(a));
+			allApartments.add(new ApartmentDTO(a));
+			//System.out.println(a.getNumberOfGuests());
 		}
 		
-		return apartmentsDto;
+		return allApartments;
 	}
 	
 	public List<Apartment> getApartments(){
@@ -175,7 +176,8 @@ public class ApartmentDao {
 	}
 	
 	
-	public ApartmentDTO updateApartment(ApartmentDTO apartment) {
+	//TODO: MOZDA TREBA PROSLEDITI APARTMENT ??
+	public String updateApartment(ApartmentDTO apartment) {
 		List<ApartmentDTO> allApartments = getAllApartments();
 		for(ApartmentDTO a : allApartments) {
 			if(a.getId().equals(apartment.getId())) {
@@ -193,22 +195,18 @@ public class ApartmentDao {
 				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 				ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
 				try {
-					writer.writeValue(new File(path), getAllApartments());
+					writer.writeValue(new File(path), getAllApartments());				//TODO: NE ZAPISE IZMENE
 				} catch (JsonGenerationException e) {
-					e.printStackTrace();
-				} catch (JsonMappingException e) {
-					System.out.println("Neuspesno mapiranje.");
 					e.printStackTrace();
 				} catch (IOException e) {
 					System.out.println("Greska u radu sa fajlovima");
 					e.printStackTrace();
 				}
 			
-				return a;
+				return "Apartman je izmenjen.";
 			}
 		}
-		
-		return null;
+		return "Apartman nije izmenjen";
 	}
 	
 	public void updateFreeDates(String id) {
