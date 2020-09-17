@@ -5,8 +5,8 @@
 				"id":"OR11"
 			},
 		"beginDate":"2020-09-12",
-		"nights":0,
-		"totalPrice":46.0,
+		"nights":1,
+		"totalPrice":500,
 		"message":"",
 		"guest":
 			{
@@ -17,16 +17,92 @@
 	{
 		"apartment":
 			{
+				"id":"OR11"
+			},
+		"beginDate":"2020-09-10",
+		"nights":2,
+		"totalPrice":1000,
+		"message":"",
+		"guest":
+			{
+				"username":"marko"
+			},
+		"status":"ended"
+	},
+	{
+		"apartment":
+			{
 				"id":"LG23"
 			},
 		"beginDate":"2020-07-17",
 		"nights":4,
-		"totalPrice":46.0,
-		"message":"",
+		"totalPrice":8000,
+		"message":"Treba mi na 4 dana",
 		"guest":
 			{
 				"username":"filip"
 			},
 		"status":"accepted"
+	},
+	{
+		"apartment":
+			{
+				"id":"BCA2"
+			},
+		"beginDate":"2020-12-12",
+		"nights":3,
+		"totalPrice":15000,
+		"message":"Jel moze popust?",
+		"guest":
+			{
+				"username":"mika"
+			},
+		"status":"created"
+	},
+	{
+		"apartment":
+			{
+				"id":"JC56"
+			},
+		"beginDate":"2021-01-03",
+		"nights":10,
+		"totalPrice":15000,
+		"message":"Otkazujem smestaj...",
+		"guest":
+			{
+				"username":"filip"
+			},
+		"status":"withdrawal"
+	},
+	{
+		"apartment":
+			{
+				"id":"JC56"
+			},
+		"beginDate":"2021-01-05",
+		"nights":4,
+		"totalPrice":6000,
+		"message":"Pozdrav, hocu da rezervisem smestaj",
+		"guest":
+			{
+				"username":"igor"
+			},
+		"status":"created"
+	},
+	{
+		"apartment":
+			{
+				"id":"BCA2"
+			},
+		"beginDate":"2021-02-05",
+		"nights":5,
+		"totalPrice":25000,
+		"message":"Druze, jel problem da povedem psa?",
+		"guest":
+			{
+				"username":"marko"
+			},
+		"status":"accepted"
 	}
+	
 ]

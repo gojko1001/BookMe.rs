@@ -8,30 +8,6 @@
 		"role":"Administrator"
 	},
 	{
-		"username":"filip",
-		"password":"12",
-		"name":"Filip",
-		"lastName":"Filipovic",
-		"male":true,
-		"role":"Guest"
-	},
-	{
-		"username":"igor",
-		"password":"12",
-		"name":"Igor",
-		"lastName":"Igorovic",
-		"male":true,
-		"role":"Guest"
-	},
-	{
-		"username":"mika",
-		"password":"12",
-		"name":"Mika",
-		"lastName":"Mikic",
-		"male":true,
-		"role":"Guest"
-	},
-	{
 		"username":"ana",
 		"password":"12",
 		"name":"Ana",
@@ -54,6 +30,30 @@
 		"lastName":"Milic",
 		"male":false,
 		"role":"Host"
+	},
+	{
+		"username":"filip",
+		"password":"12",
+		"name":"Filip",
+		"lastName":"Filipovic",
+		"male":true,
+		"role":"Guest"
+	},
+	{
+		"username":"igor",
+		"password":"12",
+		"name":"Igor",
+		"lastName":"Igorovic",
+		"male":true,
+		"role":"Guest"
+	},
+	{
+		"username":"mika",
+		"password":"12",
+		"name":"Mika",
+		"lastName":"Mikic",
+		"male":true,
+		"role":"Guest"
 	},
 	{
 		"username":"marko",

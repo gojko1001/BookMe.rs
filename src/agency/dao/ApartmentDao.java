@@ -227,8 +227,26 @@ public class ApartmentDao {
 						}
 					}
 				}
+				List<String> newFreeDates = a.getDatesForRent();
 				for(String s : takenDates)
-					a.getFreeDates().remove(s);
+					newFreeDates.remove(s);
+				a.setFreeDates(newFreeDates);
+				
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.registerModule(new JavaTimeModule());
+				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+				ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+				try {
+					writer.writeValue(new File(path), getAllApartments());
+				} catch (JsonGenerationException e) {
+					e.printStackTrace();
+				} catch (JsonMappingException e) {
+					System.out.println("Neuspesno mapiranje.");
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.out.println("Greska u radu sa fajlovima");
+					e.printStackTrace();
+				}
 
 				return;
 			}

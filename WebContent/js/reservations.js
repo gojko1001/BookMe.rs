@@ -1,4 +1,5 @@
 var logedUser;
+var reservations = [];
 
 function loadContent(user){
 	console.log(user);
@@ -8,6 +9,7 @@ function loadContent(user){
 		url:"../TuristickaAgencija/rest/reservations/all",
 		datatype:"application/json"
 	}).done(function(data){
+		reservations = data;
 		viewAllReservations(data);
 		console.log(data);
 	});	
@@ -52,24 +54,86 @@ function viewAllReservations(data){
 			content += 'ZAVRŠENA';
 		}
 		content += '</td></tr>';
-		content += '<tr><td><button class="delete" style="display:none"/></td>';
-		content += '<tr><td><button class="accept" style="display:none"/></td>';
+		content += '<tr><td><button class="cancel btn btn-primary" id="0';
+		content += i;
+		content += '" onclick="updateStatus(this, &quot;withdrawal&quot;)">Otkazi</button></td>';
+		content += '<td><button class="end btn btn-primary" id="1';
+		content += i;
+		content += '" onclick="updateStatus(this, &quot;ended&quot;)">Zavrsi</button></td></tr>';
+		content += '<tr><td><button class="deny btn btn-primary" style="background-color:red" id="2';
+		content += i;
+		content += '" onclick="updateStatus(this, &quot;denied&quot;)">Odbij</button></td>';
+		content += '<td><button class="accept btn btn-primary" style="background-color:green" id="3';
+		content += i;
+		content += '" onclick="updateStatus(this, &quot;accepted&quot;)">Prihvati</button></td></tr>';
 		content += '</table></div>';
 		content += '</div></div>';
 		
 		$("#viewReservations").append(content);
 		if(logedUser.role == "Guest"){
-			$(".delete").val("Odustani");
-			$(".delete").show();
+			if(data[i].status == "created" || data[i].status == "accepted")
+				$("#0" + i).show();
 		} 
-		if(logedUser.role == "Host"){
-			$(".delete").val("Odbij");
-			$(".delete").show();
-			$(".accept").val("Prihvati");
-			$(".accept").show();
+		if(logedUser.role == "Host" && data[i].status != "ended"){
+			if(data[i].status == "created"){
+				$("#2" + i).show();
+				$("#3" + i).show();
+			}
+			if(data[i].status == "accepted"){
+				$("#2" + i).show();
+			}
+			var today = new Date();
+			var dd = String(today.getDate()).padStart(2, '0');
+			var mm = String(today.getMonth() + 1).padStart(2, '0');
+			var yyyy = today.getFullYear();
+			
+			dateArray = data[i].beginDate.split("-");
+			if(yyyy > dateArray[0]){
+				$("#1" + i).show();
+				$("#2" + i).hide();
+			}else if(yyyy == dateArray[0]) 
+				if(mm > dateArray[1]){
+					$("#1" + i).show();
+					$("#2" + i).hide();
+				}else if(mm == dateArray[1])
+					if(dd > dateArray[2]){
+						$("#1" + i).show();
+						$("#2" + i).hide();
+					}
 		}
 	
 	}	
+}
+
+function updateStatus(event, newStatus){
+	let r = reservations[event.id.charAt(1)];
+	
+	var jsonReservation = JSON.stringify({
+		"apartment":
+			{
+				"id":r.apartmentId
+			},
+		"beginDate":r.beginDate,
+		"nights":r.nights,
+		"totalPrice":r.totalPrice,
+		"message":r.message,
+		"guest":
+			{
+				"username":r.guestUsername
+			},
+		"status":r.status
+	});
+	
+	$.ajax({
+		method: "POST",
+		url: "../TuristickaAgencija/rest/reservations/updateStatus/" + newStatus,
+		contentType: "application/json",
+		data: jsonReservation,
+		datatype: "text"
+	}).done(function(data){
+		alert(data);
+		window.location.reload();
+	});
 }
 
 
