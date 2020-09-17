@@ -104,5 +104,15 @@ public class ApartmentService {
 		return apartmentDao.updateApartment(apartment);
 	}
 	
+	@PUT
+	@Path("/delete")
+	@Produces(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String deleteApartment(Apartment apartment) {
+		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
+		User logedUser = (User)request.getSession().getAttribute("loginUser");
+		
+		return apartmentDao.deleteApartment(apartment, logedUser, (ReservationDao)context.getAttribute("reservationDao"));
+	}
 	
 }

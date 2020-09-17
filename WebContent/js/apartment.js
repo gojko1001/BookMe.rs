@@ -61,6 +61,12 @@ function loadContent(user){
 			contentB += '" onclick="viewEditApartment(this)" class="btn btn-primary" style="width:100%">Izmeni apartman</button>';
 			$('#btnEdit').append(contentB);
 		}
+		if(user.role == "Host" || user.role == "Administrator"){
+			contentB = '<button id="';
+			contentB += data.id;
+			contentB += '" onclick="deleteApartment(data)" class="btn btn-primary" style="width:100%">Izmeni apartman</button>';
+			$('#btnDelete').append(contentB);
+		}
 		
 		
 		if(user.role == "Guest"){
@@ -101,6 +107,80 @@ function loadContent(user){
 
 function viewEditApartment(event){
 	window.location.assign(window.location.origin += "/TuristickaAgencija/editApartment.html?id=" + event.id);
+}
+
+function deleteApartment(data){
+	let id = data.id;
+	let type = data.type
+	let numberOfRooms = data.numberOfRooms;
+	let numberOfGuests = data.numberOfGuests;
+	let latitude = data.location.latitude;
+	let longitude = data.location.location;
+	let country = data.location.address.country;
+	let place = data.location.address.place;
+	let postalCode = data.location.address.postalCode;
+	let street = data.location.address.street;
+	let number = data.location.address.number;
+	let datesForRent = data.datesForRent;
+	let freeDates = data.freeDates;
+	let username = data.host.username;
+	let comments = data.comments;
+	let photos = data.photos;
+	let price = data.price;
+	let checkInTime = data.checkInTime;
+	let checkOutTime = data.checkOutTime;
+	let active = data.active;
+	let amenities = data.amenities;
+	let reservations = data.reservations;
+
+	var jsonUpdate = JSON.stringify({
+		"id": id,
+        "type": type,
+        "numberOfRooms": numberOfRooms,
+        "numberOfGuests": numberOfGuests,
+        "location": {
+            "latitude": latitude,
+            "longitude": longitude,
+            "address": {
+                "country": country,
+                "place": place,
+                "postalCode": postalCode,
+                "street": street,
+                "number": number
+            }
+        },
+        "datesForRent": [
+        	datesForRent
+        ],
+        "freeDates": [
+        	freeDates
+        ],
+        "host": {
+            "username": username
+        },
+        "comments": comments,
+        "photos": photos,
+        "price": price,
+        "checkInTime": checkInTime,
+        "checkOutTime": checkOutTime,
+        "active": active,
+        "amenities": amenities,
+        "reservations": reservations,
+        "view": false
+	});
+		
+		$.ajax({
+			method: "PUT",
+			url: "../TuristickaAgencija/rest/apartments/delete",
+			contentType: "application/json",
+			data: jsonUpdate,
+			datatype: "application/json"
+		}).done(function(data){
+			if(data != null){
+				alert("Sadržaj uspešno ažuriran!");
+				openAmenities();
+			}
+		})
 }
 
 

@@ -133,35 +133,6 @@ public class AmenityDao {
 		return "Sadržaj je uspešno izmenjen.";
 	}
 	
-
-	// TODO: OBRISATI ?
-	public String deleteAmenityFromApartment(List<ApartmentDTO> allApartments, Amenity amenity) {
-		List<Amenity> apartmentAmenities = new ArrayList<Amenity>();
-		for(ApartmentDTO ap : allApartments) {
-			apartmentAmenities = ap.getAmenities();
-			for(Amenity am : apartmentAmenities) {
-				if(am.getId().equals(amenity.getId())) {
-					// TODO: RESITI
-					am.setDeleted(true);
-				}
-			}
-		}
-		
-		/*ObjectMapper mapper = new ObjectMapper();
-		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
-		
-		try {
-			writer.writeValue(new File(path), getAllApartments(user));
-		} catch (JsonGenerationException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			System.out.println("Greska u radu sa fajlovima");
-			e.printStackTrace();
-		}*/
-		
-		return "Obrisan iz apartmana.";
-	}
 	
 	
 }

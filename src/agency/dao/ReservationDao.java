@@ -54,6 +54,10 @@ public class ReservationDao {
 		return reservationsDTO;
 	}
 	
+	public List<Reservation> getReservations(){
+		return this.reservations;
+	}
+	
 	public List<ReservationDTO> getAllReservationsByRole(User user, UserDao userDao){
 		if(user == null)
 			return null;

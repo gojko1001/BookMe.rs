@@ -177,6 +177,39 @@ public class ApartmentDao {
 	}
 	
 	
+	public String deleteApartment(Apartment apartment, User user, ReservationDao reservationDao) {
+		if(user == null || user.getRole() == Role.Guest) {
+			return "Samo administrator i domaćin mogu brisati apartman.";
+		} else if(user.getRole() == Role.Administrator || user.getRole() == Role.Host) {
+			for(Apartment a : apartments) {
+				if(a.getId().equals(apartment.getId())) {
+					a.setView(apartment.isView());			//"obrisan" iz apartmana
+					for(Reservation r : reservationDao.getReservations()) {
+						if(r.getApartment().getId().equals(apartment.getId())) {
+							reservationDao.reservations.remove(r);
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+		try {
+			writer.writeValue(new File(path), getAllApartments());
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Greska u radu sa fajlovima");
+			e.printStackTrace();
+		}
+		
+		return "Sadržaj je uspešno izmenjen.";
+	}
+	
+	
 	public String updateApartment(Apartment apartment) {
 		for(Apartment a : apartments) {
 			if(a.getId().equals(apartment.getId())) {
@@ -361,4 +394,10 @@ public class ApartmentDao {
 		c.add(Calendar.DATE, daysToAdd);
 		return sdf.format(c.getTime());
 	}
+	
+	
+	
+	
+	
+	
 }
