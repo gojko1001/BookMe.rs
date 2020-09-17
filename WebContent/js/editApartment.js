@@ -79,7 +79,8 @@ $(document).ready(function(){
 			"checkOutTime":checkOutTime,
 			"active":active,
 			"amenities":amenities,
-			"reservations":[]				//TODO
+			"reservations":[],				//TODO
+			"view":true
 		});
 			
 		console.log(jsonAdd);
@@ -130,9 +131,6 @@ function viewAllAmenities(data, dataAp){
 		
 		$("#viewAmenity").append(content);
 	}
-	
-	
-	
 	
 }
 

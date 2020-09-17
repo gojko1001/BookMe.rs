@@ -140,7 +140,7 @@ $(document).ready(function(){
             amenities.push(amenity);
         });
 		
-		if(valid == false){
+		if(valid == true){
 			var jsonAdd = JSON.stringify({
 				"id":id,
 				"type":type,
@@ -169,7 +169,8 @@ $(document).ready(function(){
 				"checkOutTime":checkOutTime,
 				"active":active,
 				"amenities":amenities,
-				"reservations":[]
+				"reservations":[],
+				"view":true
 			});
 			
 			console.log(jsonAdd);

@@ -41,8 +41,8 @@ $(document).ready(function(){
 		let controlPass = $("#controlPass").val();
 
 		let valid = true;
+		
 		// VALIDACIJA POLJA
-
 		if(!name){
 			$("#name").css("border-color", "red");
 			$("#invalidName").css("font-size", "10px");

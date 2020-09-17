@@ -20,13 +20,14 @@ public class Apartment {
 	private boolean active;
 	private List<Amenity> amenities = new ArrayList<Amenity>();
 	private List<Reservation> reservations = new ArrayList<Reservation>();
+	private boolean view;
 	
 	public Apartment() {}
-
+	
 	public Apartment(String id, Type type, int numberOfRooms, int numberOfGuests, Location location,
-			List<String> datesForRent, List<String> freeDates, Host host, List<Comment> comments,
-			List<String> photos, float price, int checkInTime, int checkOutTime, boolean active,
-			List<Amenity> amenities, List<Reservation> reservations) {
+			List<String> datesForRent, List<String> freeDates, Host host, List<Comment> comments, List<String> photos,
+			float price, int checkInTime, int checkOutTime, boolean active, List<Amenity> amenities,
+			List<Reservation> reservations, boolean view) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -44,8 +45,8 @@ public class Apartment {
 		this.active = active;
 		this.amenities = amenities;
 		this.reservations = reservations;
+		this.setView(view);
 	}
-
 
 	public String getId() {
 		return id;
@@ -173,6 +174,15 @@ public class Apartment {
 
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
+	}
+
+	public boolean isView() {
+		return view;
+	}
+
+
+	public void setView(boolean view) {
+		this.view = view;
 	}
 	
 }

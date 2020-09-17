@@ -64,7 +64,8 @@
 				"id":"iron"
 			}
 		],
-		"reservations":[]
+		"reservations":[],
+		"view":true
 	},
 	
 	{
@@ -117,7 +118,8 @@
 				"id":"wifi"
 			}
 		],
-		"reservations":[]
+		"reservations":[],
+		"view":true
 	},
 	
 	{
@@ -172,7 +174,8 @@
 				"id":"parking"
 			}
 		],
-		"reservations":[]
+		"reservations":[],
+		"view":true
 	},
 	{
 		"id":"JC56",
@@ -228,7 +231,8 @@
 				"id":"towels"
 			}
 		],
-		"reservations":[]
+		"reservations":[],
+		"view":true
 	},
 	{
 		"id":"BO40",
@@ -276,6 +280,7 @@
 				"id":"wifi"
 			}
 		],
-		"reservations":[]
+		"reservations":[],
+		"view":true
 	}
 ]

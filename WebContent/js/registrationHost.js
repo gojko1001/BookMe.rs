@@ -18,7 +18,6 @@ function registration(){	// preuzeti unete vrednosti iz input-a u promenljive, p
 	let valid = true;
 	
 	// VALIDACIJA POLJA
-
 	if(!username){
 		$("#username").css("border-color", "red");
 		$("#invalidUser").css("font-size", "10px");

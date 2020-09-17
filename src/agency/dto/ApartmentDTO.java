@@ -28,6 +28,7 @@ public class ApartmentDTO {
 	private boolean active;
 	private List<Amenity> amenities = new ArrayList<Amenity>();
 	private List<ReservationDTO> reservationsDTO = new ArrayList<ReservationDTO>();
+	private boolean view;
 		
 	public ApartmentDTO() {}
 	
@@ -47,6 +48,7 @@ public class ApartmentDTO {
 		this.checkOutTime = apartment.getCheckOutTime();
 		this.active = apartment.isActive();
 		this.amenities = apartment.getAmenities();
+		this.setView(apartment.isView());
 		
 		for(Comment c : apartment.getComments()) {
 			this.commentsDTO.add(new CommentDTO(c));
@@ -156,6 +158,14 @@ public class ApartmentDTO {
 	}
 	public void setReservationsDTO(List<ReservationDTO> reservationsDTO) {
 		this.reservationsDTO = reservationsDTO;
+	}
+
+	public boolean isView() {
+		return view;
+	}
+
+	public void setView(boolean view) {
+		this.view = view;
 	}
 	
 	
