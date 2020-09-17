@@ -96,9 +96,9 @@ public class ApartmentService {
 	
 	@PUT
 	@Path("/update")
-	@Produces(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String updateApartment(ApartmentDTO apartment) {
+	public String updateApartment(Apartment apartment) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");	
 
 		return apartmentDao.updateApartment(apartment);

@@ -178,15 +178,14 @@ public class ApartmentDao {
 	
 	
 	//TODO: MOZDA TREBA PROSLEDITI APARTMENT ??
-	public String updateApartment(ApartmentDTO apartment) {
-		List<ApartmentDTO> allApartments = getAllApartments();
-		for(ApartmentDTO a : allApartments) {
+	public String updateApartment(Apartment apartment) {
+		for(Apartment a : apartments) {
 			if(a.getId().equals(apartment.getId())) {
 				a.setType(apartment.getType());
 				a.setNumberOfRooms(apartment.getNumberOfRooms());
 				a.setNumberOfGuests(apartment.getNumberOfGuests());
 				a.setLocation(apartment.getLocation());
-				a.setPhotos(apartment.getPhotos());
+				//a.setPhotos(apartment.getPhotos());
 				a.setPrice(apartment.getPrice());
 				a.setCheckInTime(apartment.getCheckInTime());
 				a.setCheckOutTime(apartment.getCheckOutTime());

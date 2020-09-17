@@ -69,12 +69,12 @@ public class ReservationService {
 	@Path("/updateStatus/{newStatus}")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void updateStatus(ReservationDTO reservation, @PathParam("newStatus")Status status) {
+	public String updateStatus(ReservationDTO reservation, @PathParam("newStatus")Status status) {
 		ReservationDao reservationDao = (ReservationDao) context.getAttribute("reservationDao");
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		reservationDao.updateStatus(reservation, Status.accepted, logedUser, apartmentDao);
+		return reservationDao.updateStatus(reservation, Status.accepted, logedUser, apartmentDao);
 	}
 	
 

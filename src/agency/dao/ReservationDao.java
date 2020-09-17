@@ -111,14 +111,14 @@ public class ReservationDao {
 		return "Uspesno kreirana rezervacija!";
 	}
 	// TODO: Provera
-	public void updateStatus(ReservationDTO reservation, Status status, User user, ApartmentDao apartmentDao) {
+	public String updateStatus(ReservationDTO reservation, Status status, User user, ApartmentDao apartmentDao) {
 		if(user == null)
-			return;
+			return "Morate biti ulogovani!";
 		if(user.getRole() == Role.Guest && status != Status.withdrawal)
-			return;
+			return "Gost moze samo da odustane od rezervacije!";
 		
 		if(user.getRole() == Role.Host && (status != Status.ended || status != Status.denied || status != Status.accepted) )
-			return;
+			return "Host moze da: prihvati, odbije, zavrsi rezervaciju!";
 		
 		if(user.getRole() == Role.Guest || user.getRole() == Role.Host)
 			for(ReservationDTO r : getAllReservations())
@@ -145,8 +145,9 @@ public class ReservationDao {
 					
 					if(status == Status.denied || status == Status.withdrawal)			// Ako se odbije ili otkaze rezervacija, oslobadjamo datume
 						apartmentDao.updateFreeDates(reservation.getApartmentId());
-					return;
+					return "Status rezervacije uspesno izmenjen!";
 				}
+		return "Status rezervacije neuspesno izmenjen!";
 	}
 	
 	

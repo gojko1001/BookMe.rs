@@ -75,14 +75,14 @@ $(document).ready(function(){
 			"host":{
 				"username":username
 			},			
-			"commentsDTO":[],					//TODO
+			"comments":[],					//TODO
 			"photos":myFile,
 			"price":price,
 			"checkInTime":checkInTime,
 			"checkOutTime":checkOutTime,
 			"active":active,
 			"amenities":amenities,
-			"reservationsDTO":[]				//TODO
+			"reservations":[]				//TODO
 		});
 			
 		console.log(jsonAdd);
@@ -91,7 +91,7 @@ $(document).ready(function(){
 				url: "../TuristickaAgencija/rest/apartments/update",
 				contentType: "application/json",
 				data: jsonAdd,
-				datatype: "application/json"
+				datatype: "text"
 			}).done(function(data){
 				alert(data);
 				if(alert == "Apartman je izmenjen."){
