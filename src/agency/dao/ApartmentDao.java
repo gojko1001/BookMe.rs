@@ -26,6 +26,7 @@ import agency.model.Amenity;
 import agency.model.Apartment;
 import agency.model.Reservation;
 import agency.model.Role;
+import agency.model.Status;
 import agency.model.User;
 
 public class ApartmentDao {
@@ -215,23 +216,22 @@ public class ApartmentDao {
 				List<String> takenDates = new ArrayList<>();
 				for(String s : a.getDatesForRent()) {
 					for(Reservation r : a.getReservations()) {
-						System.out.println("Rezervacija: " + r.getBeginDate() + ", broj noci: " + r.getNights());
-						String dueStr = getDueDate(r.getBeginDate(), r.getNights());
-						try {
-							for(Date d : getDatesInRange(sdf.parse(r.getBeginDate()), sdf.parse(dueStr))) {
-								if(d.compareTo(sdf.parse(s)) == 0) 
-									takenDates.add(s);
+						if(r.getStatus() == Status.created || r.getStatus() == Status.accepted) {
+							String dueStr = getDueDate(r.getBeginDate(), r.getNights());
+							try {
+								for(Date d : getDatesInRange(sdf.parse(r.getBeginDate()), sdf.parse(dueStr))) {
+									if(d.compareTo(sdf.parse(s)) == 0) 
+										takenDates.add(s);
+								}
+							} catch (ParseException e) {
+								e.printStackTrace();
 							}
-						} catch (ParseException e) {
-							e.printStackTrace();
 						}
 					}
 				}
 				for(String s : takenDates)
 					a.getFreeDates().remove(s);
-				System.out.println("Apartman: " + id);
-				for(String d : a.getFreeDates())
-					System.out.println("Slobodan dan: " + d);
+
 				return;
 			}
 		}

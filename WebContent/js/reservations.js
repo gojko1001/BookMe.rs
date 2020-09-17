@@ -1,5 +1,8 @@
+var logedUser;
+
 function loadContent(user){
 	console.log(user);
+	logedUser = user;
 	$.ajax({
 		method:"GET",
 		url:"../TuristickaAgencija/rest/reservations/all",
@@ -49,10 +52,22 @@ function viewAllReservations(data){
 			content += 'ZAVRŠENA';
 		}
 		content += '</td></tr>';
+		content += '<tr><td><button class="delete" style="display:none"/></td>';
+		content += '<tr><td><button class="accept" style="display:none"/></td>';
 		content += '</table></div>';
 		content += '</div></div>';
 		
 		$("#viewReservations").append(content);
+		if(logedUser.role == "Guest"){
+			$(".delete").val("Odustani");
+			$(".delete").show();
+		} 
+		if(logedUser.role == "Host"){
+			$(".delete").val("Odbij");
+			$(".delete").show();
+			$(".accept").val("Prihvati");
+			$(".accept").show();
+		}
 	
 	}	
 }

@@ -18,7 +18,6 @@ import javax.ws.rs.core.MediaType;
 import agency.dao.AmenityDao;
 import agency.dao.ApartmentDao;
 import agency.dao.ReservationDao;
-import agency.dao.UserDao;
 import agency.dto.ApartmentDTO;
 import agency.dto.ApartmentFilterDTO;
 import agency.model.Apartment;

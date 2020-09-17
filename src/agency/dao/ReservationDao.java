@@ -2,10 +2,8 @@ package agency.dao;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -22,6 +20,7 @@ import agency.model.Apartment;
 import agency.model.Host;
 import agency.model.Reservation;
 import agency.model.Role;
+import agency.model.Status;
 import agency.model.User;
 
 public class ReservationDao {
@@ -93,7 +92,6 @@ public class ReservationDao {
 		apartmentDao.mapReservationsAndApartments(reservations);
 		apartmentDao.updateFreeDates(a.getId());
 		
-		//TODO Azurirati listu freeDates
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.registerModule(new JavaTimeModule());
 		mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -112,4 +110,44 @@ public class ReservationDao {
 		
 		return "Uspesno kreirana rezervacija!";
 	}
+	// TODO: Provera
+	public void updateStatus(ReservationDTO reservation, Status status, User user, ApartmentDao apartmentDao) {
+		if(user == null)
+			return;
+		if(user.getRole() == Role.Guest && status != Status.withdrawal)
+			return;
+		
+		if(user.getRole() == Role.Host && (status != Status.ended || status != Status.denied || status != Status.accepted) )
+			return;
+		
+		if(user.getRole() == Role.Guest || user.getRole() == Role.Host)
+			for(ReservationDTO r : getAllReservations())
+				if(r.getApartmentId().equals(reservation.getApartmentId()) && 
+						r.getBeginDate().equals(reservation.getBeginDate()) && 
+						(r.getStatus() == Status.accepted || r.getStatus() == Status.created)) {
+					r.setStatus(status);
+					
+					ObjectMapper mapper = new ObjectMapper();
+					mapper.registerModule(new JavaTimeModule());
+					mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+					ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
+					try {
+						writer.writeValue(new File(path), getAllReservations());
+					} catch (JsonGenerationException e) {
+						e.printStackTrace();
+					} catch (JsonMappingException e) {
+						System.out.println("Neuspesno mapiranje.");
+						e.printStackTrace();
+					} catch (IOException e) {
+						System.out.println("Greska u radu sa fajlovima");
+						e.printStackTrace();
+					}
+					
+					if(status == Status.denied || status == Status.withdrawal)			// Ako se odbije ili otkaze rezervacija, oslobadjamo datume
+						apartmentDao.updateFreeDates(reservation.getApartmentId());
+					return;
+				}
+	}
+	
+	
 }
