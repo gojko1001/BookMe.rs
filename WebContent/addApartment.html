@@ -48,19 +48,20 @@
 									<option id="oneRoom" value="oneRoom">Jedna soba</option>
 						</select>
 					</td></tr>
-				<tr><td>Broj soba:</td><td><input type="text" id="numberOfRooms"required/></td>
-				<td><label id="invalidNumberOfRooms" class="valid">Ne sme ostati prazno!</label></td></tr>
-				<tr><td>Broj gostiju:</td><td><input type="text" id="numberOfGuests" required/></td></tr>
+				<tr><td>Broj soba:</td><td><input type="number" id="numberOfRooms"required/></td>
+				<td><label id="invalidNumberOfRooms" class="valid" >Ne sme ostati prazno!</label></td></tr>
+				<tr><td>Broj gostiju:</td><td><input type="number" id="numberOfGuests" required/></td></tr>
+				<td><label id="invalidNumberOfGuests" class="valid" >Ne sme ostati prazno!</label></td></tr>
 				<tr style="border-bottom:1px solid black">
 				<tr><td>Država:</td><td><input type="text" id="country"required/></td>
 				<td><label id="invalidCountry" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Mesto:</td><td><input type="text" id="place"required/></td>
 				<td><label id="invalidPlace" class="valid">Ne sme ostati prazno!</label></tr>
-				<tr><td>Poštanski broj:</td><td><input type="text" id="postalCode"required/></td>
+				<tr><td>Poštanski broj:</td><td><input type="number" id="postalCode"required/></td>
 				<td><label id="invalidPostalCode" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Ulica:</td><td><input type="text" id="street"required/></td>
 				<td><label id="invalidStreet" class="valid">Ne sme ostati prazno!</label></tr>
-				<tr><td>Broj:</td><td><input type="text" id="number"required/></td>
+				<tr><td>Broj:</td><td><input type="number" id="number"required/></td>
 				<td><label id="invalidNumber" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Geografska širina:</td><td><input type="text" id="latitude"required/></td>
 				<td><label id="invalidLatitude" class="valid">Ne sme ostati prazno!</label></tr>
@@ -72,14 +73,13 @@
 				</tr>
 				<tr><td>Cena:</td><td><input type="text" id="price"required/>&nbsp; RSD</td>
 				<td><label id="invalidPrice" class="valid">Ne sme ostati prazno!</label></tr>
-				<tr><td>Prijava:</td><td><input type="text" id="checkInTime"required/>&nbsp; h</td>
+				<tr><td>Prijava:</td><td><input type="number" id="checkInTime"required/>&nbsp; h</td>
 				<td><label id="invalidCheckInTime" class="valid">Ne sme ostati prazno!</label></tr>
-				<tr><td>Odjava:</td><td><input type="text" id="checkOutTime"required/>&nbsp; h</td>
+				<tr><td>Odjava:</td><td><input type="number" id="checkOutTime"required/>&nbsp; h</td>
 				<td><label id="invalidCheckOutTime" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Aktivnost:</td><td><input type="text" id="active" placeholder="NEAKTIVAN" disabled/></td></tr>
 				<tr style="border-bottom:1px solid black">
 				<tr><td>Sadržaj:</td><td><div id="viewAmenity"></div></td></tr>
-				
 
 				<tr><td><button type="button" id="btnClose" class="btn btnClose" data-toggle="button" aria-pressed="false" autocomplete="off">Odustani</button></td>
 				<td><button id="save" class="btn btn-primary" style="width:100%">Dodaj apartman</button></td></tr>

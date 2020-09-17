@@ -17,10 +17,7 @@ function loadContent(user){
 			viewAllAmenities(data, dataAp);
 		});
 	});
-	
-	
-	
-	
+		
 }
 
 $(document).ready(function(){
@@ -94,12 +91,10 @@ $(document).ready(function(){
 				datatype: "text"
 			}).done(function(data){
 				alert(data);
-				if(alert == "Apartman je izmenjen."){
-					window.location.assign(window.location.origin + "/TuristickaAgencija/");
+				if(data == "Apartman je izmenjen."){
+					openHome();
 				}
 				
-			}).error(function(data){
-				console.log(data);
 			})
 	})
 	
@@ -107,6 +102,10 @@ $(document).ready(function(){
 		window.history.back();
 	})
 })
+
+function openHome(){
+	window.location.assign(window.location.origin += "/TuristickaAgencija/");
+}
 
 
 function viewAllAmenities(data, dataAp){
