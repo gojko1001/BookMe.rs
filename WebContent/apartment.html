@@ -113,13 +113,16 @@
 		</div>
 		<button class="text-primary btn-light" style="display:none" id="reservationBtn">Rezerviši</button>
 		<div id="reservationBox" style="display:none">
-			<table>
+			<table style="display:inline-block;">
 				<tr><td>Datum čekiranja:</td><td><input type='date' id="beginDate" name='doj'  />  </td></tr>
 				<tr><td>Broj noći:</td><td><input type="number" id="nights" min=1></td></tr>
 				<tr><td>Poruka za domaćina:</td><td><textarea id="message"></textarea></td></tr>
 				<tr style="font-weight:bold; border:1px solid red"><td>Ukupna cena:</td><td><span id="totalPrice"></span> RSD</td></tr>
 				<tr><tr><td></td><td><input type="submit" value="Kreiraj rezervaciju" id="reserve" class="btn btn-primary" style="width:100%"></td></tr>
 			</table>
+			<div id="freeDates" style="display:inline-block; width:300px; vertical-align:top; margin:10px;">
+				<h5 style="color:grey">Slobodni datumi:</h5><br/>
+			</div>
 		</div>
 		<div id="comments">
 		</div>

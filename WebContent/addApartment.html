@@ -77,6 +77,10 @@
 				<td><label id="invalidCheckInTime" class="valid">Ne sme ostati prazno!</label></tr>
 				<tr><td>Odjava:</td><td><input type="number" id="checkOutTime"required/>&nbsp; h</td>
 				<td><label id="invalidCheckOutTime" class="valid">Ne sme ostati prazno!</label></tr>
+				<tr><td colspan=2>Datumi za izdavanje:</td></tr>
+				<tr><td><input type="text" id="dateFrom" placeholder="Od datuma" onfocus="(this.type='date')"></td>
+					<td><input type="text" id="dateTo" placeholder="Do datuma" onfocus="(this.type='date')"></td></tr>
+					<td><label id="invalidDates" class="valid">Datum OD mora biti manji od datuma DO</label></tr>
 				<tr><td>Aktivnost:</td><td><input type="text" id="active" placeholder="NEAKTIVAN" disabled/></td></tr>
 				<tr style="border-bottom:1px solid black">
 				<tr><td>Sadržaj:</td><td><div id="viewAmenity"></div></td></tr>

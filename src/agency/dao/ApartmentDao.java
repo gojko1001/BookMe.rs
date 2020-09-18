@@ -154,6 +154,17 @@ public class ApartmentDao {
 		for(Amenity am : apartment.getAmenities()) {
 			am = amenityDao.getAmenity(am.getId());
 		}
+		
+		List<String> dates = new ArrayList<>();
+		try {
+			for(Date d : this.getDatesInRange(sdf.parse(apartment.getDatesForRent().get(0)), sdf.parse(apartment.getDatesForRent().get(1))))
+				dates.add(sdf.format(d));
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+		
+		apartment.setDatesForRent(dates);
+		apartment.setFreeDates(dates);
 			
 		apartments.add(apartment);
 		

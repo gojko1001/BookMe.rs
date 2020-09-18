@@ -71,6 +71,12 @@ function loadContent(user){
 		
 		if(user.role == "Guest"){
 			$("#reservationBtn").show();
+			
+			for(d of data.freeDates){
+				content = d;
+				content += ", ";
+				$("#freeDates").append(content);
+			}
 			/*var enableDatesArray=[];  
 			var sortDatesArry = [];   
 				   for (var i = 0; i < data.freeDates.length; i++) {  

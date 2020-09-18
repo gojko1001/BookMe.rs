@@ -30,6 +30,8 @@ $(document).ready(function(){
 		let checkOutTime = $('#checkOutTime').val();
 		let active = false;
 		let amenities = [];
+		let dateFrom = $("#dateFrom").val();
+		let dateTo = $("#dateTo").val();
 		let valid = true;
 		
 		// VALIDACIJA PODATAKA
@@ -129,6 +131,12 @@ $(document).ready(function(){
 			$("#checkOutTime").css("border-color", "grey");
 			$("#invalidCheckOutTime").css("font-size", "0px");
 		}
+		if(new Date(dateFrom) >= new Date(dateTo) || !dateFrom || !dateTo){
+			$("#invalidDates").css("font-size", "10px");
+			valid = false;
+		}else{
+			$("#invalidDates").css("font-size", "0px");
+		}
 		
 		$.each($("input[name='checkboxes']:checked"), function(){
         	console.log($(this).attr('id'));
@@ -157,7 +165,7 @@ $(document).ready(function(){
 						"number":number
 					}
 				},
-				"datesForRent":[],
+				"datesForRent":[dateFrom, dateTo],		//U backendu generisem
 				"freeDates":[],
 				"host":{
 					"username":username
