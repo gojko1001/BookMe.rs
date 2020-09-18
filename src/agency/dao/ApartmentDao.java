@@ -232,6 +232,7 @@ public class ApartmentDao {
 				a.setCheckInTime(apartment.getCheckInTime());
 				a.setCheckOutTime(apartment.getCheckOutTime());
 				a.setAmenities(apartment.getAmenities());
+				a.setActive(apartment.isActive());
 				
 				ObjectMapper mapper = new ObjectMapper();
 				mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);

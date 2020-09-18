@@ -13,7 +13,7 @@ function loadContent(user){
 			datatype:"application/json"
 		}).done(function(data){
 			console.log(data);
-			viewApartment(dataAp);
+			viewApartment(dataAp, user);
 			viewAllAmenities(data, dataAp);
 		});
 	});
@@ -38,7 +38,12 @@ $(document).ready(function(){
 		let price = $('#price').val();
 		let checkInTime = $('#checkInTime').val();
 		let checkOutTime = $('#checkOutTime').val();
-		let active = false;		
+		let active = false;
+		if(document.getElementById('active').checked == true){
+			active = true;
+		}else{
+			active = false;
+		}
 		let amenities = [];	
 		
         $.each($("input[name='checkboxes']:checked"), function(){
@@ -134,7 +139,7 @@ function viewAllAmenities(data, dataAp){
 	
 }
 
-function viewApartment(data){
+function viewApartment(data, user){
 	$("#idApartment").val(data.id);
 	$('#type').val(data.type);
 	$('#username').val(data.host.username);
@@ -157,5 +162,12 @@ function viewApartment(data){
 	}else{
 		document.getElementById("inActive").checked = true;
 	}
+	
+	if(user.role == "Host"){
+		document.getElementById("active").disabled = true;
+		document.getElementById("inActive").disabled = true
+		//document.getElementsByName("isActive").disabled = true;
+	}
+	
 }
 
