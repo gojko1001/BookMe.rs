@@ -105,7 +105,7 @@ $(document).ready(function(){
 })
 
 function openHome(){
-	window.location.assign(window.location.origin += "/TuristickaAgencija/");
+	window.location.assign(window.location.origin + "/TuristickaAgencija/apartment.html?id=" + $("#idApartment").val());
 }
 
 
@@ -122,10 +122,10 @@ function viewAllAmenities(data, dataAp){
 		content += data[i].name;
 		content += '</label><br>';
 		
-		for(j=0; j<dataAp.amenities.length; j++){
-			if(data[i].id == dataAp.amenities[j].id){
-				// TODO:
-				//document.getElementById(" + data[i].id + ").checked = true;
+		for(am of dataAp.amenities){
+			if(data[i].id == am.id){
+				$("#" + data[i].id).prop("checked", true);
+				break;
 			}
 		}
 		

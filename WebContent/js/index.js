@@ -82,33 +82,35 @@ $(document).ready(function(){
 function showApartments(data){
 	var i;
 		for(i=0; i<data.length; i++){
-					content = '<div class="card" onclick="viewApartment(this)" id="';
-					content += data[i].id;
-					content += '">';
-					content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
-					content += data[i].id;
-					content += data[i].photos[0];
-					content += '" alt="SLIKA APARTMANA">';
-					content += '<div class="card-body">';
-					content += '<div class="data">';
-					content += '<table style="margin:10px">';
-					content += '<tr><td float="right">Naziv apartmana:</td><td>';
-					content += data[i].id;
-					content += '</td></tr>';
-					content +='<tr><td>Domaćin:</td><td>';
-					content += data[i].host.username;
-					content += '</td></tr>';
-					content +='<tr><td>Aktivnost:</td><td>';
-					if(data[i].active == false){
-						content += 'NEAKTIVAN';
-					}else{
-						content += 'AKTIVAN';
-					}
-					content += '</td></tr>';
-					content += '</table></div>';
-					content += '</div></div>';
+			if(data[i].view){
+				content = '<div class="card" onclick="viewApartment(this)" id="';
+				content += data[i].id;
+				content += '">';
+				content += '<img class="card-img-top" src="Resources/ApartmentPhotos/';
+				content += data[i].id;
+				content += data[i].photos[0];
+				content += '" alt="SLIKA APARTMANA">';
+				content += '<div class="card-body">';
+				content += '<div class="data">';
+				content += '<table style="margin:10px">';
+				content += '<tr><td float="right">Naziv apartmana:</td><td>';
+				content += data[i].id;
+				content += '</td></tr>';
+				content +='<tr><td>Domaćin:</td><td>';
+				content += data[i].host.username;
+				content += '</td></tr>';
+				content +='<tr><td>Aktivnost:</td><td>';
+				if(data[i].active == false){
+					content += 'NEAKTIVAN';
+				}else{
+					content += 'AKTIVAN';
+				}
+				content += '</td></tr>';
+				content += '</table></div>';
+				content += '</div></div>';
 					
-					$("#listOfApartments").append(content);
+				$("#listOfApartments").append(content);
+			}
 		}	
 }
 

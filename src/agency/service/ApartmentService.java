@@ -107,12 +107,11 @@ public class ApartmentService {
 	@PUT
 	@Path("/delete")
 	@Produces(MediaType.TEXT_PLAIN)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public String deleteApartment(Apartment apartment) {
+	public String deleteApartment(@QueryParam("id") String id) {
 		ApartmentDao apartmentDao = (ApartmentDao) context.getAttribute("apartmentDao");
 		User logedUser = (User)request.getSession().getAttribute("loginUser");
 		
-		return apartmentDao.deleteApartment(apartment, logedUser, (ReservationDao)context.getAttribute("reservationDao"));
+		return apartmentDao.deleteApartment(id, logedUser, (ReservationDao)context.getAttribute("reservationDao"));
 	}
 	
 }

@@ -94,7 +94,6 @@ public class ApartmentDao {
 		List<ApartmentDTO> allApartments = new ArrayList<ApartmentDTO>();
 		for(Apartment a : apartments) {
 			allApartments.add(new ApartmentDTO(a));
-			//System.out.println(a.getNumberOfGuests());
 		}
 		
 		return allApartments;
@@ -188,15 +187,15 @@ public class ApartmentDao {
 	}
 	
 	
-	public String deleteApartment(Apartment apartment, User user, ReservationDao reservationDao) {
+	public String deleteApartment(String id, User user, ReservationDao reservationDao) {
 		if(user == null || user.getRole() == Role.Guest) {
 			return "Samo administrator i domaćin mogu brisati apartman.";
 		} else if(user.getRole() == Role.Administrator || user.getRole() == Role.Host) {
 			for(Apartment a : apartments) {
-				if(a.getId().equals(apartment.getId())) {
-					a.setView(apartment.isView());			//"obrisan" iz apartmana
+				if(a.getId().equals(id)) {
+					a.setView(false);			//"obrisan" iz apartmana
 					for(Reservation r : reservationDao.getReservations()) {
-						if(r.getApartment().getId().equals(apartment.getId())) {
+						if(r.getApartment().getId().equals(id)) {
 							reservationDao.reservations.remove(r);
 							break;
 						}
