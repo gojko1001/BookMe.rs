@@ -1,5 +1,11 @@
-# Web-Projekat
+# Web: Real estate agency
 
-Pocetna stranica se otvara, uvek dostupnom, ikonicom BookMe.rs.
-Brisanje sadrzaja apartmana se nalazi u "Sadrzaj apartmana" -> klik na zeljeni sadrzaj.
-Prikaz apartmana po aktivnosti se radi u "Filteri"-> "Aktivnost apartmana" i tu mogucnost imaju samo administratori i domacini.
+Web site made for issuance of appartments.
+
+## Features
+- Adding hosts by administrator
+- Registrating as a guest
+- Viewing all available apparrtments
+- Filtering desired appartments
+- Viewing reviews of other guests
+- Much much more!
